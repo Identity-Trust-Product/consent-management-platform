@@ -1,0 +1,227 @@
+// Taxonomy models - Foundational data structures and classifications
+// These models define the core taxonomy used across the consent management platform
+
+// Business organization taxonomy
+model BusinessUnit {
+  id                Int               @id @default(autoincrement())
+  name              String
+  code              String            @unique
+  active            Boolean           @default(true)
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+  publicId          String            @unique @default(uuid()) @map("public_id")
+  businessProcesses BusinessProcess[]
+  consents          Consent[]         @relation("BusinessUnitConsents")
+
+  @@map("business_units")
+}
+
+// Business process taxonomy
+model BusinessProcess {
+  id                               Int                               @id @default(autoincrement())
+  name                             String
+  code                             String
+  version                          Int                               @default(1)
+  status                           String
+  grantDescription                 String                            @map("grant_description")
+  revokeDescription                String?                           @map("revoke_description")
+  reconsentDescription             String?                           @map("reconsent_description")
+  defaultLanguage                  String                            @default("en") @map("default_language")
+  supportedLanguages               String[]                          @default(["en"]) @map("supported_languages")
+  translations                     Json                              @default("{}") // Language translations: { "en": { "name": "...", "grantDescription": "...", ... }, "hi": { ... } }
+  legalDocuments                   Json                              @default("{}") @map("legal_documents")
+  creationType                     String?                           @map("creation_type")
+  createdBy                        String                            @map("created_by")
+  createdAt                        DateTime                          @default(now()) @map("created_at")
+  updatedAt                        DateTime                          @updatedAt @map("updated_at")
+  publishedAt                      DateTime?                         @map("published_at")
+  businessUnitId                   Int                               @map("business_unit_id")
+  template                         String                            @default("default") // Template to use for notice rendering: "default", "processing-purpose-only", "mandatory-non-mandatory-split"
+  publicId                         String                            @unique @default(uuid()) @map("public_id")
+  businessProcessRules             BusinessProcessRule[]
+  businessUnit                     BusinessUnit                      @relation(fields: [businessUnitId], references: [id])
+  businessProcessToConsentPurposes BusinessProcessToConsentPurpose[]
+  consents                         Consent[]                         @relation("BusinessProcessConsents")
+  notices                          Notice[]
+  grievances                       Grievance[]
+
+  @@unique([code, version])
+  @@index([code])
+  @@index([status])
+  @@map("business_processes")
+}
+
+// Consent purpose taxonomy
+model ConsentPurpose {
+  id                               Int                               @id @default(autoincrement())
+  name                             String
+  code                             String
+  version                          Int                               @default(1)
+  status                           String
+  description                      String?
+  supportedLanguages               String[]                          @default(["en"]) @map("supported_languages")
+  translations                     Json                              @default("{}") // Language translations: { "en": { "name": "...", "description": "..." }, "hi": { ... } }
+  createdBy                        String                            @map("created_by")
+  createdAt                        DateTime                          @default(now()) @map("created_at")
+  updatedAt                        DateTime                          @updatedAt @map("updated_at")
+  publishedAt                      DateTime?                         @map("published_at")
+  publicId                         String                            @unique @default(uuid()) @map("public_id")
+  businessProcessRules             BusinessProcessRule[]
+  businessProcessToConsentPurposes BusinessProcessToConsentPurpose[]
+  consents                         Consent[]                         @relation("ConsentPurposeConsents")
+  processingPurposes               ProcessingPurpose[]
+
+  @@unique([code, version])
+  @@index([code])
+  @@index([status])
+  @@map("consent_purposes")
+}
+
+// Processing purpose taxonomy
+model ProcessingPurpose {
+  id                                Int                                @id @default(autoincrement())
+  name                              String
+  status                            String
+  createdBy                         String                             @map("created_by")
+  createdAt                         DateTime                           @default(now()) @map("created_at")
+  updatedAt                         DateTime                           @updatedAt @map("updated_at")
+  consentPurposeId                  Int                                @map("consent_purpose_id")
+  purposeOfProcessingId             Int                                @map("purpose_of_processing_id")
+  description                       String?
+  userAttributeNames                String[]                           @map("user_attribute_names")
+  supportedLanguages                String[]                           @default(["en"]) @map("supported_languages")
+  translations                      Json                               @default("{}") // Language translations: { "en": { "name": "...", "description": "..." }, "hi": { ... } }
+  publicId                          String                             @unique @default(uuid()) @map("public_id")
+  businessProcessRules              BusinessProcessRule[]
+  consents                          Consent[]                          @relation("ProcessingPurposeConsents")
+  processingPurposeToDataProcessors ProcessingPurposeToDataProcessor[]
+  consentPurpose                    ConsentPurpose                     @relation(fields: [consentPurposeId], references: [id])
+  purposeOfProcessing               PurposeOfProcessing                @relation(fields: [purposeOfProcessingId], references: [id])
+
+  @@unique([consentPurposeId, purposeOfProcessingId])
+  @@map("processing_purposes")
+}
+
+// Standard purpose of processing categories
+model PurposeOfProcessing {
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  code               String              @unique
+  description        String?
+  createdAt          DateTime            @default(now()) @map("created_at")
+  updatedAt          DateTime            @updatedAt @map("updated_at")
+  processingPurposes ProcessingPurpose[]
+
+  @@map("purposes_of_processing")
+}
+
+// User attribute taxonomy
+model UserAttribute {
+  id                 Int      @id @default(autoincrement())
+  name               String   @unique
+  pii                Boolean  @default(false)
+  supportedLanguages String[] @default(["en"]) @map("supported_languages")
+  translations       Json     @default("{}") // Language translations: { "en": { "name": "...", "description": "...", "placeholder": "..." }, "hi": { ... } }
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@map("user_attributes")
+}
+
+// Data processor registry
+model DataProcessor {
+  ouId                             String                             @id @unique @map("ou_id")
+  legalName                        String                             @map("legal_name")
+  brandName                        String                             @map("brand_name")
+  cin                              String?
+  industry                         String?
+  active                           Boolean                            @default(true)
+  createdAt                        DateTime                           @default(now()) @map("created_at")
+  updatedAt                        DateTime                           @updatedAt @map("updated_at")
+  ProcessingPurposeToDataProcessor ProcessingPurposeToDataProcessor[]
+  webhooks                         Webhook[]
+
+  @@map("data_processors")
+}
+
+// Junction table for processing purposes and data processors
+model ProcessingPurposeToDataProcessor {
+  id                  Int               @id @default(autoincrement())
+  dataProcessorId     String            @map("data_processor_id")
+  status              String
+  createdBy           String            @map("created_by")
+  createdAt           DateTime          @default(now()) @map("created_at")
+  updatedAt           DateTime          @updatedAt @map("updated_at")
+  processingPurposeId Int               @map("processing_purpose_id")
+  userAttributeNames  String[]          @map("user_attribute_names")
+  dataProcessor       DataProcessor     @relation(fields: [dataProcessorId], references: [ouId])
+  processingPurpose   ProcessingPurpose @relation(fields: [processingPurposeId], references: [id])
+
+  @@map("processing_purpose_to_data_processors")
+}
+
+model BusinessProcessRule {
+  id                                Int                                @id @default(autoincrement())
+  mandatory                         Boolean                            @default(false)
+  reconsentableByPrincipal          Boolean                            @default(false) @map("reconsentable_by_principal")
+  revocableByPrincipal              Boolean                            @default(false) @map("revocable_by_principal")
+  createdBy                         String                             @map("created_by")
+  createdAt                         DateTime                           @default(now()) @map("created_at")
+  updatedAt                         DateTime                           @updatedAt @map("updated_at")
+  businessProcessId                 Int                                @map("business_process_id")
+  consentPurposeId                  Int                                @map("consent_purpose_id")
+  processingPurposeId               Int                                @map("processing_purpose_id")
+  publicId                          String                             @unique @default(uuid()) @map("public_id")
+  businessProcess                   BusinessProcess                    @relation(fields: [businessProcessId], references: [id])
+  consentPurpose                    ConsentPurpose                     @relation(fields: [consentPurposeId], references: [id])
+  processingPurpose                 ProcessingPurpose                  @relation(fields: [processingPurposeId], references: [id])
+  consents                          Consent[]                          @relation("BusinessProcessRuleConsents")
+  retentionDuration                 Int?                               @map("retention_duration")
+  dataRetentionPolicyConfigurations DataRetentionPolicyConfiguration[]
+
+  @@map("business_process_rules")
+}
+
+model BusinessProcessToConsentPurpose {
+  id                Int             @id @default(autoincrement())
+  consentDuration   Int?            @map("consent_duration")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+  businessProcessId Int             @map("business_process_id")
+  consentPurposeId  Int             @map("consent_purpose_id")
+  businessProcess   BusinessProcess @relation(fields: [businessProcessId], references: [id])
+  consentPurpose    ConsentPurpose  @relation(fields: [consentPurposeId], references: [id])
+
+  @@map("business_processes_to_consent_purposes")
+}
+
+model DataRetentionPolicy {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  policyUrl   String?  @map("policy_url")
+  createdBy   String   @map("created_by")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  publicId    String   @unique @default(uuid()) @map("public_id")
+
+  configurations DataRetentionPolicyConfiguration[]
+
+  @@map("data_retention_policies")
+}
+
+model DataRetentionPolicyConfiguration {
+  id                    Int      @id @default(autoincrement())
+  dataRetentionPolicyId Int      @map("data_retention_policy_id")
+  businessProcessRuleId Int      @map("business_process_rule_id")
+  trigger               String
+  notifyUserIds         String[] @default([]) @map("notify_user_ids")
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  dataRetentionPolicy DataRetentionPolicy @relation(fields: [dataRetentionPolicyId], references: [id], onDelete: Cascade)
+  businessProcessRule BusinessProcessRule @relation(fields: [businessProcessRuleId], references: [id], onDelete: Cascade)
+
+  @@unique([dataRetentionPolicyId, businessProcessRuleId])
+  @@map("data_retention_policy_configurations")
+}

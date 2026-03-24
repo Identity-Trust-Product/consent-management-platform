@@ -1,0 +1,75 @@
+// Webhook configuration and event types
+
+enum WebhookEventType {
+  // Consent Events
+  CONSENT_CREATED
+  CONSENT_REVOKED
+  CONSENT_UPDATED
+  CONSENT_EXPIRED
+  CONSENT_ARTIFACTS_CREATED_OR_UPDATED
+  
+  // Notice Events
+  NOTICE_CREATED
+  NOTICE_SUBMITTED
+  
+  // Data Retention Events
+  DATA_RETENTION_ACTION
+}
+
+enum WebhookTargetType {
+  DATA_FIDUCIARY
+  DATA_PROCESSOR
+}
+
+enum WebhookDeliveryStatus {
+  PENDING
+  DELIVERED
+  FAILED
+  TIMEOUT
+}
+
+model Webhook {
+  id               Int                @id @default(autoincrement())
+  publicId         String             @unique @default(uuid()) @map("public_id")
+  eventType        WebhookEventType   @map("event_type")
+  endpointUrl      String             @map("endpoint_url")
+  httpMethod       String             @default("POST") @map("http_method")
+  customHeaders    Json?              @map("custom_headers")
+  signingSecret    String             @map("signing_secret")
+  isActive         Boolean            @default(true) @map("is_active")
+  targetType       WebhookTargetType  @default(DATA_FIDUCIARY) @map("target_type")
+  dataProcessorId  String?            @map("data_processor_id")
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+  
+  dataProcessor    DataProcessor?     @relation(fields: [dataProcessorId], references: [ouId])
+  logs             WebhookLog[]
+
+  @@index([eventType])
+  @@index([isActive])
+  @@index([targetType])
+  @@index([dataProcessorId])
+  @@map("webhooks")
+}
+
+model WebhookLog {
+  id              Int                    @id @default(autoincrement())
+  publicId        String                 @unique @default(uuid()) @map("public_id")
+  webhookId       Int                    @map("webhook_id")
+  eventId         String                 @unique @map("event_id")
+  eventType       WebhookEventType       @map("event_type")
+  payload         Json
+  status          WebhookDeliveryStatus
+  httpStatus      Int?                   @map("http_status")
+  attemptedAt     DateTime               @default(now()) @map("attempted_at")
+  responseTime    Int?                   @map("response_time")
+  errorMessage    String?                @map("error_message")
+  
+  webhook         Webhook                @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+
+  @@index([webhookId])
+  @@index([status])
+  @@index([eventType])
+  @@index([attemptedAt])
+  @@map("webhook_logs")
+}

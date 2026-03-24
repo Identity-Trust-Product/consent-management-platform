@@ -1,0 +1,31 @@
+// General Audit Log System
+
+model AuditLog {
+  id                String   @id @default(uuid())
+  
+  // Who did it?
+  performedByUserId String?  @map("performed_by_user_id")
+  performedByUser   User?    @relation("UserAuditLogs", fields: [performedByUserId], references: [id])
+  
+  // What did they do?
+  action            String   // e.g., "CREATE", "UPDATE", "DELETE", "LOGIN"
+  resource          String   // e.g., "BUSINESS_UNIT", "USER"
+  resourceId        String?  @map("resource_id") // The ID of the item affected
+  
+  // Context
+  payload           Json?    // The input data (what they tried to change)
+  result            Json?    // The output data (what it looks like now)
+  metadata          Json?    // e.g., { "ip": "127.0.0.1", "userAgent": "Mozilla..." }
+  
+  // Status
+  status            String   @default("SUCCESS") // "SUCCESS" | "FAILURE"
+  failureReason     String?  @map("failure_reason")
+  
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  @@index([resource, resourceId])
+  @@index([performedByUserId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

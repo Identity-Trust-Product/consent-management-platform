@@ -1,0 +1,263 @@
+// ===================================================================
+// Grievance Redressal Mechanism Models
+// ===================================================================
+
+// Provides a consistent, type-safe set of categories for grievances.
+// Aligns with the MeitY BRD's requirement for a predefined categorization system.
+enum GrievanceCategory {
+  CONSENT_UPDATE
+  WITHDRAW_CONSENT
+  ERASE_DATA
+  PROCESSING_PURPOSE_ENQUIRY
+  REPORT_BREACH
+  REVIEW_REQUEST
+  NOMINATE_MEMBER
+}
+
+// Defines the lifecycle states for a grievance ticket (Phase 1 + Phase 2).
+enum GrievanceStatus {
+  SUBMITTED    // Newly created by the Data Principal, awaiting review/assignment.
+  ASSIGNED     // Assigned to an agent but not yet actively worked on.
+  IN_PROGRESS  // Actively being worked on by a Fiduciary Agent (messages exchanged).
+  RESOLVED     // Resolution provided by agent, pending principal confirmation.
+  CLOSED       // The case is fully closed by agent or principal.
+  REOPENED     // Ticket was closed/resolved but reopened by principal or agent.
+}
+
+// Severity levels used for SLA calculations and escalation.
+enum GrievanceSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+// Defines who authored a grievance message.
+enum GrievanceMessageAuthorType {
+  PRINCIPAL         // Message from the Data Principal.
+  FIDUCIARY_AGENT   // Message from the assigned agent.
+  SYSTEM            // Automated system messages (timeline events).
+}
+
+// Defines the type of message.
+enum GrievanceMessageType {
+  USER_MESSAGE      // Regular chat message from user or agent.
+  SYSTEM_EVENT      // System-generated timeline event.
+}
+
+// --- The Core Grievance Ticket Model ---
+// This is the single source of truth for a user's complaint.
+model Grievance {
+  id              Int               @id @default(autoincrement())
+  publicId        String            @unique @default(uuid()) @map("public_id") // This is the user-facing "Reference Number".
+
+  // --- Core Ticket Information ---
+  // The identifier for the external Data Principal who raised the grievance.
+  dataPrincipalId String            @map("data_principal_id")
+
+  // Flexible JSON field for storing data principal metadata (name, email, phone, etc.)
+  metadata        Json              @default("{}")
+
+  // The current state of the ticket in its lifecycle.
+  status          GrievanceStatus   @default(SUBMITTED)
+
+  // The predefined category of the grievance.
+  category        GrievanceCategory
+
+  // Severity used for SLA calculations and escalation. Auto-assigned at creation
+  // based on category mapping (see docs/sla-implementation.md). Agents may update it.
+  severity        GrievanceSeverity  @default(MEDIUM)
+
+  // The user-provided subject and detailed description.
+  subject         String
+  description     String            @db.Text
+
+  // --- Business Context ---
+  // Link to the business process this grievance is related to
+  businessProcessId Int             @map("business_process_id")
+
+  // --- Assignment and Timestamps ---
+  // The ID of the internal CMS User (agent) this ticket is assigned to.
+  assignedToId    String?           @map("assigned_to_id")
+
+  // Timestamps for tracking and analytics (TAT).
+  resolvedAt      DateTime?         @map("resolved_at")
+  closedAt        DateTime?         @map("closed_at")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  // --- Read/Unread Tracking ---
+  // Track when the agent and principal last viewed this grievance
+  agentLastSeenAt     DateTime?     @map("agent_last_seen_at")
+  principalLastSeenAt DateTime?     @map("principal_last_seen_at")
+
+  // --- Phase 2: Feedback (Optional, stored as JSON) ---
+  // When the principal provides feedback after resolution.
+  // Example: { "rating": 5, "comment": "Excellent service!", "submittedAt": "2025-11-09T..." }
+  feedback        Json?
+
+  // --- Relations ---
+  // A Grievance is linked to a BusinessProcess
+  businessProcess BusinessProcess   @relation(fields: [businessProcessId], references: [id])
+
+  // A Grievance can be assigned to one internal User.
+  assignedTo      User?             @relation("AssignedGrievances", fields: [assignedToId], references: [id])
+
+  // A Grievance will have an immutable log of all actions taken.
+  auditLogs       GrievanceAuditLog[]
+
+  // A Grievance can have many messages (conversation thread).
+  messages        GrievanceMessage[]
+
+  // Optional one-to-one SLA tracker for this grievance.
+  slaTracker      SlaTracker?
+
+  // --- Indexes for Performance ---
+  @@index([dataPrincipalId])
+  @@index([assignedToId])
+  @@index([severity])
+  @@index([status])
+  @@index([businessProcessId])
+  @@index([status, createdAt])
+  @@index([businessProcessId, status])
+  @@map("grievances")
+}
+
+// --- Immutable Audit Log for Compliance ---
+// Records every meaningful action taken on a grievance.
+model GrievanceAuditLog {
+  id                Int       @id @default(autoincrement())
+  grievanceId       Int       @map("grievance_id")
+
+  // The specific action that was performed.
+  action            String    // e.g., "CREATED_BY_PRINCIPAL", "ASSIGNED_TO_AGENT"
+
+  // A flexible JSON blob for storing context about the action.
+  // e.g., { "assignedTo": "user_id_xyz", "assignedToName": "John Doe" }
+  details           Json?
+
+  // The actor who performed this action. Could be an internal User or the system.
+  performedByUserId String?   @map("performed_by_user_id")
+
+  createdAt         DateTime  @default(now()) @map("created_at")
+
+  // --- Relations ---
+  // An audit log belongs to one Grievance. If the grievance is deleted, its logs are deleted too.
+  grievance         Grievance @relation(fields: [grievanceId], references: [id], onDelete: Cascade)
+
+  // An audit log may be performed by one internal User.
+  performedByUser   User?     @relation("PerformedAuditLogs", fields: [performedByUserId], references: [id])
+
+  @@index([grievanceId])
+  @@index([performedByUserId])
+  @@map("grievance_audit_logs")
+}
+
+// --- Phase 2: Grievance Messages (Conversation Thread + System Events) ---
+// Represents individual messages in the conversation between principal and agent,
+// as well as system-generated timeline events (status changes, assignments, etc.)
+model GrievanceMessage {
+  id          Int                        @id @default(autoincrement())
+  grievanceId Int                        @map("grievance_id")
+  
+  // Type of message: USER_MESSAGE or SYSTEM_EVENT
+  messageType GrievanceMessageType       @default(USER_MESSAGE) @map("message_type")
+  
+  // For SYSTEM_EVENT: type of event (e.g., "STATUS_CHANGE", "ASSIGNED", "RESOLVED")
+  eventType   String?                    @map("event_type")
+  
+  // For SYSTEM_EVENT: additional event details as JSON
+  // Example: { "from": "OPEN", "to": "IN_PROGRESS", "performedBy": "user_id", "performedByName": "John Doe" }
+  eventDetails Json?                     @map("event_details")
+  
+  // Who sent this message (PRINCIPAL, FIDUCIARY_AGENT, or SYSTEM).
+  authorType  GrievanceMessageAuthorType @map("author_type")
+  
+  // The identifier of the author (data_principal_id for principals, user.id for agents, null for system).
+  authorId    String?                    @map("author_id")
+  
+  // The actual message content (null for SYSTEM_EVENT).
+  message     String?                    @db.Text
+  
+  createdAt   DateTime                   @default(now()) @map("created_at")
+
+  // --- Relations ---
+  grievance   Grievance                  @relation(fields: [grievanceId], references: [id], onDelete: Cascade)
+  
+  // Optional relation to User for agent messages (to get author details)
+  // Note: For PRINCIPAL messages, authorId is data_principal_id (not in users table)
+  // Only FIDUCIARY_AGENT messages have authorId referencing users table
+  authorUser  User?                      @relation("AuthoredGrievanceMessages", fields: [authorId], references: [id], map: "grievance_messages_author_user_fkey")
+
+  // File attachments
+  attachments GrievanceAttachment[]
+
+  @@index([grievanceId, createdAt])
+  @@index([messageType])
+  @@index([authorId])
+  @@map("grievance_messages")
+}
+
+// --- File Attachments ---
+// File attachments for grievance messages
+model GrievanceAttachment {
+  id        Int      @id @default(autoincrement())
+  messageId Int      @map("message_id")
+  
+  // Storage information
+  fileKey   String   @map("file_key") // Unique identifier/path in storage
+  fileName  String   @map("file_name") // Original filename for display
+  fileSize  Int      @map("file_size") // Size in bytes
+  mimeType  String   @map("mime_type") // MIME type (e.g., "image/jpeg")
+  
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  message   GrievanceMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  
+  @@index([messageId])
+  @@index([fileKey])
+  @@map("grievance_attachments")
+}
+
+// ------------------------------------------------------------------
+// SLA Models
+// ------------------------------------------------------------------
+
+// Admin-configurable SLA settings per severity.
+model SlaConfiguration {
+  id                   Int       @id @default(autoincrement())
+  severity             GrievanceSeverity @unique
+  resolutionTimeInDays Int
+  escalationUserIds    String[]  // list of internal user IDs (UUIDs)
+  active               Boolean   @default(true)
+  businessHoursEnabled Boolean   @default(false)
+  businessHoursStart   String?   // e.g., "09:00"
+  businessHoursEnd     String?   // e.g., "17:00"
+  businessDays         Int[]     // 1..7 (Mon..Sun) e.g., [1,2,3,4,5]
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@map("sla_configurations")
+}
+
+// Per-grievance SLA tracker for efficient queries and cron processing.
+model SlaTracker {
+  id                   Int       @id @default(autoincrement())
+  grievanceId          Int       @unique
+  severity             GrievanceSeverity
+  startedAt            DateTime  @default(now())
+  expectedResolutionAt DateTime
+  resolvedAt           DateTime?
+  isBreached           Boolean   @default(false)
+  breachedAt           DateTime?
+  escalatedAt          DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  grievance            Grievance @relation(fields: [grievanceId], references: [id], onDelete: Cascade)
+
+  @@index([expectedResolutionAt])
+  @@index([isBreached])
+  @@map("sla_trackers")
+}

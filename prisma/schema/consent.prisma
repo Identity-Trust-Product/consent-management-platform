@@ -1,0 +1,76 @@
+// Consent records and lifecycle management
+
+model Consent {
+  id                    Int                 @id @default(autoincrement())
+  publicId              String              @unique @default(uuid()) @map("public_id")
+  requestId             String              @map("request_id")
+  requestType           String              @map("request_type")
+  referenceId           String              @map("reference_id")
+  dataPrincipalId       String              @map("data_principal_id")
+  businessProcessId     String              @map("business_process_id")
+  consentPurposeId      String              @map("consent_purpose_id")
+  processingPurposeId   String              @map("processing_purpose_id")
+  businessProcessRuleId String              @map("business_process_rule_id")
+  businessUnitId        String              @map("business_unit_id")
+  userAttributeNames    String[]            @map("user_attribute_names")
+  majorDataPrincipalId  String?             @map("major_data_principal_id")
+  parentConsentId       String?             @map("parent_consent_id")
+  language              String
+  insertedAt            DateTime            @default(now()) @map("inserted_at")
+  updatedAt             DateTime            @updatedAt @map("updated_at")
+  status                String              @default("accepted")
+  expiresAt             DateTime?           @map("expires_at")
+  isExpired             Boolean             @default(false) @map("is_expired")
+  dataRetentionActionTriggeredAt DateTime?  @map("data_retention_action_triggered_at")
+  businessProcess       BusinessProcess     @relation("BusinessProcessConsents", fields: [businessProcessId], references: [publicId])
+  businessProcessRule   BusinessProcessRule @relation("BusinessProcessRuleConsents", fields: [businessProcessRuleId], references: [publicId])
+  businessUnit          BusinessUnit        @relation("BusinessUnitConsents", fields: [businessUnitId], references: [publicId])
+  consentPurpose        ConsentPurpose      @relation("ConsentPurposeConsents", fields: [consentPurposeId], references: [publicId])
+  parentConsent         Consent?            @relation("ConsentHierarchy", fields: [parentConsentId], references: [publicId])
+  childConsents         Consent[]           @relation("ConsentHierarchy")
+  processingPurpose     ProcessingPurpose   @relation("ProcessingPurposeConsents", fields: [processingPurposeId], references: [publicId])
+  auditTrail ConsentAuditTrail[] @relation("ConsentAuditEvents")
+
+  // NULLS NOT DISTINCT - parent consent id being NULL will still trigger a unique constraint violation
+  @@unique([userAttributeNames, processingPurposeId, referenceId, parentConsentId, consentPurposeId, businessProcessId, dataPrincipalId], name: "consent_unique_constraint")
+  @@index([dataPrincipalId])
+  @@index([businessProcessId])
+  @@index([processingPurposeId])
+  @@index([businessUnitId])
+  @@index([expiresAt, isExpired])
+  @@index([dataRetentionActionTriggeredAt])
+  @@map("consents")
+}
+
+// Add this Enum to define the allowed actions
+enum ConsentAction {
+  GRANTED         // Initial consent creation
+  REVOKED         // Consent revoked by user or system
+  VERSION_UPDATED // Consent migrated to a new business process version
+  RENEWED         // A new consent was created to replace this expiring one
+  SUPERCEDED      // This consent was replaced by a new one (due to renewal)
+  EXPIRED         // Consent expired
+}
+
+// Add this Model to store the history
+model ConsentAuditTrail {
+  id              Int           @id @default(autoincrement())
+  publicId        String        @unique @default(uuid()) @map("public_id")
+
+  // Relation to the Consent record
+  consentId       String        @map("consent_id")
+  consent         Consent       @relation("ConsentAuditEvents", fields: [consentId], references: [publicId])
+
+  // Core audit fields
+  dataPrincipalId String        @map("data_principal_id")
+  action          ConsentAction 
+  actor           String        // e.g., 'data_principal', 'system'
+  timestamp       DateTime      @default(now())
+  
+  // Flexible JSON for details (diffs, reasons, etc.)
+  details         Json?
+
+  @@index([consentId])
+  @@index([dataPrincipalId])
+  @@map("consent_audit_trail")
+}

@@ -1,0 +1,48 @@
+// Notice management models
+
+model Notice {
+  id                         Int              @id @default(autoincrement())
+  publicId                   String           @unique @default(uuid()) @map("public_id")
+  redirectionUrl             String?          @map("redirection_url")
+  linkExpiresAt              DateTime?        @map("link_expires_at")
+  status                     String           @default("pending")
+  consentStatus              String?          @map("consent_status")
+  dataPrincipalId            String           @map("data_principal_id")
+  defaultLanguage            String           @map("default_language")
+  creationMethod             String           @map("creation_method")
+  createdByUserId            String           @map("created_by_user_id")
+  dataPrincipalSubmittedData Json?            @map("data_principal_submitted_data")
+  referenceId                String?          @map("reference_id")
+  businessProcessId          Int              @map("business_process_id")
+  markCompletedTimestamp     DateTime?        @map("mark_completed_timestamp")
+  statusReason               String?          @map("status_reason")
+  forMinor                   Boolean          @default(false) @map("for_minor")
+  noticeConfig               Json?            @map("notice_config")
+  createdAt                  DateTime         @default(now()) @map("inserted_at")
+  updatedAt                  DateTime         @updatedAt @map("updated_at")
+  consentDuration            Int?             @map("consent_duration")
+  businessProcess            BusinessProcess  @relation(fields: [businessProcessId], references: [id])
+  metadata                   NoticeMetadata[]
+
+  @@unique([referenceId, dataPrincipalId, businessProcessId], name: "notice_accepted_unique_index")
+  @@index([businessProcessId])
+  @@index([dataPrincipalId])
+  @@index([referenceId])
+  @@index([status])
+  @@index([updatedAt])
+  @@map("notices")
+}
+
+model NoticeMetadata {
+  id        Int      @id @default(autoincrement())
+  noticeId  Int      @map("notice_id")
+  key       String
+  value     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  notice    Notice   @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+
+  @@index([noticeId])
+  @@index([key])
+  @@map("notice_metadata")
+}

@@ -1,0 +1,14 @@
+// 3. Your Notifications table model
+model Notification {
+  id        Int      @id @default(autoincrement())
+  dataPrincipalId     String      @map("data_principal_id") // dp_id = "data principal id"
+  type      String
+  seen      Boolean  @default(false)
+  metadata  Json?    // Optional field for storing extra data
+
+  // Adds an index to the dp_id column for faster queries
+  @@index([dataPrincipalId])
+  
+  // Maps the model name "Notification" to the table name "notifications" in the database
+  @@map("notifications")
+}

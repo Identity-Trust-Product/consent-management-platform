@@ -1,0 +1,14 @@
+// Activity logging models
+
+model PrincipalActivityLog {
+  id              Int      @id @default(autoincrement())
+  dataPrincipalId String   @map("data_principal_id")
+  sessionId       String   @map("session_id")
+  eventType       String   @map("event_type")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@unique([sessionId, eventType])
+  @@index([dataPrincipalId, updatedAt])
+  @@map("principal_activity_logs")
+}

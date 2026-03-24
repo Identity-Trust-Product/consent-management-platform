@@ -1,0 +1,505 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [
+      {
+        "source": "/cms/_next/:path+",
+        "destination": "/_next/:path+",
+        "regex": "^/cms/_next(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))(?:/)?$"
+      }
+    ],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/cms/api/auth/[...nextauth]",
+      "regex": "^/cms/api/auth/(.+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnextauth": "nxtPnextauth"
+      },
+      "namedRegex": "^/cms/api/auth/(?<nxtPnextauth>.+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/api/v1/notices/grant/[id]",
+      "regex": "^/cms/api/v1/notices/grant/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/api/v1/notices/grant/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-processes/[id]",
+      "regex": "^/cms/data\\-fiduciary/business\\-processes/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-processes/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-processes/[id]/edit",
+      "regex": "^/cms/data\\-fiduciary/business\\-processes/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-processes/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-units/[id]",
+      "regex": "^/cms/data\\-fiduciary/business\\-units/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-units/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-units/[id]/edit",
+      "regex": "^/cms/data\\-fiduciary/business\\-units/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-units/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/consent-purposes/[id]",
+      "regex": "^/cms/data\\-fiduciary/consent\\-purposes/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/consent\\-purposes/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/consent-purposes/[id]/edit",
+      "regex": "^/cms/data\\-fiduciary/consent\\-purposes/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/consent\\-purposes/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/consent-timeline/[id]",
+      "regex": "^/cms/data\\-fiduciary/consent\\-timeline/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/consent\\-timeline/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/data-processors/[ouId]",
+      "regex": "^/cms/data\\-fiduciary/data\\-processors/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPouId": "nxtPouId"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/data\\-processors/(?<nxtPouId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/data-processors/[ouId]/edit",
+      "regex": "^/cms/data\\-fiduciary/data\\-processors/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPouId": "nxtPouId"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/data\\-processors/(?<nxtPouId>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/data-retention/[id]/edit",
+      "regex": "^/cms/data\\-fiduciary/data\\-retention/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/data\\-retention/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/notices/[public_id]",
+      "regex": "^/cms/data\\-fiduciary/notices/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPpublic_id": "nxtPpublic_id"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/notices/(?<nxtPpublic_id>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/purposes-of-processing/[id]",
+      "regex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/purposes-of-processing/[id]/edit",
+      "regex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/user-attributes/[id]",
+      "regex": "^/cms/data\\-fiduciary/user\\-attributes/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/user\\-attributes/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/user-attributes/[id]/edit",
+      "regex": "^/cms/data\\-fiduciary/user\\-attributes/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/cms/data\\-fiduciary/user\\-attributes/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/dprm/[access_token]",
+      "regex": "^/cms/principal/dprm/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/dprm/(?<nxtPaccess_token>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/dprm/[access_token]/consent-action-center",
+      "regex": "^/cms/principal/dprm/([^/]+?)/consent\\-action\\-center(?:/)?$",
+      "routeKeys": {
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/dprm/(?<nxtPaccess_token>[^/]+?)/consent\\-action\\-center(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/dprm/[access_token]/consent-wallet",
+      "regex": "^/cms/principal/dprm/([^/]+?)/consent\\-wallet(?:/)?$",
+      "routeKeys": {
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/dprm/(?<nxtPaccess_token>[^/]+?)/consent\\-wallet(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/dprm/[access_token]/grievances",
+      "regex": "^/cms/principal/dprm/([^/]+?)/grievances(?:/)?$",
+      "routeKeys": {
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/dprm/(?<nxtPaccess_token>[^/]+?)/grievances(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/dprm/[access_token]/grievances/new",
+      "regex": "^/cms/principal/dprm/([^/]+?)/grievances/new(?:/)?$",
+      "routeKeys": {
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/dprm/(?<nxtPaccess_token>[^/]+?)/grievances/new(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/dprm/[access_token]/grievances/[grievanceId]/chat",
+      "regex": "^/cms/principal/dprm/([^/]+?)/grievances/([^/]+?)/chat(?:/)?$",
+      "routeKeys": {
+        "nxtPaccess_token": "nxtPaccess_token",
+        "nxtPgrievanceId": "nxtPgrievanceId"
+      },
+      "namedRegex": "^/cms/principal/dprm/(?<nxtPaccess_token>[^/]+?)/grievances/(?<nxtPgrievanceId>[^/]+?)/chat(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/dprm/[access_token]/notifications",
+      "regex": "^/cms/principal/dprm/([^/]+?)/notifications(?:/)?$",
+      "routeKeys": {
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/dprm/(?<nxtPaccess_token>[^/]+?)/notifications(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/notice/[notice_id]/accept/[access_token]",
+      "regex": "^/cms/principal/notice/([^/]+?)/accept/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnotice_id": "nxtPnotice_id",
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/notice/(?<nxtPnotice_id>[^/]+?)/accept/(?<nxtPaccess_token>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/notice/[notice_id]/reject/[access_token]",
+      "regex": "^/cms/principal/notice/([^/]+?)/reject/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnotice_id": "nxtPnotice_id",
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/notice/(?<nxtPnotice_id>[^/]+?)/reject/(?<nxtPaccess_token>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/notice/[notice_id]/view/[access_token]",
+      "regex": "^/cms/principal/notice/([^/]+?)/view/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnotice_id": "nxtPnotice_id",
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/notice/(?<nxtPnotice_id>[^/]+?)/view/(?<nxtPaccess_token>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/cms/principal/receipt/[notice_id]/[access_token]",
+      "regex": "^/cms/principal/receipt/([^/]+?)/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnotice_id": "nxtPnotice_id",
+        "nxtPaccess_token": "nxtPaccess_token"
+      },
+      "namedRegex": "^/cms/principal/receipt/(?<nxtPnotice_id>[^/]+?)/(?<nxtPaccess_token>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/cms",
+      "regex": "^/cms(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms(?:/)?$"
+    },
+    {
+      "page": "/cms/api/consents/revoke",
+      "regex": "^/cms/api/consents/revoke(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/api/consents/revoke(?:/)?$"
+    },
+    {
+      "page": "/cms/api/consents/update",
+      "regex": "^/cms/api/consents/update(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/api/consents/update(?:/)?$"
+    },
+    {
+      "page": "/cms/api/dashboard-config",
+      "regex": "^/cms/api/dashboard\\-config(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/api/dashboard\\-config(?:/)?$"
+    },
+    {
+      "page": "/cms/api/logout",
+      "regex": "^/cms/api/logout(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/api/logout(?:/)?$"
+    },
+    {
+      "page": "/cms/api/v1/consents/revoke/purpose_met",
+      "regex": "^/cms/api/v1/consents/revoke/purpose_met(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/api/v1/consents/revoke/purpose_met(?:/)?$"
+    },
+    {
+      "page": "/cms/api/v1/consents/validate",
+      "regex": "^/cms/api/v1/consents/validate(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/api/v1/consents/validate(?:/)?$"
+    },
+    {
+      "page": "/cms/api/v1/notices/grant",
+      "regex": "^/cms/api/v1/notices/grant(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/api/v1/notices/grant(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/api-keys",
+      "regex": "^/cms/data\\-fiduciary/api\\-keys(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/api\\-keys(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-processes",
+      "regex": "^/cms/data\\-fiduciary/business\\-processes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-processes(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-processes/new",
+      "regex": "^/cms/data\\-fiduciary/business\\-processes/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-processes/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-units",
+      "regex": "^/cms/data\\-fiduciary/business\\-units(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-units(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/business-units/new",
+      "regex": "^/cms/data\\-fiduciary/business\\-units/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/business\\-units/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/consent-history",
+      "regex": "^/cms/data\\-fiduciary/consent\\-history(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/consent\\-history(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/consent-purposes",
+      "regex": "^/cms/data\\-fiduciary/consent\\-purposes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/consent\\-purposes(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/consent-purposes/new",
+      "regex": "^/cms/data\\-fiduciary/consent\\-purposes/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/consent\\-purposes/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/dashboard",
+      "regex": "^/cms/data\\-fiduciary/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/dashboard(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/data-processors",
+      "regex": "^/cms/data\\-fiduciary/data\\-processors(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/data\\-processors(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/data-processors/new",
+      "regex": "^/cms/data\\-fiduciary/data\\-processors/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/data\\-processors/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/data-retention",
+      "regex": "^/cms/data\\-fiduciary/data\\-retention(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/data\\-retention(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/data-retention/new",
+      "regex": "^/cms/data\\-fiduciary/data\\-retention/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/data\\-retention/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/grievances/admin",
+      "regex": "^/cms/data\\-fiduciary/grievances/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/grievances/admin(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/grievances/my-tickets",
+      "regex": "^/cms/data\\-fiduciary/grievances/my\\-tickets(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/grievances/my\\-tickets(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/notices",
+      "regex": "^/cms/data\\-fiduciary/notices(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/notices(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/notices/new",
+      "regex": "^/cms/data\\-fiduciary/notices/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/notices/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/purposes-of-processing",
+      "regex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/purposes-of-processing/new",
+      "regex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/purposes\\-of\\-processing/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/sla",
+      "regex": "^/cms/data\\-fiduciary/sla(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/sla(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/user-attributes",
+      "regex": "^/cms/data\\-fiduciary/user\\-attributes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/user\\-attributes(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/user-attributes/new",
+      "regex": "^/cms/data\\-fiduciary/user\\-attributes/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/user\\-attributes/new(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/users",
+      "regex": "^/cms/data\\-fiduciary/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/users(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/webhooks",
+      "regex": "^/cms/data\\-fiduciary/webhooks(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/webhooks(?:/)?$"
+    },
+    {
+      "page": "/cms/data-fiduciary/webhooks/logs",
+      "regex": "^/cms/data\\-fiduciary/webhooks/logs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/data\\-fiduciary/webhooks/logs(?:/)?$"
+    },
+    {
+      "page": "/cms/forbidden",
+      "regex": "^/cms/forbidden(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/forbidden(?:/)?$"
+    },
+    {
+      "page": "/cms/invalid-link",
+      "regex": "^/cms/invalid\\-link(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/invalid\\-link(?:/)?$"
+    },
+    {
+      "page": "/cms/link-expired",
+      "regex": "^/cms/link\\-expired(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/link\\-expired(?:/)?$"
+    },
+    {
+      "page": "/cms/login",
+      "regex": "^/cms/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cms/login(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

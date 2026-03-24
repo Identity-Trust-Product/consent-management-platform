@@ -1,0 +1,26 @@
+> privy-meity@0.1.0 audit
+> audit-ci --high
+
+NPM audit report results:
+{
+  "advisories": {},
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 528,
+      "dev": 314,
+      "optional": 109,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 903
+    }
+  }
+}
+Passed npm security audit.

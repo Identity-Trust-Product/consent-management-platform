@@ -1,0 +1,104 @@
+// Authentication and authorization models
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id                      String              @id @default(uuid())
+  name                    String?
+  email                   String?             @unique
+  emailVerified           DateTime?           @map("email_verified")
+  image                   String?
+  password                String?
+  createdAt               DateTime            @default(now()) @map("created_at")
+  updatedAt               DateTime            @updatedAt @map("updated_at")
+  accounts                Account[]
+  sessions                Session[]
+  userRoles               UserRole[]
+  apiKeys                 ApiKey[]
+  assignedGrievances      Grievance[]         @relation("AssignedGrievances")
+  performedAuditLogs      GrievanceAuditLog[] @relation("PerformedAuditLogs")
+  authoredGrievanceMessages GrievanceMessage[] @relation("AuthoredGrievanceMessages")
+  auditLogs               AuditLog[]          @relation("UserAuditLogs")
+
+  @@map("users")
+}
+
+model Role {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String?
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  userRoles   UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  roleId     String   @map("role_id")
+  assignedAt DateTime @default(now()) @map("assigned_at")
+  assignedBy String?  @map("assigned_by")
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model ApiKey {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  key         String    @unique // Hashed API key (bcrypt)
+  prefix      String // First 8 chars for display (e.g., "pk_live_")
+  userId      String    @map("user_id")
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isActive    Boolean   @default(true) @map("is_active")
+  lastUsedAt  DateTime? @map("last_used_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@index([key])
+  @@index([userId])
+  @@index([isActive])
+  @@index([prefix])
+  @@map("api_keys")
+}

@@ -1,0 +1,51 @@
+// ============================================================================
+// Open Bharart Digital Consent - Consent Management Platform
+// Multi-File Prisma Schema
+// ============================================================================
+//
+// This schema is organized into multiple files for better maintainability.
+// Prisma automatically merges all .prisma files in the schema/ directory.
+//
+// Documentation: https://www.prisma.io/docs/orm/prisma-schema/overview/location#multi-file-prisma-schema
+//
+// ============================================================================
+// SCHEMA ORGANIZATION
+// ============================================================================
+//
+// 📋 base.prisma
+//    └─ Generator and datasource configuration
+//
+// 🔐 auth.prisma
+//    └─ User, Account, Session, Role, UserRole, VerificationToken, ApiKey
+//
+// 🏗️ taxonomy.prisma (Core Taxonomy Structures)
+//    ├─ BusinessUnit
+//    ├─ BusinessProcess
+//    ├─ ConsentPurpose
+//    ├─ ProcessingPurpose
+//    ├─ PurposeOfProcessing
+//    ├─ UserAttribute
+//    ├─ DataProcessor
+//    ├─ ProcessingPurposeToDataProcessor
+//    ├─ BusinessProcessRule
+//    └─ BusinessProcessToConsentPurpose
+//
+// ✅ consent.prisma
+//    └─ Consent (records and lifecycle management)
+//
+// 📧 notice.prisma
+//    └─ Notice (privacy notice management)
+//
+// 📊 principal-activity-log.prisma
+//    └─ PrincipalActivityLog (audit trail)
+//
+// 🔔 webhooks.prisma
+//    └─ Webhook (event notification endpoints)
+//    └─ WebhookEventType (event types enum)
+//
+// 🎫 grievances.prisma
+//    ├─ GrievanceCategory (enum)
+//    ├─ GrievanceStatus (enum)
+//    ├─ Grievance (ticket management)
+//    └─ GrievanceAuditLog (immutable audit trail)
+// ============================================================================

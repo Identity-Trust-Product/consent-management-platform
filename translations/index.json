@@ -1,0 +1,124 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2025-11-05T07:09:48.023Z",
+  "format": "next-i18next",
+  "languages": [
+    {
+      "code": "as",
+      "translationCount": 69
+    },
+    {
+      "code": "bn",
+      "translationCount": 71
+    },
+    {
+      "code": "brx",
+      "translationCount": 69
+    },
+    {
+      "code": "doi",
+      "translationCount": 69
+    },
+    {
+      "code": "en",
+      "translationCount": 69
+    },
+    {
+      "code": "gu",
+      "translationCount": 69
+    },
+    {
+      "code": "hi",
+      "translationCount": 69
+    },
+    {
+      "code": "kn",
+      "translationCount": 69
+    },
+    {
+      "code": "kok",
+      "translationCount": 69
+    },
+    {
+      "code": "ks",
+      "translationCount": 69
+    },
+    {
+      "code": "mai",
+      "translationCount": 69
+    },
+    {
+      "code": "ml",
+      "translationCount": 69
+    },
+    {
+      "code": "mni",
+      "translationCount": 69
+    },
+    {
+      "code": "mr",
+      "translationCount": 69
+    },
+    {
+      "code": "ne",
+      "translationCount": 69
+    },
+    {
+      "code": "or",
+      "translationCount": 69
+    },
+    {
+      "code": "pa",
+      "translationCount": 69
+    },
+    {
+      "code": "sa",
+      "translationCount": 69
+    },
+    {
+      "code": "sat",
+      "translationCount": 69
+    },
+    {
+      "code": "sd",
+      "translationCount": 69
+    },
+    {
+      "code": "ta",
+      "translationCount": 69
+    },
+    {
+      "code": "te",
+      "translationCount": 69
+    },
+    {
+      "code": "ur",
+      "translationCount": 69
+    }
+  ],
+  "supportedLocales": [
+    "as",
+    "bn",
+    "brx",
+    "doi",
+    "en",
+    "gu",
+    "hi",
+    "kn",
+    "ks",
+    "kok",
+    "mai",
+    "ml",
+    "mni",
+    "mr",
+    "ne",
+    "or",
+    "pa",
+    "sa",
+    "sat",
+    "sd",
+    "ta",
+    "te",
+    "ur"
+  ]
+}
