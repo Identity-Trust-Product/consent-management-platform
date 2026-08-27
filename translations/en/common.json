@@ -1,7 +1,7 @@
 {
   "common": {
     "Select All": "Select All",
-    "User Attributes": "User Attributes",
+    "User Attributes": "Purpose Attributes",
     "Click to Select": "Click to Select",
     "Review Later": "Review Later",
     "List of Consents": "List of Consents",
@@ -37,12 +37,12 @@
     "Review & Accept All Required Consents": "Review & Accept All Required Consents",
     "By selecting all, you are agreeing to provide consent for all required purposes": "By selecting all, you are agreeing to provide consent for all required purposes",
     "Personal Information Used": "Personal Information Used",
-    "EULA and DPO contact details": "EULA and DPO contact details",
+    "EULA and DPO contact details": "Redirectional URL and DPO contact details",
     "Consent Duration": "Consent Duration",
     "Days": "Days",
     "Day": "Day",
     "This is a mandatory field and cannot be deselected.": "This is a mandatory field and cannot be deselected.",
-    "At least one user attribute must be selected.": "At least one user attribute must be selected.",
+    "At least one user attribute must be selected.": "At least one purpose attribute must be selected.",
     "Hour": "Hour",
     "Hours": "Hours",
     "You have the right to:": "You have the right to:",
@@ -55,7 +55,7 @@
     "you can contact us here": "you can contact us here",
     "You can withdraw your consent at any time by": "You can withdraw your consent at any time by",
     "Clicking here": "Clicking here",
-    "Please read this End-User License Agreement carefully before providing consent.": "Please read this End-User License Agreement carefully before providing consent.",
+    "Please read this End-User License Agreement carefully before providing consent.": "Please review this Redirectional URL carefully before providing consent.",
     "Upon withdrawal, your personal data will be erased unless retention is required by law": "Upon withdrawal, your personal data will be erased unless retention is required by law",
     "SUPPLEMENTAL CONSENT NOTICE": "SUPPLEMENTAL CONSENT NOTICE",
     "You are providing supplemental consent to {{brand_name}} for {{title}}": "You are providing supplemental consent to {{brand_name}} for {{title}}",
@@ -67,7 +67,7 @@
     "Data Protection Rights Management page": "Data Protection Rights Management page",
     "If you have any questions about the processing of your personal data, contact the Data Protection Officer.": "If you have any questions about the processing of your personal data, contact the Data Protection Officer.",
     "Click here to check": "Click here to check",
-    "End-User License Agreement": "End-User License Agreement",
+    "End-User License Agreement": "Redirectional URL",
     "To continue with your application, please review and provide consent for the following purposes": "To continue with your application, please review and provide consent for the following purposes",
     "numerals": "0123456789"
   }

@@ -65,7 +65,7 @@ export const createBusinessUnit = createSafeAction(
     // Check if code already exists
     const codeExists = await checkBusinessUnitCodeExistsService(data.code);
     if (codeExists) {
-      throw new Error("Business unit code already exists");
+      throw new Error("Department code already exists");
     }
 
     const businessUnit = await createBusinessUnitService(data);
@@ -90,7 +90,7 @@ export const updateBusinessUnit = createSafeAction(
         id
       );
       if (codeExists) {
-        throw new Error("Business unit code already exists");
+        throw new Error("Department code already exists");
       }
     }
 

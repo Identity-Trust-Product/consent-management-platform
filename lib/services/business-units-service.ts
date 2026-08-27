@@ -22,7 +22,7 @@ export async function getAllBusinessUnits() {
     return businessUnits;
   } catch (error) {
     console.error("Error fetching business units:", error);
-    throw new Error("Failed to fetch business units");
+    throw new Error("Failed to fetch departments");
   }
 }
 
@@ -34,7 +34,7 @@ export async function getBusinessUnitById(id: number) {
     return businessUnit;
   } catch (error) {
     console.error("Error fetching business unit:", error);
-    throw new Error("Failed to fetch business unit");
+    throw new Error("Failed to fetch department");
   }
 }
 
@@ -52,7 +52,7 @@ export async function createBusinessUnit(
     return businessUnit;
   } catch (error) {
     console.error("Error creating business unit:", error);
-    throw new Error("Failed to create business unit");
+    throw new Error("Failed to create department");
   }
 }
 
@@ -68,7 +68,7 @@ export async function updateBusinessUnit(
     return businessUnit;
   } catch (error) {
     console.error("Error updating business unit:", error);
-    throw new Error("Failed to update business unit");
+    throw new Error("Failed to update department");
   }
 }
 
@@ -80,7 +80,7 @@ export async function deleteBusinessUnit(id: number) {
     return { success: true };
   } catch (error) {
     console.error("Error deleting business unit:", error);
-    throw new Error("Failed to delete business unit");
+    throw new Error("Failed to delete department");
   }
 }
 
@@ -92,7 +92,7 @@ export async function getBusinessUnitByCode(code: string) {
     return businessUnit;
   } catch (error) {
     console.error("Error fetching business unit by code:", error);
-    throw new Error("Failed to fetch business unit");
+    throw new Error("Failed to fetch department");
   }
 }
 
@@ -117,6 +117,6 @@ export async function checkBusinessUnitCodeExists(
     return true;
   } catch (error) {
     console.error("Error checking business unit code:", error);
-    throw new Error("Failed to check business unit code");
+    throw new Error("Failed to check department code");
   }
 }

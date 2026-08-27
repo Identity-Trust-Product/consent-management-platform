@@ -39,7 +39,7 @@ export function NoticeButton({
   size = "default",
   className,
   disabled = false,
-  purpose: _purpose,
+  purpose,
   type = "button",
 }: NoticeButtonProps) {
   const { isHighContrast } = useHighContrast();
@@ -51,7 +51,14 @@ export function NoticeButton({
       disabled={disabled}
       variant={variant}
       size={size}
-      className={cn(className, isHighContrast && "hc-footer-button")}
+      className={cn(
+        purpose === "accept" &&
+          "border-0 bg-gradient-to-r from-sky-600 to-blue-800 text-white shadow-md hover:from-sky-700 hover:to-blue-900",
+        purpose === "reject" &&
+          "border border-blue-800 bg-white text-blue-900 shadow-sm hover:bg-blue-50",
+        className,
+        isHighContrast && "hc-footer-button",
+      )}
     >
       {children}
     </Button>

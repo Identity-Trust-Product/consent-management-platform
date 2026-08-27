@@ -124,7 +124,7 @@ export function ReceiptDropdown({
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold text-gray-900 w-32 shrink-0">
-                        Data Principal ID:
+                        User ID:
                       </span>
                       <span
                         className="text-sm font-medium text-gray-500 font-mono truncate"

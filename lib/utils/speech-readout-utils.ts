@@ -126,7 +126,7 @@ function buildProcessingPurposeSection(
   }
 
   return {
-    title: `${translate('Purpose of Processing')}: ${translatedPP.name}`,
+    title: `${translate('Purpose Sub Master')}: ${translatedPP.name}`,
     content: parts.join('\n\n')
   };
 }
@@ -164,7 +164,7 @@ function buildConsentPurposeContent(
         }
       );
 
-      parts.push(`\n\n${translate('Purpose of Processing')}: ${translatedPP.name}`);
+      parts.push(`\n\n${translate('Purpose Sub Master')}: ${translatedPP.name}`);
       if (translatedPP.description) {
         parts.push(`\n\n${translatedPP.description}`);
       }
@@ -181,7 +181,7 @@ function buildConsentPurposeContent(
   }
 
   return {
-    title: `${translate('Major Purpose of Consent')}: ${translatedCP.name}`,
+    title: `${translate('Major Purpose Master')}: ${translatedCP.name}`,
     content: parts.join(''),
   }
 };

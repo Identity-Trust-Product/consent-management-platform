@@ -95,8 +95,8 @@ export function PurposeOfProcessingForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Purpose of processing created successfully"
-            : "Purpose of processing updated successfully"
+            ? "Purpose sub master created successfully"
+            : "Purpose sub master updated successfully"
         );
         router.push("/cms/data-fiduciary/purposes-of-processing");
       } else {
@@ -122,15 +122,15 @@ export function PurposeOfProcessingForm({
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
               {mode === "new"
-                ? "New Purpose of Processing"
-                : "Edit Purpose of Processing"}
+                ? "New Purpose Sub Master"
+                : "Edit Purpose Sub Master"}
             </h2>
           </div>
         </div>
         <p className="text-muted-foreground">
           {mode === "new"
-            ? "Create a new purpose of processing"
-            : "Update purpose of processing details"}
+            ? "Create a new purpose sub master"
+            : "Update purpose sub master details"}
         </p>
       </div>
 
@@ -150,12 +150,12 @@ export function PurposeOfProcessingForm({
                     render={({ field }) => (
                       <FormItem className="max-w-lg">
                         <FormLabel>
-                          Purpose of Processing Name{" "}
+                          Purpose Sub Master Name{" "}
                           <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Enter purpose of processing name"
+                            placeholder="Enter purpose sub master name"
                             {...field}
                           />
                         </FormControl>
@@ -202,7 +202,7 @@ export function PurposeOfProcessingForm({
                         </FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Enter purpose of processing description"
+                            placeholder="Enter purpose sub master description"
                             className="min-h-[100px]"
                             {...field}
                           />

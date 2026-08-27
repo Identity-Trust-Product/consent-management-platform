@@ -375,7 +375,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
                       }}
                     >
                       <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-                      Add a Purpose of Consent
+                      Add a Purpose Master
                     </Button>
                   </div>
                 </CardContent>
@@ -385,7 +385,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
                 <Table>
                   <TableHeader className="bg-muted">
                     <TableRow>
-                      <TableHead className="whitespace-normal">Purpose of Consent</TableHead>
+                      <TableHead className="whitespace-normal">Purpose Master</TableHead>
                       <TableHead className="whitespace-normal">Consent Duration</TableHead>
                       <TableHead className="whitespace-normal">Purpose of Processing</TableHead>
                       <TableHead className="whitespace-normal">Attributes</TableHead>

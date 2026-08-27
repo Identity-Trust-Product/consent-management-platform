@@ -550,7 +550,7 @@ export default function TicketDetailView({
                       )}
                       <div>
                         <p className="text-muted-foreground mb-1">
-                          Business Process
+                          Process
                         </p>
                         <p className="font-medium">
                           {detailedTicket.businessProcess.name}
@@ -558,7 +558,7 @@ export default function TicketDetailView({
                       </div>
                       <div>
                         <p className="text-muted-foreground mb-1">
-                          Data Principal ID
+                          User ID
                         </p>
                         <p className="font-mono text-xs break-all">
                           {detailedTicket.dataPrincipalId}
@@ -590,7 +590,7 @@ export default function TicketDetailView({
                                 {detailedTicket.consentTaxonomy.businessProcess.name} (v{detailedTicket.consentTaxonomy.businessProcess.version})
                               </Link>
                               <p className="text-xs text-muted-foreground mt-0.5">
-                                Business Process
+                                Process
                               </p>
                             </div>
                           </div>
@@ -695,7 +695,7 @@ export default function TicketDetailView({
                           </div>
                         ) : (
                           <p className="text-xs text-muted-foreground italic">
-                            No consent purposes configured for this business process.
+                            No purpose masters configured for this process.
                           </p>
                         )}
                       </div>

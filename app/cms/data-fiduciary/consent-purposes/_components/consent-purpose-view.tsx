@@ -147,7 +147,7 @@ export function ConsentPurposeView({
 
           {/* Purposes of Processing List */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Purposes of Processing List</h3>
+            <h3 className="font-semibold">Purpose Sub Master List</h3>
 
             {processingPurposes.length > 0 ? (
               <div className="border rounded-lg overflow-hidden">
@@ -155,7 +155,7 @@ export function ConsentPurposeView({
                   <TableHeader>
                     <TableRow>
                       <TableHead className="bg-muted/30 border-r w-[200px]">
-                        Purpose of Processing
+                        Purpose Sub Master
                       </TableHead>
                       <TableHead className="bg-muted/30 border-r w-[150px]">
                         Description
@@ -223,7 +223,7 @@ export function ConsentPurposeView({
                       Processors Name
                     </TableHead>
                     <TableHead className="bg-muted/30 border-r w-[250px]">
-                      Purpose of Processing
+                      Purpose Sub Master
                     </TableHead>
                     <TableHead className="bg-muted/30">Attributes</TableHead>
                   </TableRow>
@@ -326,7 +326,7 @@ export function ConsentPurposeView({
             <div className="space-y-6">
               {/* Consent Purpose Translations */}
               <div className="rounded-lg border p-4">
-                <h4 className="font-medium mb-3">Purpose of Consent</h4>
+                <h4 className="font-medium mb-3">Purpose Master</h4>
                 <div className="space-y-2">
                   {Object.entries(SUPPORTED_LANGUAGES)
                     .filter(([code]) => code !== "en" && consentPurpose.supportedLanguages.includes(code))
@@ -357,7 +357,7 @@ export function ConsentPurposeView({
               {/* Processing Purposes Translations */}
               {processingPurposes.length > 0 && (
                 <div className="rounded-lg border p-4">
-                  <h4 className="font-medium mb-3">Purposes of Processing</h4>
+                  <h4 className="font-medium mb-3">Purpose Sub Masters</h4>
                   {processingPurposes.map((pp: any, ppIndex: number) => (
                     <div key={pp.id} className="mb-6 last:mb-0">
                       <div className="flex items-center gap-2 mb-3 pb-2 border-b">

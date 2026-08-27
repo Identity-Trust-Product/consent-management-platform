@@ -47,10 +47,10 @@ export function PurposesOfProcessingClient({
   const handleDelete = async (id: number) => {
     const result = await deletePurposeOfProcessing({ id });
     if (result.success) {
-      toast.success("Purpose of processing deleted successfully");
+      toast.success("Purpose sub master deleted successfully");
       router.refresh();
     } else {
-      toast.error(result.error || "Failed to delete purpose of processing");
+      toast.error(result.error || "Failed to delete purpose sub master");
     }
   };
 
@@ -59,7 +59,7 @@ export function PurposesOfProcessingClient({
       {/* Filter and New Button Group */}
       <div className="flex items-center justify-end gap-4">
         <h5 className="flex-1 tracking-tight">
-          List of Purposes of Processing ({data.length} Entries)
+          List of Purpose Sub Masters ({data.length} Entries)
         </h5>
         <Input
           id="filter-names"

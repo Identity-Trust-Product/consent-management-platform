@@ -241,7 +241,7 @@ export function detectBreakingChanges(
               field: "userAttributes",
               oldValue: baselineAttrs,
               newValue: currentAttrs,
-              description: `Processing purpose ${currentRule.processingPurposeId}: User attributes changed`,
+              description: `Processing purpose ${currentRule.processingPurposeId}: Purpose attributes changed`,
             });
           }
 

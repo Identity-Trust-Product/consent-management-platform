@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { ArrowRight, Cookie, Shield, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const user = await getCurrentUser();
@@ -35,6 +36,8 @@ export default async function Home() {
       </div>
     );
   }
+
+  redirect("/cms/data-fiduciary/dashboard");
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center p-8 overflow-hidden">

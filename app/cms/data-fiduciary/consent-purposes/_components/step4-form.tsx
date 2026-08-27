@@ -571,7 +571,7 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
 
             {/* Consent Purpose Translation */}
             <div className="space-y-4 rounded-lg border p-4">
-              <h4 className="font-semibold">Purpose of Consent Name</h4>
+              <h4 className="font-semibold">Purpose Master Name</h4>
               <Input
                 placeholder={`Enter name in ${selectedLangInfo.name}`}
                 value={cpTranslations[selectedLanguage]?.name || ""}
@@ -585,7 +585,7 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
               />
 
               <h4 className="font-semibold mt-4">
-                Purpose of Consent Description
+                Purpose Master Description
               </h4>
               <Textarea
                 placeholder={`Enter description in ${selectedLangInfo.name}`}
@@ -605,7 +605,7 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
             {processingPurposes && processingPurposes.length > 0 && (
               <div className="space-y-4">
                 <h4 className="font-semibold">
-                  List of Purposes of Processing
+                  List of Purpose Sub Masters
                 </h4>
                 {processingPurposes.map((pp: any, index: number) => {
                   // Get processing purpose ref (id, tempId, or code)
@@ -627,7 +627,7 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
 
                       <div>
                         <label className="text-sm font-medium">
-                          Purpose of Processing Name
+                          Purpose Sub Master Name
                         </label>
                         <Input
                           placeholder={`Enter name in ${selectedLangInfo.name}`}
@@ -649,7 +649,7 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
 
                       <div>
                         <label className="text-sm font-medium">
-                          Purpose of Processing Description
+                          Purpose Sub Master Description
                         </label>
                         <Textarea
                           placeholder={`Enter description in ${selectedLangInfo.name}`}

@@ -112,13 +112,13 @@ export async function POST(request: NextRequest) {
 
     if (!businessProcess) {
       return ApiErrors.notFound(
-        `Business process with code '${validatedData.business_process.code}' and version '${validatedData.business_process.version}' not found`
+        `Process with code '${validatedData.business_process.code}' and version '${validatedData.business_process.version}' not found`
       );
     }
 
     // Check if business process is published
     if (businessProcess.status !== "published") {
-      return ApiErrors.validationError("Business process is not published", {
+      return ApiErrors.validationError("Process is not published", {
         status: businessProcess.status,
       });
     }

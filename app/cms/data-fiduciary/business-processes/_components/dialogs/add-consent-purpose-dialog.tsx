@@ -243,7 +243,7 @@ export function AddConsentPurposeDialog({
       <DialogContent className="sm:max-w-6xl h-[700px] flex flex-col">
         <DialogHeader className="flex-shrink-0">
           <DialogTitle>
-            {isEdit ? "Edit" : "Add"} Purpose of Consent
+            {isEdit ? "Edit" : "Add"} Purpose Master
           </DialogTitle>
         </DialogHeader>
 
@@ -251,12 +251,12 @@ export function AddConsentPurposeDialog({
           <div className="flex-1 space-y-6 overflow-y-auto pr-2">
             {/* Consent Purpose Selection */}
             <div className="space-y-2">
-              <Label>Purpose of Consent</Label>
+              <Label>Purpose Master</Label>
               {publishedConsentPurposes.length === 0 && (
                 <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-md">
                   <p className="text-sm text-yellow-800">
                     No published consent purposes available. Please publish
-                    consent purposes first before creating business processes.
+                    consent purposes first before creating processes.
                   </p>
                 </div>
               )}
@@ -290,7 +290,7 @@ export function AddConsentPurposeDialog({
                           </div>
                         ) : null;
                       })()
-                      : "Select a purpose of consent..."}
+                      : "Select a purpose master..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </PopoverTrigger>
@@ -436,8 +436,8 @@ export function AddConsentPurposeDialog({
                   <Table>
                     <TableHeader className="bg-muted">
                       <TableRow>
-                        <TableHead>Purpose of Processing</TableHead>
-                        <TableHead>User Attributes</TableHead>
+                        <TableHead>Purpose Sub Master</TableHead>
+                        <TableHead>Purpose Attributes</TableHead>
                         <TableHead className="text-center">Mandatory</TableHead>
                         <TableHead className="text-center">
                           Re-consentable by Principal
@@ -569,7 +569,7 @@ export function AddConsentPurposeDialog({
                 publishedConsentPurposes.length === 0
               }
             >
-              {isEdit ? "Update" : "Add"} Purpose of Consent
+              {isEdit ? "Update" : "Add"} Purpose Master
             </Button>
           </div>
         </div>

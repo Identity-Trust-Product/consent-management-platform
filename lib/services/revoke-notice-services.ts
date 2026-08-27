@@ -77,7 +77,7 @@ export async function getRevokeDataForService(
     });
 
     if (!businessProcess) {
-      throw new Error("Business Process not found.");
+      throw new Error("Process not found.");
     }
     const bpInternalId = businessProcess.id;
 

@@ -210,7 +210,7 @@ export function AddProcessingPurposeDialog({
           <div className="flex-1 flex flex-col space-y-6 overflow-hidden">
             <div className="flex-1 space-y-4 overflow-y-auto pr-2">
               <h3 className="text-lg font-medium">
-                Select Purpose of Processing
+                Select Purpose Sub Master
               </h3>
               <p className="text-sm text-muted-foreground">
                 Choose the legal basis and purpose for processing user data, and
@@ -218,7 +218,7 @@ export function AddProcessingPurposeDialog({
               </p>
 
               <div className="space-y-2">
-                <Label htmlFor="purpose-select">Purpose of Processing</Label>
+                <Label htmlFor="purpose-select">Purpose Sub Master</Label>
                 {isEdit ? (
                   <div className="w-full p-3 border rounded-md bg-muted">
                     <span className="text-sm">
@@ -245,7 +245,7 @@ export function AddProcessingPurposeDialog({
                             (purpose) =>
                               purpose.id === formData.purposeOfProcessingId
                           )?.name
-                          : "Select a purpose of processing..."}
+                          : "Select a purpose sub master..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </PopoverTrigger>
@@ -255,7 +255,7 @@ export function AddProcessingPurposeDialog({
                         <CommandList>
                           <CommandEmpty>
                             {availablePurposesOfProcessing.length === 0
-                              ? "All purposes of processing are already in use."
+                              ? "All purpose sub masters are already in use."
                               : "No purpose found."}
                           </CommandEmpty>
                           <CommandGroup>
@@ -333,10 +333,10 @@ export function AddProcessingPurposeDialog({
                 </Button>
                 <div>
                   <h3 className="text-lg font-medium">
-                    Select User Attributes
+                    Select Purpose Attributes
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Choose which user attributes will be collected for:{" "}
+                    Choose which purpose attributes will be collected for:{" "}
                     <strong>{formData.name}</strong>
                   </p>
                 </div>
@@ -345,7 +345,7 @@ export function AddProcessingPurposeDialog({
 
             <div className="flex-1 space-y-3 overflow-hidden">
               <Label>
-                User Attributes ({formData.userAttributeNames.length} selected)
+                Purpose Attributes ({formData.userAttributeNames.length} selected)
               </Label>
 
               {/* Selected Attributes Display - Fixed height container */}
@@ -398,7 +398,7 @@ export function AddProcessingPurposeDialog({
                   >
                     <span className="text-muted-foreground">
                       {formData.userAttributeNames.length === 0
-                        ? "Select user attributes..."
+                        ? "Select purpose attributes..."
                         : `${formData.userAttributeNames.length} attribute${formData.userAttributeNames.length === 1 ? "" : "s"
                         } selected`}
                     </span>

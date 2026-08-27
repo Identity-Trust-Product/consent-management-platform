@@ -68,7 +68,7 @@ export async function getAllBusinessProcesses() {
     return businessProcesses;
   } catch (error) {
     console.error("Error fetching business processes:", error);
-    throw new Error("Failed to fetch business processes");
+    throw new Error("Failed to fetch processes");
   }
 }
 
@@ -229,7 +229,7 @@ export async function getBusinessProcessById(id: number) {
     };
   } catch (error) {
     console.error("Error fetching business process:", error);
-    throw new Error("Failed to fetch business process");
+    throw new Error("Failed to fetch process");
   }
 }
 
@@ -267,7 +267,7 @@ export async function createBusinessProcess(data: {
     return businessProcess;
   } catch (error) {
     console.error("Error creating business process:", error);
-    throw new Error("Failed to create business process");
+    throw new Error("Failed to create process");
   }
 }
 
@@ -295,7 +295,7 @@ export async function updateBusinessProcess(
     return businessProcess;
   } catch (error) {
     console.error("Error updating business process:", error);
-    throw new Error("Failed to update business process");
+    throw new Error("Failed to update process");
   }
 }
 
@@ -322,7 +322,7 @@ export async function deleteBusinessProcess(id: number) {
     return { success: true };
   } catch (error) {
     console.error("Error deleting business process:", error);
-    throw new Error("Failed to delete business process");
+    throw new Error("Failed to delete process");
   }
 }
 
@@ -475,7 +475,7 @@ export async function saveOrUpdateBusinessProcess(
     return result;
   } catch (error) {
     console.error("Error saving business process:", error);
-    throw new Error("Failed to save business process");
+    throw new Error("Failed to save process");
   }
 }
 
@@ -584,7 +584,7 @@ export async function saveBusinessProcess(
     return result;
   } catch (error) {
     console.error("Error saving business process:", error);
-    throw new Error("Failed to save business process");
+    throw new Error("Failed to save process");
   }
 }
 
@@ -639,7 +639,7 @@ export async function getBusinessProcessFormData() {
     };
   } catch (error) {
     console.error("Error fetching business process form data:", error);
-    throw new Error("Failed to fetch business process form data");
+    throw new Error("Failed to fetch process form data");
   }
 }
 
@@ -665,7 +665,7 @@ export async function checkBusinessProcessCodeExists(
     return !!businessProcess;
   } catch (error) {
     console.error("Error checking business process code:", error);
-    throw new Error("Failed to check business process code");
+    throw new Error("Failed to check process code");
   }
 }
 
@@ -716,7 +716,7 @@ export async function saveOrUpdateBusinessProcessWithVersioning(
         });
 
         if (!currentBP) {
-          throw new Error("Business process not found");
+          throw new Error("Process not found");
         }
 
         // Only create new version if current BP is published
@@ -858,7 +858,7 @@ export async function saveOrUpdateBusinessProcessWithVersioning(
 
             if (existingConsents) {
               throw new Error(
-                "Cannot modify business process rules as there are existing consents. Please create a new version instead.",
+                "Cannot modify process rules as there are existing consents. Please create a new version instead.",
               );
             }
           }
@@ -959,7 +959,7 @@ export async function saveOrUpdateBusinessProcessWithVersioning(
     return result;
   } catch (error) {
     console.error("Error saving business process with versioning:", error);
-    throw new Error("Failed to save business process");
+    throw new Error("Failed to save process");
   }
 }
 // Helper: Get all business processes using a given consent purpose (by code+version)

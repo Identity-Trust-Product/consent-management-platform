@@ -202,7 +202,7 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>
-                              Business Process Name{" "}
+                              Process Name{" "}
                               <span className="text-destructive">*</span>
                             </FormLabel>
                             <FormControl>
@@ -223,7 +223,7 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>
-                              Business Unit{" "}
+                              Department{" "}
                               <span className="text-destructive">*</span>
                             </FormLabel>
                             <Popover
@@ -247,7 +247,7 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                                         (unit) => unit.id === field.value
                                       )?.code +
                                       ")"
-                                      : "Select a business unit..."}
+                                      : "Select a Department..."}
                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                   </Button>
                                 </FormControl>
@@ -258,10 +258,10 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                                 side="top"
                               >
                                 <Command>
-                                  <CommandInput placeholder="Search business units..." />
+                                  <CommandInput placeholder="Search departments..." />
                                   <CommandList>
                                     <CommandEmpty>
-                                      No business unit found.
+                                      No department found.
                                     </CommandEmpty>
                                     <CommandGroup>
                                       {data.businessUnits?.map((unit) => (

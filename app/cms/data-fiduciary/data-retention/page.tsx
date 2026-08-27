@@ -110,7 +110,7 @@ export default async function DataRetentionPage() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold">Choose a trigger and business process</h3>
+              <h3 className="font-semibold">Choose a trigger and process</h3>
               <p className="text-sm text-muted-foreground">
                 Select when retention starts and map the rule to a relevant process.
               </p>

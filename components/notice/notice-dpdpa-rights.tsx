@@ -65,7 +65,7 @@ export function NoticeDpdpaRights({
               onClick={() => setIsEulaDialogOpen(true)}
               className="underline cursor-pointer"
             >
-              <b>{t("EULA and DPO contact details")}</b>
+              <b>{t("Redirectional URL and DPO contact details")}</b>
             </button>
           </p>
         )}

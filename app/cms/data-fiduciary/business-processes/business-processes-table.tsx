@@ -209,9 +209,9 @@ export function BusinessProcessesTable({
       }
       filterValue={filterValue}
       filterKey="name"
-      deleteDialogTitle="Delete Business Process"
+      deleteDialogTitle="Delete Process"
       deleteDialogDescription={(businessProcess: BusinessProcess) =>
-        `Are you sure you want to delete the business process "${businessProcess.name}"? This action cannot be undone.`
+        `Are you sure you want to delete the process "${businessProcess.name}"? This action cannot be undone.`
       }
       getItemName={(businessProcess: BusinessProcess) => businessProcess.name}
     />

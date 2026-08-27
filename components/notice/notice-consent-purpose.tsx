@@ -227,7 +227,7 @@ export function NoticeConsentPurpose({
             </AccordionTrigger>
             <AccordionContent
               className={cn(
-                "p-4 pt-0 bg-primary-50 rounded-b-lg",
+                "rounded-b-lg bg-blue-50 p-4 pt-0",
                 isHighContrast && "hc-accordion-content",
               )}
             >

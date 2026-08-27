@@ -1,1 +1,11 @@
-{"pages":{},"app":{"/Users/kedarkulkarni/Work/Privy/consent-manager-platform/app/cms/layout":["static/media/4cf2300e9c8272f7-s.p.woff2","static/media/93f479601ee12b01-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}
+{
+  "app": {
+    "[project]/app/cms/principal/notice/[notice_id]/view/[access_token]/page": [
+      "static/media/caa3a2e1cccd8315-s.p.3b6cae6d.woff2",
+      "static/media/797e433ab948586e-s.p.29207c2f.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

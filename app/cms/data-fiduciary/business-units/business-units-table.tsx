@@ -160,9 +160,9 @@ export function BusinessUnitsTable({
       onRowClick={(businessUnit: BusinessUnit) => onView(businessUnit.id)}
       filterValue={filterValue}
       filterKey="name"
-      deleteDialogTitle="Delete Business Unit"
+      deleteDialogTitle="Delete Department"
       deleteDialogDescription={(businessUnit: BusinessUnit) =>
-        `Are you sure you want to delete the business unit "${businessUnit.name}"? This action cannot be undone.`
+        `Are you sure you want to delete the department "${businessUnit.name}"? This action cannot be undone.`
       }
       getItemName={(businessUnit: BusinessUnit) => businessUnit.name}
     />

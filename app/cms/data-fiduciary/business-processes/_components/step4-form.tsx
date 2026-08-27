@@ -200,8 +200,8 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
     const englishData = state.step1Data || data.businessProcess;
 
     if (!englishData || !englishData.name || !englishData.grantDescription) {
-      toast.error("Please complete Step 1 with business process name and grant description first");
-      return { error: "Business process data is required" };
+      toast.error("Please complete Step 1 with process name and grant description first");
+      return { error: "Process data is required" };
     }
 
     // CREATE MODE: Use translateTextToLanguages for each field
@@ -260,8 +260,8 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
 
     // EDIT MODE: Translate using latest context data, then update DB
     if (!businessProcessId) {
-      toast.error("Business process ID not found");
-      return { error: "Business process ID not found" };
+      toast.error("Process ID not found");
+      return { error: "Process ID not found" };
     }
 
     try {
@@ -341,7 +341,7 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
     if (!englishData) {
       console.error("No English data found in step1Data or businessProcess!");
       toast.error(
-        "Missing business process data. Please complete Step 1 first."
+        "Missing process data. Please complete Step 1 first."
       );
       return;
     }
@@ -391,7 +391,7 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
     if (!englishData) {
       console.error("No English data found in step1Data or businessProcess!");
       toast.error(
-        "Missing business process data. Please complete Step 1 first."
+        "Missing process data. Please complete Step 1 first."
       );
       return;
     }
@@ -489,7 +489,7 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
           </span>
         </div>
         <p className="text-muted-foreground">
-          Add translations for business process in 22 Indian languages
+          Add translations for the process in 22 Indian languages
         </p>
       </div>
 
@@ -537,7 +537,7 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
             {/* Business Process Translation */}
             <div className="space-y-4 rounded-lg border p-4">
               <div>
-                <h4 className="font-semibold mb-2">Business Process Name</h4>
+                <h4 className="font-semibold mb-2">Process Name</h4>
                 <Input
                   placeholder={`Enter name in ${selectedLangInfo.name}`}
                   value={bpTranslations[selectedLanguage]?.name || ""}

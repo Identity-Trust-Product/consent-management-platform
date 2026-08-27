@@ -21,7 +21,7 @@ export const businessProcessSchema = z.object({
     .string()
     .min(1, "Code is required")
     .max(50, "Code must be less than 50 characters"),
-  businessUnitId: z.number().min(1, "Business unit is required"),
+  businessUnitId: z.number().min(1, "Department is required"),
   grantDescription: z
     .string()
     .min(8, "Grant description should be at least 8 characters long")

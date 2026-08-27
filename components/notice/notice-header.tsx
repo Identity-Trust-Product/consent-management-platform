@@ -89,13 +89,16 @@ export function NoticeHeader({
   return (
     <div
       className={cn(
-        "flex items-center justify-between py-6 px-10 border-b bg-neutral-20",
+        "flex items-center justify-between border-b border-blue-800 bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-900 px-10 py-6 text-white",
         isHighContrast && "hc-bg-header hc-no-border",
         className,
       )}
     >
       {/* Logo */}
-      <FiduciaryLogo isHighContrast={isHighContrast} />
+      <FiduciaryLogo
+        isHighContrast={isHighContrast}
+        className="text-white"
+      />
 
       {/* Right side controls */}
       <div className="flex items-center gap-3">
@@ -114,8 +117,8 @@ export function NoticeHeader({
                   aria-label="Descrease size"
                   size="sm"
                   className={cn(
-                    "rounded-md h-6.5 w-6 cursor-pointer data-[state=on]:text-white hover:bg-transparent hover:text-current text-neutral-300",
-                    currentFontSize === "s" && "text-white bg-neutral-300",
+                    "h-6.5 w-6 cursor-pointer rounded-md text-blue-100 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
+                    currentFontSize === "s" && "bg-white/20 text-white",
                     isHighContrast && "hc-text-white",
                   )}
                 >
@@ -125,8 +128,8 @@ export function NoticeHeader({
                   value="m"
                   aria-label="Default size"
                   className={cn(
-                    "rounded-md h-6.5 w-6 cursor-pointer data-[state=on]:text-white hover:bg-transparent hover:text-current text-neutral-300",
-                    currentFontSize === "m" && "text-white bg-neutral-300",
+                    "h-6.5 w-6 cursor-pointer rounded-md text-blue-100 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
+                    currentFontSize === "m" && "bg-white/20 text-white",
                     isHighContrast && "hc-text-white",
                   )}
                 >
@@ -136,8 +139,8 @@ export function NoticeHeader({
                   value="l"
                   aria-label="Increase size"
                   className={cn(
-                    "rounded-md h-6.5 w-6 cursor-pointer data-[state=on]:text-white hover:bg-transparent text-neutral-300",
-                    currentFontSize === "l" && "text-white bg-neutral-300",
+                    "h-6.5 w-6 cursor-pointer rounded-md text-blue-100 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
+                    currentFontSize === "l" && "bg-white/20 text-white",
                     isHighContrast && "hc-text-white",
                   )}
                 >
@@ -149,7 +152,7 @@ export function NoticeHeader({
             {/* Separator */}
             <div
               className={cn(
-                "w-px h-6 bg-gray-300",
+                "h-6 w-px bg-white/30",
                 isHighContrast && "hc-border-light-gray",
               )}
             />
@@ -161,7 +164,7 @@ export function NoticeHeader({
           onClick={handleHighContrastToggle}
           className={cn(
             "flex items-center justify-center rounded-md cursor-pointer transition-colors",
-            isHighContrast ? "text-yellow-500" : "text-neutral-300",
+            isHighContrast ? "text-yellow-500" : "text-blue-100",
             isHighContrast && "hc-text-gold",
           )}
           aria-label="Toggle high contrast mode"
@@ -172,7 +175,7 @@ export function NoticeHeader({
         {/* Separator */}
         <div
           className={cn(
-            "w-px h-6 bg-gray-300",
+            "h-6 w-px bg-white/30",
             isHighContrast && "hc-border-light-gray",
           )}
         />
@@ -183,7 +186,7 @@ export function NoticeHeader({
         {/* Separator */}
         <div
           className={cn(
-            "w-px h-6 bg-gray-300",
+            "h-6 w-px bg-white/30",
             isHighContrast && "hc-border-light-gray",
           )}
         />
@@ -192,7 +195,7 @@ export function NoticeHeader({
         <Select value={currentLanguage} onValueChange={handleLanguageChange}>
           <SelectTrigger
             className={cn(
-              "flex items-center gap-2 bg-white cursor-pointer",
+              "flex cursor-pointer items-center gap-2 border-white/30 bg-white/10 text-white hover:bg-white/20",
               isMobile ? "w-auto px-2" : "w-40",
               isHighContrast &&
               "hc-language-dropdown hc-bg-black hc-text-white notice-language-dropdown",
@@ -201,7 +204,7 @@ export function NoticeHeader({
           >
             <Languages
               className={cn(
-                "h-6 w-6 text-neutral-700",
+                "h-6 w-6 text-white",
                 isHighContrast && "hc-text-white",
               )}
             />

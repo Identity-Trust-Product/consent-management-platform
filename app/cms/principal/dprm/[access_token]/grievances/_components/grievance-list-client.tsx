@@ -307,7 +307,7 @@ export default function GrievanceListClient({
                     {/* Meta Information */}
                     <div className="flex flex-col gap-1 text-xs text-muted-foreground">
                       <div className="flex items-center justify-between">
-                        <span>Business Process:</span>
+                        <span>Process:</span>
                         <span className="font-medium text-foreground">
                           {grievance.businessProcess.name}
                         </span>

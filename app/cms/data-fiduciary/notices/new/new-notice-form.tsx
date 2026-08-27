@@ -37,7 +37,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -205,7 +204,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
 
         if (!majorMetadata || !majorMetadata.value.trim()) {
           toast.error(
-            "Major Data Principal ID is required when creating a notice for a minor"
+            "Major User ID is required when creating a notice for a minor"
           );
           setIsSubmitting(false);
           return;
@@ -215,7 +214,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
         const majorIdValue = majorMetadata.value.trim();
         if (majorIdValue.length < 3) {
           toast.error(
-            "Major Data Principal ID must be at least 3 characters long"
+            "Major User ID must be at least 3 characters long"
           );
           setIsSubmitting(false);
           return;
@@ -224,7 +223,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
         const uuidRegex = /^[0-9a-z-]{3,}$/i;
         if (!uuidRegex.test(majorIdValue)) {
           toast.error(
-            "Major Data Principal ID must be a valid UUID format (e.g., 123e4567-e89b-12d3-a456-426614174000)"
+            "Major User ID must be a valid UUID format (e.g., 123e4567-e89b-12d3-a456-426614174000)"
           );
           setIsSubmitting(false);
           return;
@@ -307,7 +306,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Enter Data Principal ID
+                  Enter User ID
                   <span className="text-destructive">*</span>
                 </FormLabel>
                 <FormControl>
@@ -328,7 +327,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
             name="businessProcessId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Choose Business Process</FormLabel>
+                <FormLabel>Choose Process</FormLabel>
                 <Popover open={openCombobox} onOpenChange={setOpenCombobox}>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -345,18 +344,18 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                             );
                             return selectedProcess
                               ? `${selectedProcess.name} (${selectedProcess.code}) (v${selectedProcess.version})`
-                              : "Select business process";
+                              : "Select process";
                           })()
-                          : "Select business process"}
+                          : "Select process"}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="max-w-xl p-0">
                     <Command>
-                      <CommandInput placeholder="Search business process..." />
+                      <CommandInput placeholder="Search process..." />
                       <CommandList>
-                        <CommandEmpty>No business process found.</CommandEmpty>
+                        <CommandEmpty>No process found.</CommandEmpty>
                         <CommandGroup>
                           {businessProcesses.map((process) => (
                             <CommandItem
@@ -469,10 +468,10 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="purpose_of_processing">
-                        Purpose of Processing
+                        Purpose Sub Master
                       </SelectItem>
                       <SelectItem value="purpose_of_consent">
-                        Purpose of Consent
+                        Purpose Master
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -588,29 +587,6 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
             />
           </div>
 
-          {/* For Minor Checkbox */}
-          <FormField
-            control={form.control}
-            name="forMinor"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-y-0">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>For Minor</FormLabel>
-                  <p className="text-sm text-muted-foreground">
-                    Check this if the consent is for a minor (requires
-                    major/guardian data principal ID)
-                  </p>
-                </div>
-              </FormItem>
-            )}
-          />
-
           {/* Metadata Section */}
           <div className="space-y-4 max-w-4/5">
             <div className="flex items-center justify-start">
@@ -650,7 +626,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                       placeholder={
                         row.isLocked &&
                           row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
-                          ? "Major Data Principal ID"
+                          ? "Major User ID"
                           : row.isLocked &&
                             row.key ===
                             NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
@@ -660,7 +636,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                       value={
                         row.isLocked &&
                           row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
-                          ? "Major Data Principal ID"
+                          ? "Major User ID"
                           : row.isLocked &&
                             row.key ===
                             NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR

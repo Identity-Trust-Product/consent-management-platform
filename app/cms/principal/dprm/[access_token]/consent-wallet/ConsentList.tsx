@@ -62,7 +62,7 @@ export function ConsentList({ consents, status, userAttributes }: ConsentListPro
     <div className="space-y-6 pb-20">
       {/* The "Purpose of Consent" Label */}
       <div className="font-semibold text-sm text-gray-900 mb-2">
-        {t("Purpose of Consent")}
+        {t("Purpose Master")}
       </div>
 
       {/* Grouped Accordion */}

@@ -20,7 +20,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
-import { ChevronDownIcon, Info } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 import { NoticeSelectButton } from "./notice-select-button";
 import { useHighContrast } from "@/contexts/high-contrast-context";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -84,23 +84,6 @@ export function NoticeProcessingPurpose({
           <div className="flex flex-wrap gap-2">{children}</div>
         </div>
       )}
-
-      <div className="flex items-start gap-2">
-        <div className="flex group relative">
-          <Info
-            className={cn(
-              "w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0",
-              isHighContrast && "hc-info-note",
-            )}
-          />
-        </div>
-        <p
-          className={cn("text-sm", isHighContrast && "hc-info-note")}
-          dangerouslySetInnerHTML={{
-            __html: t("retention_policy_text"),
-          }}
-        />
-      </div>
     </div>
   );
 

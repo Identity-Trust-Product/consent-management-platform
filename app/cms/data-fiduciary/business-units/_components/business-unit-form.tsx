@@ -91,8 +91,8 @@ export function BusinessUnitForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Business unit created successfully"
-            : "Business unit updated successfully"
+            ? "Department created successfully"
+            : "Department updated successfully"
         );
         router.push("/cms/data-fiduciary/business-units");
       } else {
@@ -117,14 +117,14 @@ export function BusinessUnitForm({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {mode === "new" ? "New Business Unit" : "Edit Business Unit"}
+              {mode === "new" ? "New Department" : "Edit Department"}
             </h2>
           </div>
         </div>
         <p className="text-muted-foreground">
           {mode === "new"
-            ? "Create a new business unit"
-            : "Update business unit details"}
+            ? "Create a new department"
+            : "Update department details"}
         </p>
       </div>
 
@@ -144,12 +144,12 @@ export function BusinessUnitForm({
                     render={({ field }) => (
                       <FormItem className="max-w-lg">
                         <FormLabel>
-                          Business Unit Name{" "}
+                          Department Name{" "}
                           <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Enter business unit name"
+                            placeholder="Enter Department name"
                             {...field}
                           />
                         </FormControl>

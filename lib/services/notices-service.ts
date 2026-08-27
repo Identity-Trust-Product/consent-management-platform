@@ -388,7 +388,7 @@ export async function getBusinessProcessWithFullDataById(
       "Error fetching business process with full data by ID:",
       error,
     );
-    throw new Error("Failed to fetch business process with full data");
+    throw new Error("Failed to fetch process with full data");
   }
 }
 
@@ -417,6 +417,11 @@ export async function getNoticeWithFullDataByPublicId(publicId: string) {
             id: true,
             name: true,
             code: true,
+            businessUnit: {
+              select: {
+                name: true,
+              },
+            },
             grantDescription: true,
             revokeDescription: true,
             reconsentDescription: true,
@@ -708,7 +713,7 @@ export async function getBusinessProcessesByCode(
     return transformedBusinessProcesses as (typeof transformedBusinessProcesses)[0][];
   } catch (error) {
     console.error("Error fetching business processes by code:", error);
-    throw new Error("Failed to fetch business processes by code");
+    throw new Error("Failed to fetch processes by code");
   }
 }
 

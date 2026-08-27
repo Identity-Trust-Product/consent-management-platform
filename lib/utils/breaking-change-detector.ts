@@ -94,9 +94,9 @@ export function detectBreakingChanges(
       ) {
         breakingChanges.push({
           type: "pp_modified",
-          description: `Processing purpose "${baselinePP.name}": Purpose of processing changed`,
+          description: `Processing purpose "${baselinePP.name}": Purpose sub master changed`,
           details:
-            "Changing the purpose of processing category requires a new version",
+            "Changing the purpose sub master category requires a new version",
         });
       }
 
@@ -108,7 +108,7 @@ export function detectBreakingChanges(
       if (removedAttributes.length > 0) {
         breakingChanges.push({
           type: "ua_removed",
-          description: `Processing purpose "${baselinePP.name}": User attributes removed`,
+          description: `Processing purpose "${baselinePP.name}": Purpose attributes removed`,
           oldValue: baselinePP.userAttributeNames,
           newValue: modifiedPP.userAttributeNames,
         });
@@ -122,7 +122,7 @@ export function detectBreakingChanges(
       if (addedAttributes.length > 0) {
         breakingChanges.push({
           type: "pp_modified",
-          description: `Processing purpose "${baselinePP.name}": User attributes added`,
+          description: `Processing purpose "${baselinePP.name}": Purpose attributes added`,
           oldValue: baselinePP.userAttributeNames,
           newValue: modifiedPP.userAttributeNames,
         });

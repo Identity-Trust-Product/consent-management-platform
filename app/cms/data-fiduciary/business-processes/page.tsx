@@ -37,7 +37,7 @@ async function BusinessProcessesContent() {
     <Button asChild>
       <Link href="/cms/data-fiduciary/business-processes/new" className="group">
         <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-        <p className="text-base">New Business Process</p>
+        <p className="text-base">New Process</p>
       </Link>
     </Button>
   ) : null;
@@ -64,7 +64,7 @@ export default function BusinessProcessesPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Loading business processes...
+              Loading processes...
             </p>
           </div>
         </div>

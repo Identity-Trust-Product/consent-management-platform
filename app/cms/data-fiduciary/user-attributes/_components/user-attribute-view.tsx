@@ -68,7 +68,7 @@ export function UserAttributeView({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {userAttribute?.name || "User Attribute"}
+              {userAttribute?.name || "Purpose Attribute"}
             </h2>
             {userAttribute?.updatedAt && (
               <span className="text-sm text-muted-foreground">
@@ -94,7 +94,7 @@ export function UserAttributeView({
             Edit
           </EditButton>
         </div>
-        <p className="text-muted-foreground">View user attribute details</p>
+        <p className="text-muted-foreground">View purpose attribute details</p>
       </div>
 
       {/* Scrollable Content */}
@@ -108,7 +108,7 @@ export function UserAttributeView({
               <div className="space-y-4">
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    User Attribute Name:
+                    Purpose Attribute Name:
                   </span>
                   <p className="mt-1">
                     {userAttribute?.name || "Not specified"}
@@ -154,7 +154,9 @@ export function UserAttributeView({
         {/* Translations */}
         <div className="space-y-4">
           <div className="rounded-lg border p-4">
-            <h3 className="font-semibold mb-4">User Attribute in 22 Indian Languages</h3>
+            <h3 className="font-semibold mb-4">
+              Purpose Attribute in 22 Indian Languages
+            </h3>
 
             {userAttribute.supportedLanguages && userAttribute.supportedLanguages.filter(code => code !== "en").length > 0 ? (
               <div className="space-y-2">

@@ -65,7 +65,7 @@ export function NoticeFooter({
       {isMobile ? (
         // Mobile layout: question on top, buttons below
         <div className="flex flex-col items-center gap-4 w-full">
-          <p className="text-base font-medium text-center">{displayQuestion}</p>
+          <p className="text-center text-base font-semibold text-slate-800">{displayQuestion}</p>
           <div className="flex gap-4 w-full justify-center">
             <NoticeButton
               onClick={onReject}
@@ -88,7 +88,7 @@ export function NoticeFooter({
       ) : (
         // Desktop layout: question and buttons side by side
         <div className="flex items-center gap-6">
-          <p className="text-base font-medium whitespace-nowrap">
+          <p className="whitespace-nowrap text-base font-semibold text-slate-800">
             {displayQuestion}
           </p>
           <div className="flex gap-4">
@@ -117,7 +117,7 @@ export function NoticeFooter({
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-0 right-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50 border-t bg-white",
+        "fixed bottom-0 left-0 right-0 z-50 border-t border-blue-100 bg-white/95 shadow-[0_-4px_12px_-2px_rgba(15,23,42,0.16)] backdrop-blur",
         isHighContrast && "hc-notice-footer",
       )}
     >

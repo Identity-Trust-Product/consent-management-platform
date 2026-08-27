@@ -218,8 +218,8 @@ export async function getConsentHistoryDetail(
       count: group.length,
       details: {
         sections: group.map((item) => ({
-          title: `Purpose of Processing: ${item.consent.processingPurpose.name}`,
-          consentPurposeName: `Purpose of Consent: ${item.consent.consentPurpose.name}`,
+          title: `Purpose Sub Master: ${item.consent.processingPurpose.name}`,
+          consentPurposeName: `Purpose Master: ${item.consent.consentPurpose.name}`,
           description: item.consent.processingPurpose.description || "",
           isEssential: false,
           attributes: item.consent.userAttributeNames.map((name) => ({
@@ -330,7 +330,7 @@ export async function getReceiptViewDetails(option: ReceiptOption) {
     });
 
     if (!businessProcess) {
-      return { success: false, error: "Business Process not found" };
+      return { success: false, error: "Process not found" };
     }
 
     const notice = await prisma.notice.findUnique({

@@ -52,7 +52,11 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" className="w-full" disabled={pending}>
+    <Button
+      type="submit"
+      className="h-12 w-full rounded-xl bg-linear-to-r from-blue-700 to-indigo-700 text-base font-semibold shadow-md transition-all hover:from-blue-800 hover:to-indigo-800 hover:shadow-lg"
+      disabled={pending}
+    >
       {pending ? (
         <>
           <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -68,7 +72,11 @@ function SubmitButton() {
 function LoginFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/cms";
+  const requestedCallbackUrl = searchParams.get("callbackUrl");
+  const callbackUrl =
+    !requestedCallbackUrl || requestedCallbackUrl === "/cms"
+      ? "/cms/data-fiduciary/dashboard"
+      : requestedCallbackUrl;
   const [state, formAction] = useActionState(login, initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -82,8 +90,22 @@ function LoginFormContent() {
 
   useEffect(() => {
     if (state.success) {
-      toast.success("Success! Redirecting...", { description: state.message });
-      router.push(callbackUrl);
+      toast.success("Login successful", {
+        description: state.message || "Redirecting to your dashboard...",
+        duration: 2200,
+        classNames: {
+          toast:
+            "min-w-[360px] rounded-2xl border border-emerald-200 bg-white p-5 shadow-2xl",
+          title: "text-lg font-bold text-emerald-800",
+          description: "mt-1 text-base text-slate-600",
+        },
+      });
+
+      const redirectTimer = window.setTimeout(() => {
+        router.replace(callbackUrl);
+      }, 1200);
+
+      return () => window.clearTimeout(redirectTimer);
     } else {
       // Handle server-side validation errors
       if (state.errors) {
@@ -121,40 +143,33 @@ function LoginFormContent() {
       </div>
 
       {/* Login Card */}
-      <div className="relative w-full max-w-md mx-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        {/* Logo/Brand Section */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="relative group transform hover:scale-105 transition-transform duration-300">
-            <div className="relative bg-primary dark:bg-black/10 backdrop-blur-2xl border border-white/30 dark:border-white/20 p-8 rounded-2xl shadow-2xl">
-              <div className="flex flex-col items-center gap-3">
-                <img src={"/cms/lgw.webp"} width={150} alt="" />
-              </div>
-            </div>
-          </div>
-          <p className="mt-6 text-sm text-gray-600 dark:text-gray-400 font-medium">
+      <div className="relative mx-4 w-full max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-700">
+        {/* Brand Section */}
+        <div className="mb-8 text-center">
+          <h1 className="whitespace-nowrap bg-linear-to-r from-blue-950 via-blue-800 to-indigo-700 bg-clip-text text-[clamp(1.75rem,4.5vw,3.5rem)] font-bold tracking-tight text-transparent dark:from-blue-200 dark:via-white dark:to-indigo-200">
             Consent Management Platform
-          </p>
+          </h1>
         </div>
 
         {/* Login Form Card */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 p-8 space-y-6">
+        <div className="mx-auto max-w-xl space-y-8 rounded-3xl border border-white/80 bg-white/90 p-10 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-gray-700/50 dark:bg-slate-800/90 sm:p-12">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
               Welcome Back
             </h2>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
               Sign in to access your account
             </p>
           </div>
 
           <Form {...form}>
-            <form action={formAction} className="space-y-5" noValidate>
+            <form action={formAction} className="space-y-6" noValidate>
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
+                    <FormLabel className="text-base font-semibold text-gray-700 dark:text-gray-300">
                       Email Address
                     </FormLabel>
                     <FormControl>
@@ -163,7 +178,7 @@ function LoginFormContent() {
                         <Input
                           placeholder="you@example.com"
                           type="email"
-                          className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 transition-colors"
+                          className="h-13 rounded-xl border-gray-300 pl-11 text-base transition-colors focus:border-blue-600 focus:ring-blue-500/20 dark:border-gray-600 dark:focus:border-blue-500"
                           {...field}
                         />
                       </div>
@@ -177,7 +192,7 @@ function LoginFormContent() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
+                    <FormLabel className="text-base font-semibold text-gray-700 dark:text-gray-300">
                       Password
                     </FormLabel>
                     <FormControl>
@@ -186,7 +201,7 @@ function LoginFormContent() {
                         <Input
                           type={showPassword ? "text" : "password"}
                           placeholder="••••••••"
-                          className="pl-10 pr-10 h-11 border-gray-300 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 transition-colors"
+                          className="h-13 rounded-xl border-gray-300 pr-11 pl-11 text-base transition-colors focus:border-blue-600 focus:ring-blue-500/20 dark:border-gray-600 dark:focus:border-blue-500"
                           {...field}
                         />
                         <button
@@ -328,20 +343,13 @@ export default function LoginPage() {
     <Suspense
       fallback={
         <main className="relative flex items-center justify-center min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-          <div className="relative w-full max-w-md mx-4">
-            <div className="flex flex-col items-center mb-8">
-              <div className="relative">
-                <div className="relative bg-white/10 dark:bg-black/10 backdrop-blur-2xl border border-white/30 dark:border-white/20 p-8 rounded-2xl shadow-2xl">
-                  <div className="flex flex-col items-center gap-3">
-                    <img src={"/cms/logo.png"} width={150} alt="" />
-                    <h1 className="text-4xl font-bold text-slate-800 dark:text-white tracking-tight">
-                      Privy
-                    </h1>
-                  </div>
-                </div>
-              </div>
+          <div className="relative mx-4 w-full max-w-4xl">
+            <div className="mb-8 text-center">
+              <h1 className="whitespace-nowrap bg-linear-to-r from-blue-950 via-blue-800 to-indigo-700 bg-clip-text text-[clamp(1.75rem,4.5vw,3.5rem)] font-bold tracking-tight text-transparent dark:from-blue-200 dark:via-white dark:to-indigo-200">
+                Consent Management Platform
+              </h1>
             </div>
-            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 p-8">
+            <div className="mx-auto max-w-xl rounded-3xl border border-white/80 bg-white/90 p-12 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-gray-700/50 dark:bg-slate-800/90">
               <div className="flex justify-center">
                 <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
               </div>

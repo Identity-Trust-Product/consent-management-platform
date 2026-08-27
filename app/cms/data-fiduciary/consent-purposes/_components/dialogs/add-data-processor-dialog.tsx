@@ -270,10 +270,10 @@ export function AddDataProcessorDialog({
             <div className="space-y-4 flex-1 min-h-0">
               <div>
                 <Label className="text-base font-medium">
-                  Map Processing Purposes & User Attributes
+                  Map Processing Purposes & Purpose Attributes
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  Select which user attributes this data processor will handle
+                  Select which purpose attributes this data processor will handle
                   for each processing purpose.
                 </p>
               </div>
@@ -285,13 +285,13 @@ export function AddDataProcessorDialog({
                     <TableHeader className="sticky top-0 bg-white z-10">
                       <TableRow>
                         <TableHead className="bg-muted/30 border-r">
-                          Purpose of Processing
+                          Purpose Sub Master
                         </TableHead>
                         <TableHead className="bg-muted/30 border-r">
                           Attributes
                         </TableHead>
                         <TableHead className="bg-muted/30">
-                          Choose User Attributes
+                          Choose Purpose Attributes
                         </TableHead>
                       </TableRow>
                     </TableHeader>

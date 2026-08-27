@@ -27,16 +27,16 @@ export const createNoticeSchema = z
       ),
     dataPrincipalId: z
       .string()
-      .min(3, "Data Principal ID must be at least 3 characters long")
-      .max(255, "Data Principal ID must not exceed 255 characters")
+      .min(3, "User ID must be at least 3 characters long")
+      .max(255, "User ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "Data Principal ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
       ),
     businessProcessId: z
       .number()
       .int()
-      .positive("Please select a business process"),
+      .positive("Please select a process"),
     noticeDuration: z
       .number()
       .int()
@@ -124,16 +124,16 @@ export const createNoticeApiSchema = z
       ),
     data_principal_id: z
       .string()
-      .min(3, "Data Principal ID must be at least 3 characters long")
-      .max(255, "Data Principal ID must not exceed 255 characters")
+      .min(3, "User ID must be at least 3 characters long")
+      .max(255, "User ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "Data Principal ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
       ),
     business_process_id: z
       .number()
       .int()
-      .positive("Please select a business process"),
+      .positive("Please select a process"),
     notice_duration: z
       .number()
       .int()
@@ -211,11 +211,11 @@ export const createGrantNoticeApiSchema = z
       ),
     data_principal_id: z
       .string()
-      .min(3, "Data Principal ID must be at least 3 characters long")
-      .max(255, "Data Principal ID must not exceed 255 characters")
+      .min(3, "User ID must be at least 3 characters long")
+      .max(255, "User ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "Data Principal ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
       ),
     notice_settings: z.object({
       expires_in_hours: z
@@ -238,11 +238,11 @@ export const createGrantNoticeApiSchema = z
         .optional(),
     }),
     business_process: z.object({
-      code: z.string().min(1, "Business process code is required"),
+      code: z.string().min(1, "Process code is required"),
       version: z
         .number()
         .int()
-        .positive("Business process version must be positive"),
+        .positive("Process version must be positive"),
     }),
     metadata: z
       .array(
@@ -300,7 +300,7 @@ export const createGrantNoticeApiSchema = z
     },
     {
       message:
-        "Major Data Principal ID must be at least 3 characters and in valid UUID format",
+        "Major User ID must be at least 3 characters and in valid UUID format",
       path: ["metadata"],
     }
   )

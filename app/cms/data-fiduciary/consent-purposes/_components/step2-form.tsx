@@ -203,7 +203,7 @@ export function Step2Form({ data, isEdit, consentPurposeId }: Step2FormProps) {
 
   const handleAddProcessingPurpose = (data: ProcessingPurposeData) => {
     if (data.purposeOfProcessingId === null) {
-      toast.error("Please select a purpose of processing");
+      toast.error("Please select a purpose sub master");
       return;
     }
 
@@ -313,7 +313,7 @@ export function Step2Form({ data, isEdit, consentPurposeId }: Step2FormProps) {
       {/* Header - Fixed */}
       <div className="border-b px-6 py-5 flex-shrink-0">
         <h2 className="text-2xl font-bold tracking-tight">
-          Step 2. Add Purpose of Processing
+          Step 2. Add Purpose Sub Master
         </h2>
       </div>
 
@@ -350,7 +350,7 @@ export function Step2Form({ data, isEdit, consentPurposeId }: Step2FormProps) {
               <Table>
                 <TableHeader className="bg-muted">
                   <TableRow>
-                    <TableHead>Purpose of Processing</TableHead>
+                    <TableHead>Purpose Sub Master</TableHead>
                     <TableHead className="w-1/3">Description</TableHead>
                     <TableHead>Attributes Included</TableHead>
                     <TableHead className="text-center w-24">Actions</TableHead>

@@ -49,7 +49,7 @@ export const ROUTE_PREFIXES = {
 /**
  * Default redirect after login
  */
-export const DEFAULT_LOGIN_REDIRECT = "/cms/data-fiduciary/business-units";
+export const DEFAULT_LOGIN_REDIRECT = "/cms/data-fiduciary/dashboard";
 
 /**
  * Health check endpoint

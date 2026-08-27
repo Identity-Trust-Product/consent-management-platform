@@ -22,7 +22,7 @@ export async function getAllPurposesOfProcessing() {
     return purposesOfProcessing;
   } catch (error) {
     console.error("Error fetching purposes of processing:", error);
-    throw new Error("Failed to fetch purposes of processing");
+    throw new Error("Failed to fetch purpose sub masters");
   }
 }
 
@@ -34,7 +34,7 @@ export async function getPurposeOfProcessingById(id: number) {
     return purposeOfProcessing;
   } catch (error) {
     console.error("Error fetching purpose of processing:", error);
-    throw new Error("Failed to fetch purpose of processing");
+    throw new Error("Failed to fetch purpose sub master");
   }
 }
 
@@ -52,7 +52,7 @@ export async function createPurposeOfProcessing(
     return purposeOfProcessing;
   } catch (error) {
     console.error("Error creating purpose of processing:", error);
-    throw new Error("Failed to create purpose of processing");
+    throw new Error("Failed to create purpose sub master");
   }
 }
 
@@ -68,7 +68,7 @@ export async function updatePurposeOfProcessing(
     return purposeOfProcessing;
   } catch (error) {
     console.error("Error updating purpose of processing:", error);
-    throw new Error("Failed to update purpose of processing");
+    throw new Error("Failed to update purpose sub master");
   }
 }
 
@@ -80,7 +80,7 @@ export async function deletePurposeOfProcessing(id: number) {
     return { success: true };
   } catch (error) {
     console.error("Error deleting purpose of processing:", error);
-    throw new Error("Failed to delete purpose of processing");
+    throw new Error("Failed to delete purpose sub master");
   }
 }
 
@@ -92,7 +92,7 @@ export async function getPurposeOfProcessingByCode(code: string) {
     return purposeOfProcessing;
   } catch (error) {
     console.error("Error fetching purpose of processing by code:", error);
-    throw new Error("Failed to fetch purpose of processing");
+    throw new Error("Failed to fetch purpose sub master");
   }
 }
 
@@ -117,6 +117,6 @@ export async function checkPurposeOfProcessingCodeExists(
     return true;
   } catch (error) {
     console.error("Error checking purpose of processing code:", error);
-    throw new Error("Failed to check purpose of processing code");
+    throw new Error("Failed to check purpose sub master code");
   }
 }

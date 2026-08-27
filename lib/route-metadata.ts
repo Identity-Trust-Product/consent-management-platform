@@ -69,129 +69,129 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     ],
   },
   "/cms/data-fiduciary/business-units": {
-    title: "Business Unit",
+    title: "Department",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-units/new": {
-    title: "New Business Unit",
+    title: "Add New Department",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Business Unit",
+        label: "Department",
         href: "/cms/data-fiduciary/business-units",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-units/:id": {
-    title: "View Business Unit",
+    title: "View Department",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Business Unit",
+        label: "Department",
         href: "/cms/data-fiduciary/business-units",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-units/:id/edit": {
-    title: "Edit Business Unit",
+    title: "Edit Department",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Business Unit",
+        label: "Department",
         href: "/cms/data-fiduciary/business-units",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes": {
-    title: "User Attributes",
+    title: "Purpose Attributes",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes/new": {
-    title: "New User Attribute",
+    title: "New Purpose Attribute",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "User Attributes",
+        label: "Purpose Attributes",
         href: "/cms/data-fiduciary/user-attributes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes/:id": {
-    title: "View User Attribute",
+    title: "View Purpose Attribute",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "User Attributes",
+        label: "Purpose Attributes",
         href: "/cms/data-fiduciary/user-attributes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes/:id/edit": {
-    title: "Edit User Attribute",
+    title: "Edit Purpose Attribute",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "User Attributes",
+        label: "Purpose Attributes",
         href: "/cms/data-fiduciary/user-attributes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/purposes-of-processing": {
-    title: "Purposes of Processing",
+    title: "Purpose Sub Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/purposes-of-processing/new": {
-    title: "New Purpose of Processing",
+    title: "New Purpose Sub Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purposes of Processing",
+        label: "Purpose Sub Master",
         href: "/cms/data-fiduciary/purposes-of-processing",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/purposes-of-processing/:id": {
-    title: "View Purpose of Processing",
+    title: "View Purpose Sub Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purposes of Processing",
+        label: "Purpose Sub Master",
         href: "/cms/data-fiduciary/purposes-of-processing",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/purposes-of-processing/:id/edit": {
-    title: "Edit Purpose of Processing",
+    title: "Edit Purpose Sub Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purposes of Processing",
+        label: "Purpose Sub Master",
         href: "/cms/data-fiduciary/purposes-of-processing",
       },
       { type: "page", label: "Current Page" },
@@ -241,105 +241,105 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     ],
   },
   "/cms/data-fiduciary/consent-purposes": {
-    title: "Purpose of Consent",
+    title: "Purpose Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/consent-purposes/new": {
-    title: "New Purpose of Consent",
+    title: "New Purpose Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purpose of Consent",
+        label: "Purpose Master",
         href: "/cms/data-fiduciary/consent-purposes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/consent-purposes/:id": {
-    title: "View Purpose of Consent",
+    title: "View Purpose Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purpose of Consent",
+        label: "Purpose Master",
         href: "/cms/data-fiduciary/consent-purposes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/consent-purposes/:id/edit": {
-    title: "Edit Purpose of Consent",
+    title: "Edit Purpose Master",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purpose of Consent",
+        label: "Purpose Master",
         href: "/cms/data-fiduciary/consent-purposes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-processes": {
-    title: "Business Process",
+    title: "Process",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-processes/new": {
-    title: "New Business Process",
+    title: "New Process",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Business Process",
+        label: "Process",
         href: "/cms/data-fiduciary/business-processes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-processes/:id": {
-    title: "View Business Process",
+    title: "View Process",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Business Process",
+        label: "Process",
         href: "/cms/data-fiduciary/business-processes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-processes/:id/edit": {
-    title: "Edit Business Process",
+    title: "Edit Process",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Business Process",
+        label: "Process",
         href: "/cms/data-fiduciary/business-processes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/notices": {
-    title: "Prospective Consent",
+    title: "Notice Details",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/notices/new": {
-    title: "New Prospective Consent",
+    title: "New Notice Details",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Prospective Consent",
+        label: "Notice Details",
         href: "/cms/data-fiduciary/notices",
       },
       { type: "page", label: "Current Page" },
@@ -351,7 +351,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Prospective Consent",
+        label: "Notice Details",
         href: "/cms/data-fiduciary/notices",
       },
       { type: "page", label: "Current Page" },

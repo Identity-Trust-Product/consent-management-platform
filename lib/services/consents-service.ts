@@ -136,7 +136,7 @@ export async function createConsents(
         );
         if (!rule) {
           throw new Error(
-            `Business process rule not found for ID: ${selection.ruleId}`
+            `Process rule not found for ID: ${selection.ruleId}`
           );
         }
 

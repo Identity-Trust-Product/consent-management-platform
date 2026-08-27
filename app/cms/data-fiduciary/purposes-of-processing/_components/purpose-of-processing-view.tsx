@@ -67,7 +67,7 @@ export function PurposeOfProcessingView({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {purposeOfProcessing?.name || "Purpose of Processing"}
+              {purposeOfProcessing?.name || "Purpose Sub Master"}
             </h2>
             {purposeOfProcessing?.updatedAt && (
               <span className="text-sm text-muted-foreground">
@@ -84,7 +84,7 @@ export function PurposeOfProcessingView({
           </EditButton>
         </div>
         <p className="text-muted-foreground">
-          View purpose of processing details
+          View purpose sub master details
         </p>
       </div>
 
@@ -99,7 +99,7 @@ export function PurposeOfProcessingView({
               <div className="space-y-4">
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Purpose of Processing Name:
+                    Purpose Sub Master Name:
                   </span>
                   <p className="mt-1">
                     {purposeOfProcessing?.name || "Not specified"}

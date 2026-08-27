@@ -67,7 +67,7 @@ export const createUserAttribute = createSafeAction(
     // Check if name already exists (case-insensitive)
     const nameExists = await checkUserAttributeNameExistsService(data.name);
     if (nameExists) {
-      throw new Error("User attribute name already exists");
+      throw new Error("Purpose attribute name already exists");
     }
 
     const userAttribute = await createUserAttributeService(data);
@@ -91,7 +91,7 @@ export const updateUserAttribute = createSafeAction(
       input.id
     );
     if (nameExists) {
-      throw new Error("User attribute name already exists");
+      throw new Error("Purpose attribute name already exists");
     }
 
     const userAttribute = await updateUserAttributeService(

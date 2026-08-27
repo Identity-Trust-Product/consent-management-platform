@@ -161,9 +161,9 @@ export function UserAttributesTable({
       onRowClick={(userAttribute: UserAttribute) => onView(userAttribute.id)}
       filterValue={filterValue}
       filterKey="name"
-      deleteDialogTitle="Delete User Attribute"
+      deleteDialogTitle="Delete Purpose Attribute"
       deleteDialogDescription={(userAttribute: UserAttribute) =>
-        `Are you sure you want to delete the user attribute "${userAttribute.name}"? This action cannot be undone.`
+        `Are you sure you want to delete the purpose attribute "${userAttribute.name}"? This action cannot be undone.`
       }
       getItemName={(userAttribute: UserAttribute) => userAttribute.name}
     />

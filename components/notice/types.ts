@@ -24,6 +24,9 @@ export interface NoticeData {
     id: number;
     name: string;
     code: string;
+    businessUnit: {
+      name: string;
+    };
     grantDescription: string;
     revokeDescription?: string | null;
     reconsentDescription?: string | null;

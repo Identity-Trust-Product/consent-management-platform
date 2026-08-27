@@ -37,7 +37,7 @@ async function PurposesOfProcessingContent() {
     <Button asChild>
       <Link href="/cms/data-fiduciary/purposes-of-processing/new" className="group">
         <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-        <p className="text-base">New Purpose of Processing</p>
+        <p className="text-base">New Purpose Sub Master</p>
       </Link>
     </Button>
   ) : null;
@@ -64,7 +64,7 @@ export default function PurposesOfProcessingPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Loading purposes of processing...
+              Loading purpose sub masters...
             </p>
           </div>
         </div>

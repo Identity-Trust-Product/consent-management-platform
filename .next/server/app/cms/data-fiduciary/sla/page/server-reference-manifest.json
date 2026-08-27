@@ -1,0 +1,80 @@
+{
+  "node": {
+    "0060c229d5c44aa39a52b0da063b4e763444cd1280": {
+      "workers": {
+        "app/cms/data-fiduciary/sla/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/sla/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/sla.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/sla/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "000c7a0570d59008f278fcbabaa80f62e11d042cf4": {
+      "workers": {
+        "app/cms/data-fiduciary/sla/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/sla/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/sla.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getSlaConfigurations",
+          "filename": "actions/sla.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/sla/page": "rsc"
+      },
+      "exportedName": "getSlaConfigurations",
+      "filename": "actions/sla.ts"
+    },
+    "008d64b431a0a8057cd284b5d96dadefe93989bc7a": {
+      "workers": {
+        "app/cms/data-fiduciary/sla/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/sla/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/sla.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getSlaStatistics",
+          "filename": "actions/sla.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/sla/page": "rsc"
+      },
+      "exportedName": "getSlaStatistics",
+      "filename": "actions/sla.ts"
+    },
+    "00f001290e69615efd77ce78c5f0f0361a50e3e560": {
+      "workers": {
+        "app/cms/data-fiduciary/sla/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/sla/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/sla.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getFiduciaryAgents",
+          "filename": "actions/sla.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/sla/page": "rsc"
+      },
+      "exportedName": "getFiduciaryAgents",
+      "filename": "actions/sla.ts"
+    },
+    "7fe640a51726c69411d9800701a6b1543115d410ba": {
+      "workers": {
+        "app/cms/data-fiduciary/sla/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/sla/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/sla.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateSlaConfiguration",
+          "filename": "actions/sla.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/sla/page": "action-browser"
+      },
+      "exportedName": "updateSlaConfiguration",
+      "filename": "actions/sla.ts"
+    }
+  },
+  "edge": {}
+}

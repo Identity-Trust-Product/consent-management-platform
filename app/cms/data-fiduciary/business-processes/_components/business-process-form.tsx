@@ -46,7 +46,7 @@ const steps = [
   },
   {
     number: 3,
-    title: "Choose EULA",
+    title: "Choose Redirectional URL",
     description: "End User License Agreement",
   },
   { number: 4, title: "Translate", description: "Language translations" },

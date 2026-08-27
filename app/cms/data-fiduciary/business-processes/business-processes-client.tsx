@@ -48,13 +48,13 @@ export function BusinessProcessesClient({
     try {
       const result = await deleteBusinessProcess({ id });
       if (result.success) {
-        toast.success("Business process deleted successfully");
+        toast.success("Process deleted successfully");
         router.refresh();
       } else {
-        toast.error(result.error || "Failed to delete business process");
+        toast.error(result.error || "Failed to delete process");
       }
     } catch (error) {
-      toast.error("An error occurred while deleting the business process");
+      toast.error("An error occurred while deleting the process");
     }
   };
 
@@ -63,7 +63,7 @@ export function BusinessProcessesClient({
       {/* Filter and New Button Group */}
       <div className="flex items-center justify-end gap-4">
         <h5 className="flex-1 tracking-tight">
-          List of Business Processes ({data.length} Entries)
+          List of Processes ({data.length} Entries)
         </h5>
         <Input
           id="filter-names"

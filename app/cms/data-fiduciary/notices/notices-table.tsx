@@ -17,8 +17,6 @@ import { DataTable } from "@/components/ui/data-table";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { generateNoticeLink } from "@/actions/notices";
-import { generateDprmLinkForNotice } from "@/actions/dprm";
-import { useRouter } from "next/navigation";
 
 export type Notice = {
   id: number;
@@ -78,25 +76,6 @@ function CopyCell({ value, label }: { value: string | null; label: string }) {
 }
 
 export function NoticesTable({ data, onView }: NoticesTableProps) {
-  const router = useRouter();
-
-  const handleCopyDPRM = async (notice: Notice) => {
-    try {
-      const result = await generateDprmLinkForNotice(notice);
-
-      if (result.success && result.url) {
-        // Copy the URL to clipboard
-        await navigator.clipboard.writeText(result.url);
-        toast.success("DPRM link copied to clipboard!");
-      } else {
-        toast.error(result.error || "Failed to generate DPRM link");
-      }
-    } catch (error) {
-      console.error("Error copying DPRM link:", error);
-      toast.error("Failed to copy DPRM link");
-    }
-  };
-
   const handleCopyNotice = async (notice: Notice) => {
     try {
       const result = await generateNoticeLink(notice.id);
@@ -117,9 +96,9 @@ export function NoticesTable({ data, onView }: NoticesTableProps) {
   const columns: ColumnDef<Notice>[] = [
     {
       accessorKey: "dataPrincipalId",
-      header: "Data Principal ID",
+      header: "User ID",
       cell: ({ row }) => (
-        <CopyCell value={row.getValue("dataPrincipalId")} label="Principal ID" />
+        <CopyCell value={row.getValue("dataPrincipalId")} label="User ID" />
       ),
     },
     {
@@ -135,26 +114,6 @@ export function NoticesTable({ data, onView }: NoticesTableProps) {
       cell: ({ row }) => (
         <CopyCell value={row.getValue("publicId")} label="Notice ID" />
       ),
-    },
-    {
-      accessorKey: "forMinor",
-      header: "Minor",
-      cell: ({ row }) => {
-        const forMinor = row.getValue("forMinor") as boolean;
-        return (
-          <div className="flex justify-center pb-4">
-            {forMinor ? (
-              <Badge variant="outline" className="text-xs bg-success-50 border-success-50">
-                Yes
-              </Badge>
-            ) : (
-              <Badge variant="secondary" className="text-xs">
-                No
-              </Badge>
-            )}
-          </div>
-        );
-      },
     },
     {
       accessorKey: "createdAt",
@@ -314,24 +273,6 @@ export function NoticesTable({ data, onView }: NoticesTableProps) {
             >
               <Eye className="h-3 w-3" />
               <span>View</span>
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              {...(!isDisabled && {
-                onClick: (e) => {
-                  e.stopPropagation();
-                  handleCopyDPRM(notice);
-                },
-              })}
-              disabled={isDisabled}
-              className={`h-8 px-2 text-xs ${isDisabled
-                  ? "text-gray-400 cursor-not-allowed"
-                  : "text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                }`}
-            >
-              <Copy className="h-3 w-3" />
-              DPRM
             </Button>
             <Button
               variant="ghost"

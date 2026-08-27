@@ -199,7 +199,7 @@ export default function NewGrievanceClient({
               <CardContent className="space-y-4">
                 <div className="bg-muted/50 rounded-lg p-3 border">
                   <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    {t("Principal ID")}
+                    {t("User ID")}
                   </label>
                   <p className="text-sm font-mono mt-1 font-semibold">
                     {dataPrincipalId}

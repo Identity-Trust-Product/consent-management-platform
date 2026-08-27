@@ -38,7 +38,7 @@ DATABASE_URL="postgresql://user:password@localhost:5432/privy_opencms"
 
 # Authentication (NextAuth.js)
 AUTH_SECRET="your-generated-secret-key" # Generate with: openssl rand -base64 32
-BASE_PATH="http://localhost:3000"
+BASE_PATH="http://localhost:3000/cms"
 
 # Email Service (Postmark)
 EMAIL_PROVIDER="postmark"

@@ -261,7 +261,7 @@ export function Step2ConfigureProcess({
       {/* Header - Fixed */}
       <div className="border-b px-6 py-5 flex-shrink-0">
         <h2 className="text-2xl font-bold tracking-tight">
-          Step 2. Configure Policy for Business Processes
+          Step 2. Configure Policy for Processes
         </h2>
       </div>
 
@@ -270,13 +270,13 @@ export function Step2ConfigureProcess({
         <div className="space-y-8">
           <div className="space-y-4">
             <div className="flex flex-col space-y-2">
-              <Label>Select Business Processes</Label>
+              <Label>Select Processes</Label>
               <MultiSelect
                 values={selectedBPs.map((bp) => bp.businessProcessId.toString())}
                 onValuesChange={handleValuesChange}
               >
                 <MultiSelectTrigger className="w-full">
-                  <MultiSelectValue placeholder="Select Business Processes..." />
+                  <MultiSelectValue placeholder="Select Processes..." />
                 </MultiSelectTrigger>
                 <MultiSelectContent>
                   {businessProcesses.map((bp) => (
@@ -325,8 +325,8 @@ export function Step2ConfigureProcess({
                       <TableHeader className="bg-muted">
                         <TableRow>
                           <TableHead>Consent Purpose</TableHead>
-                          <TableHead>Purpose Of Processing</TableHead>
-                          <TableHead>User Attribute</TableHead>
+                          <TableHead>Purpose Sub Master</TableHead>
+                          <TableHead>Purpose Attribute</TableHead>
                           <TableHead>Retention Duration</TableHead>
                           <TableHead className="w-[200px]">Trigger*</TableHead>
                           <TableHead className="w-[300px]">

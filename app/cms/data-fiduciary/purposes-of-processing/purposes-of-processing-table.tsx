@@ -142,9 +142,9 @@ export function PurposesOfProcessingTable({
       }
       filterValue={filterValue}
       filterKey="name"
-      deleteDialogTitle="Delete Purpose of Processing"
+      deleteDialogTitle="Delete Purpose Sub Master"
       deleteDialogDescription={(purposeOfProcessing: PurposeOfProcessing) =>
-        `Are you sure you want to delete the purpose of processing "${purposeOfProcessing.name}"? This action cannot be undone.`
+        `Are you sure you want to delete the purpose sub master "${purposeOfProcessing.name}"? This action cannot be undone.`
       }
       getItemName={(purposeOfProcessing: PurposeOfProcessing) =>
         purposeOfProcessing.name

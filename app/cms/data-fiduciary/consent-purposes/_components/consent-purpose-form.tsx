@@ -39,7 +39,7 @@ const steps = [
   { number: 1, title: "General Settings", description: "Basic information" },
   {
     number: 2,
-    title: "Add Purpose of Processing",
+    title: "Add Purpose Sub Master",
     description: "Processing purposes",
   },
   { number: 3, title: "Add Processor", description: "Data processors" },

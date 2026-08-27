@@ -47,10 +47,10 @@ export function UserAttributesClient({
   const handleDelete = async (id: number) => {
     const result = await deleteUserAttribute({ id });
     if (result.success) {
-      toast.success("User attribute deleted successfully");
+      toast.success("Purpose attribute deleted successfully");
       router.refresh();
     } else {
-      toast.error(result.error || "Failed to delete user attribute");
+      toast.error(result.error || "Failed to delete purpose attribute");
     }
   };
 
@@ -59,7 +59,7 @@ export function UserAttributesClient({
       {/* Filter and New Button Group */}
       <div className="flex items-center justify-end gap-4">
         <h5 className="flex-1 tracking-tight">
-          List of User Attributes ({data.length} Entries)
+          List of Purpose Attributes ({data.length} Entries)
         </h5>
         <Input
           id="filter-names"

@@ -25,7 +25,7 @@ export async function getAllUserAttributes() {
     return userAttributes;
   } catch (error) {
     console.error("Error fetching user attributes:", error);
-    throw new Error("Failed to fetch user attributes");
+    throw new Error("Failed to fetch purpose attributes");
   }
 }
 
@@ -37,7 +37,7 @@ export async function getUserAttributeById(id: number) {
     return userAttribute;
   } catch (error) {
     console.error("Error fetching user attribute:", error);
-    throw new Error("Failed to fetch user attribute");
+    throw new Error("Failed to fetch purpose attribute");
   }
 }
 
@@ -56,7 +56,7 @@ export async function createUserAttribute(
     return userAttribute;
   } catch (error) {
     console.error("Error creating user attribute:", error);
-    throw new Error("Failed to create user attribute");
+    throw new Error("Failed to create purpose attribute");
   }
 }
 
@@ -72,7 +72,7 @@ export async function updateUserAttribute(
     return userAttribute;
   } catch (error) {
     console.error("Error updating user attribute:", error);
-    throw new Error("Failed to update user attribute");
+    throw new Error("Failed to update purpose attribute");
   }
 }
 
@@ -84,7 +84,7 @@ export async function deleteUserAttribute(id: number) {
     return { success: true };
   } catch (error) {
     console.error("Error deleting user attribute:", error);
-    throw new Error("Failed to delete user attribute");
+    throw new Error("Failed to delete purpose attribute");
   }
 }
 
@@ -101,7 +101,7 @@ export async function getUserAttributeByName(name: string) {
     return userAttribute;
   } catch (error) {
     console.error("Error fetching user attribute by name:", error);
-    throw new Error("Failed to fetch user attribute");
+    throw new Error("Failed to fetch purpose attribute");
   }
 }
 
@@ -131,6 +131,6 @@ export async function checkUserAttributeNameExists(
     return true;
   } catch (error) {
     console.error("Error checking user attribute name:", error);
-    throw new Error("Failed to check user attribute name");
+    throw new Error("Failed to check purpose attribute name");
   }
 }

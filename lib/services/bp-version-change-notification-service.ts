@@ -93,7 +93,7 @@ export async function detectVersionChanges(
   });
 
   if (!oldVersion || !newVersion) {
-    throw new Error("Business process version not found");
+    throw new Error("Process version not found");
   }
 
   const changes: VersionChangeDetails = {
@@ -195,7 +195,7 @@ export async function detectVersionChanges(
             newRule.processingPurpose.userAttributeNames.sort();
           if (JSON.stringify(oldAttrs) !== JSON.stringify(newAttrs)) {
             ppChanges.push({
-              field: "User Attributes",
+              field: "Purpose Attributes",
               before: oldAttrs.join(", "),
               after: newAttrs.join(", "),
             });

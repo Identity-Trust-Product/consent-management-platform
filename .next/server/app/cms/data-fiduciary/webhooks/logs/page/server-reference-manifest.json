@@ -1,0 +1,50 @@
+{
+  "node": {
+    "0060c229d5c44aa39a52b0da063b4e763444cd1280": {
+      "workers": {
+        "app/cms/data-fiduciary/webhooks/logs/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/webhooks/logs/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/webhook-logs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/webhooks/logs/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "402fa44621dd0ed483ad7e2356b1373fa9bc8d17d8": {
+      "workers": {
+        "app/cms/data-fiduciary/webhooks/logs/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/webhooks/logs/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/webhook-logs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getWebhookLogs",
+          "filename": "actions/webhook-logs.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/webhooks/logs/page": "rsc"
+      },
+      "exportedName": "getWebhookLogs",
+      "filename": "actions/webhook-logs.ts"
+    },
+    "40a6369e708c344f03b60955b07c4ecb127dd8fea2": {
+      "workers": {
+        "app/cms/data-fiduciary/webhooks/logs/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/webhooks/logs/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/webhook-logs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getWebhookLogsAnalytics",
+          "filename": "actions/webhook-logs.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/webhooks/logs/page": "rsc"
+      },
+      "exportedName": "getWebhookLogsAnalytics",
+      "filename": "actions/webhook-logs.ts"
+    }
+  },
+  "edge": {}
+}

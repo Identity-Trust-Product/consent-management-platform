@@ -44,7 +44,7 @@ export function SuccessPage({
 
   const handleManageConsents = async () => {
     if (!dataPrincipalId) {
-      toast.error("Data principal ID not available");
+      toast.error("User ID not available");
       return;
     }
 

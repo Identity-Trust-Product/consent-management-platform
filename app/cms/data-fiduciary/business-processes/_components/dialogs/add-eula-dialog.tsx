@@ -147,14 +147,17 @@ export function AddEulaDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Edit EULA" : "Add EULA"}</DialogTitle>
+          <DialogTitle>
+            {isEdit ? "Edit Redirectional URL" : "Add Redirectional URL"}
+          </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Title Field */}
           <div className="space-y-2">
             <Label htmlFor="title">
-              Add a Title for the EULA <span className="text-red-500">*</span>
+              Add a title for the Redirectional URL{" "}
+              <span className="text-red-500">*</span>
             </Label>
             <Input
               id="title"
@@ -171,7 +174,7 @@ export function AddEulaDialog({
           {/* Link Field */}
           <div className="space-y-2">
             <Label htmlFor="link">
-              Enter the EULA link or email{" "}
+              Enter the Redirectional URL link or email{" "}
               <span className="text-red-500">*</span>
             </Label>
             <Input

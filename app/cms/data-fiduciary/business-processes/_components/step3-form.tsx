@@ -68,7 +68,7 @@ export function Step3Form({ data, isEdit, businessProcessId }: Step3FormProps) {
         link: eulaData.link,
       },
     });
-    toast.success("EULA added successfully!");
+    toast.success("Redirectional URL added successfully!");
     setDialogOpen(false);
   };
 
@@ -82,7 +82,7 @@ export function Step3Form({ data, isEdit, businessProcessId }: Step3FormProps) {
           link: eulaData.link,
         },
       });
-      toast.success("EULA updated successfully!");
+      toast.success("Redirectional URL updated successfully!");
       setEditingEula(null);
       setDialogOpen(false);
     }
@@ -93,7 +93,7 @@ export function Step3Form({ data, isEdit, businessProcessId }: Step3FormProps) {
       type: "DELETE_EULA",
       payload: eulaId,
     });
-    toast.success("EULA deleted successfully!");
+    toast.success("Redirectional URL deleted successfully!");
   };
 
   const openEditDialog = (eula: {
@@ -157,7 +157,7 @@ export function Step3Form({ data, isEdit, businessProcessId }: Step3FormProps) {
       {/* Header - Fixed */}
       <div className="border-b px-6 py-5 flex-shrink-0">
         <h2 className="text-2xl font-bold tracking-tight">
-          Step 3. Choose EULA
+          Step 3. Choose Redirectional URL
         </h2>
       </div>
 
@@ -166,22 +166,22 @@ export function Step3Form({ data, isEdit, businessProcessId }: Step3FormProps) {
         {/* EULAs Table */}
         {eulas.length === 0 ? (
           <div className="border border-dashed rounded-lg p-8 text-center">
-            <h3 className="text-lg font-medium mb-2">No EULA yet!</h3>
+            <h3 className="text-lg font-medium mb-2">No Redirectional URL yet!</h3>
             <p className="text-muted-foreground mb-4">
-              Add EULA that you need for carrying out the Process by clicking
+              Add a Redirectional URL needed for carrying out the Process by clicking
               the button below
             </p>
-            <Button onClick={openAddDialog}>Add EULA</Button>
+            <Button onClick={openAddDialog}>Add Redirectional URL</Button>
           </div>
         ) : (
           <div className="space-y-4">
             {/* List Header with Add Button */}
             <div className="flex items-center justify-between">
               <h5 className="text-neutral-500 font-medium">
-                List of EULAs ({eulas.length}{" "}
+                List of Redirectional URLs ({eulas.length}{" "}
                 {eulas.length === 1 ? "Entry" : "Entries"})
               </h5>
-              <Button onClick={openAddDialog}>Add EULA</Button>
+              <Button onClick={openAddDialog}>Add Redirectional URL</Button>
             </div>
 
             {/* Table */}
@@ -189,7 +189,7 @@ export function Step3Form({ data, isEdit, businessProcessId }: Step3FormProps) {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="font-semibold">EULA Name</TableHead>
+                    <TableHead className="font-semibold">Redirectional URL Name</TableHead>
                     <TableHead className="font-semibold">Link</TableHead>
                     <TableHead className="font-semibold text-center">
                       Actions

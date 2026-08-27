@@ -25,7 +25,6 @@ import {
 import { AccordionSelect } from "../accordion-select";
 import { NoticeConsentPurpose } from "../notice-consent-purpose";
 import { NoticeDescription } from "../notice-description";
-import { NoticeDpdpaRights } from "../notice-dpdpa-rights";
 import { NoticeFooter } from "../notice-footer";
 import { NoticeHeader } from "../notice-header";
 import { NoticeProcessingPurpose } from "../notice-processing-purpose";
@@ -47,7 +46,6 @@ export function DefaultNoticeTemplate({
   className,
   onAccept,
   onReject,
-  container,
   speechReadoutButton,
 }: DefaultNoticeTemplateProps) {
   const { isHighContrast } = useHighContrast();
@@ -95,14 +93,17 @@ export function DefaultNoticeTemplate({
 
       <CardContent
         className={cn(
-          "pt-5",
+          "pt-6",
           isMobile ? "px-2" : "px-14",
           "hc-bg-notice-body",
           className,
         )}
       >
         {/* Title and Subtitle */}
-        <NoticeTitle businessProcessName={translatedBP.name} />
+        <NoticeTitle
+          businessProcessName={translatedBP.name}
+          brandName={notice.businessProcess.businessUnit.name}
+        />
 
         {/* Business Process Description */}
         <NoticeDescription description={translatedBP.grantDescription} />
@@ -184,6 +185,7 @@ export function DefaultNoticeTemplate({
                         )
                       }
                       showSelection={!isConsentPurposeViewMode}
+                      defaultOpen={true}
                       variant="accordion"
                     >
                       {processingPurpose.userAttributes.map((userAttribute) => {
@@ -214,12 +216,6 @@ export function DefaultNoticeTemplate({
           })}
         </div>
       </CardContent>
-
-      {/* Digital Personal Data Protection Act 2023 Rights Section */}
-      <NoticeDpdpaRights
-        legalDocuments={notice.businessProcess.legalDocuments}
-        container={container}
-      />
 
       {/* Footer with preview mode logic handled internally */}
       <NoticeFooter

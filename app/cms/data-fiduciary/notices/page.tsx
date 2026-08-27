@@ -35,7 +35,7 @@ async function NoticesContent() {
     <Button asChild>
       <Link href="/cms/data-fiduciary/notices/new" className="group">
         <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-        <p className="text-base">New Prospective Consent</p>
+        <p className="text-base">New Notice Details</p>
       </Link>
     </Button>
   ) : null;

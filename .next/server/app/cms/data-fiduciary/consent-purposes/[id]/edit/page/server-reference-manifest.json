@@ -1,0 +1,110 @@
+{
+  "node": {
+    "0060c229d5c44aa39a52b0da063b4e763444cd1280": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/consent-purpose-form.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "7817f412d199e81c81597545fc9f54d9c77bdb0d92": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/consent-purpose-form.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "autoTranslateConsentPurpose",
+          "filename": "actions/auto-translate.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": "action-browser"
+      },
+      "exportedName": "autoTranslateConsentPurpose",
+      "filename": "actions/auto-translate.ts"
+    },
+    "786fd342078d6b7afd66dc76df99e14c9e35cb1365": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/consent-purpose-form.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "autoTranslateProcessingPurpose",
+          "filename": "actions/auto-translate.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": "action-browser"
+      },
+      "exportedName": "autoTranslateProcessingPurpose",
+      "filename": "actions/auto-translate.ts"
+    },
+    "704ce32ef850c2bb4b6f4d46e757bc9db118d35e04": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/consent-purpose-form.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "translateTextToLanguages",
+          "filename": "actions/auto-translate.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": "action-browser"
+      },
+      "exportedName": "translateTextToLanguages",
+      "filename": "actions/auto-translate.ts"
+    },
+    "400d36f9d10e31e8aa1234186c73eca060aab5f5e5": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/consent-purpose-form.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "saveConsentPurposeFromClientState",
+          "filename": "actions/consent-purpose-form.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": "action-browser"
+      },
+      "exportedName": "saveConsentPurposeFromClientState",
+      "filename": "actions/consent-purpose-form.ts"
+    },
+    "40c1285b7faea57d407352b9d1568677f640797c7e": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/consent-purpose-form.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getHighestVersionForConsentPurposeCode",
+          "filename": "actions/consent-purposes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": "action-browser"
+      },
+      "exportedName": "getHighestVersionForConsentPurposeCode",
+      "filename": "actions/consent-purposes.ts"
+    },
+    "40b1b85e0c514b2f8ee7f2130f5243b52de51d3efa": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/consent-purpose-form.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getNextVersionsForBPCodes",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/[id]/edit/page": "action-browser"
+      },
+      "exportedName": "getNextVersionsForBPCodes",
+      "filename": "actions/business-processes.ts"
+    }
+  },
+  "edge": {}
+}

@@ -1,0 +1,50 @@
+{
+  "node": {
+    "0060c229d5c44aa39a52b0da063b4e763444cd1280": {
+      "workers": {
+        "app/cms/data-fiduciary/purposes-of-processing/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/purposes-of-processing/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/purposes-of-processing.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/purposes-of-processing/new/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "7f559ccce12852a427b0b1d7ab010cee909dafbc21": {
+      "workers": {
+        "app/cms/data-fiduciary/purposes-of-processing/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/purposes-of-processing/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/purposes-of-processing.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createPurposeOfProcessing",
+          "filename": "actions/purposes-of-processing.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/purposes-of-processing/new/page": "action-browser"
+      },
+      "exportedName": "createPurposeOfProcessing",
+      "filename": "actions/purposes-of-processing.ts"
+    },
+    "7fdc4b78806781f719a31b9faa6d3beca420891c9d": {
+      "workers": {
+        "app/cms/data-fiduciary/purposes-of-processing/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/purposes-of-processing/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/purposes-of-processing.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updatePurposeOfProcessing",
+          "filename": "actions/purposes-of-processing.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/purposes-of-processing/new/page": "action-browser"
+      },
+      "exportedName": "updatePurposeOfProcessing",
+      "filename": "actions/purposes-of-processing.ts"
+    }
+  },
+  "edge": {}
+}

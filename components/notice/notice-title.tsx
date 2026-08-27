@@ -13,8 +13,6 @@
 import { cn } from "@/lib/utils";
 import { useHighContrast } from "@/contexts/high-contrast-context";
 import { useNoticeTranslation } from "@/hooks/use-notice-translation";
-import { getFiduciaryConfig } from "@/actions/fiduciary-config";
-import { useEffect, useState } from "react";
 
 interface NoticeTitleProps {
   businessProcessName: string;
@@ -27,11 +25,10 @@ export function NoticeTitle({
   businessProcessName,
   className,
   noticeType = "consent",
-  brandName: _brandName,
+  brandName = "",
 }: NoticeTitleProps) {
   const { isHighContrast } = useHighContrast();
   const { t } = useNoticeTranslation();
-  const [brand, setBrand] = useState<string>(" ");
 
   // Get translated notice type header
   const getNoticeTypeHeader = () => {
@@ -50,22 +47,16 @@ export function NoticeTitle({
   // Get translated description
   const getDescription = () => {
     return t("{{brand_name}} is seeking your consent for {{title}}", {
-      brand_name: brand,
+      brand_name: brandName,
       title: businessProcessName,
     });
   };
 
-  useEffect(() => {
-    getFiduciaryConfig().then((data) => {
-      setBrand(data.fiduciaryName);
-    });
-  }, []);
-
   return (
-    <div className={cn("text-center py-3", className)}>
+    <div className={cn("py-4 text-center", className)}>
       <h1
         className={cn(
-          "text-2xl font-bold text-blue-700 mb-2",
+          "mb-2 text-2xl font-bold tracking-tight text-blue-900",
           isHighContrast && "hc-text-cyan",
         )}
       >
@@ -73,7 +64,7 @@ export function NoticeTitle({
       </h1>
       <p
         className={cn(
-          "text-xl font-semibold text-gray-900",
+          "text-lg font-semibold leading-relaxed text-slate-900 sm:text-xl",
           isHighContrast && "text-white",
         )}
       >

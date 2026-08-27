@@ -105,14 +105,16 @@ function NoticePageContent({
       );
 
       if (result.success) {
-        // Show success toast and redirect to the accept page
-        toast.success("Consent accepted successfully!");
+        // Show the success message before returning to the request list.
+        toast.success("Consent selected for request successfully!");
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        // Redirect to the accept page to show the success state
-        const currentUrl = window.location.pathname;
-        const acceptUrl =
-          currentUrl.replace("/view/", "/accept/") + `?lang=${currentLanguage}`;
-        router.push(acceptUrl);
+        const dataExchangeAppUrl =
+          process.env.NEXT_PUBLIC_DATA_EXCHANGE_APP_URL ||
+          "http://localhost:3000";
+        window.location.assign(
+          `${dataExchangeAppUrl.replace(/\/$/, "")}/pendingRequests`,
+        );
       } else {
         // Handle validation errors
         console.error("Validation errors:", result.errors);
@@ -183,17 +185,24 @@ function NoticePageContent({
   return (
     <div
       className={cn(
-        "min-h-screen bg-neutral-30 notice-container",
+         "notice-container min-h-screen bg-linear-to-br from-slate-50 via-blue-50/40 to-indigo-50 px-3 py-4 text-slate-900 antialiased sm:px-6 sm:py-6",
         isHighContrast && "hc-bg-canvas",
       )}
+      style={{
+        fontFamily:
+          'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      }}
     >
       <div
-        className={cn("max-w-[900px] mx-auto", isMobile ? "pb-24" : "pb-16")}
+        className={cn(
+          "mx-auto max-w-[900px]",
+          isMobile ? "pb-24" : "pb-16",
+        )}
       >
         <div className="max-w-[900px] mx-auto">
           <Card
             className={cn(
-              "shadow-lg rounded-none border gap-0 p-0 min-h-screen",
+              "min-h-[calc(100vh-3rem)] gap-0 overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-0 shadow-[0_20px_60px_-24px_rgba(15,23,42,0.28)]",
               isHighContrast && "hc-no-card-border",
             )}
           >

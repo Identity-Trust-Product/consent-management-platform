@@ -125,7 +125,7 @@ export function SlaBreachEscalation({
             </tr>
             <tr>
               <td style={{ padding: "8px 0", color: "#6B7280", fontSize: "14px" }}>
-                Business Process:
+                Process:
               </td>
               <td style={{ padding: "8px 0", color: "#111827", fontSize: "14px" }}>
                 {businessProcessName}
@@ -199,7 +199,7 @@ Time Overdue: ${variables.timeOverdue}
 
 GRIEVANCE DETAILS:
 Subject: ${variables.grievanceSubject}
-Business Process: ${variables.businessProcessName}
+Process: ${variables.businessProcessName}
 ${variables.assignedToName ? `Assigned To: ${variables.assignedToName}` : "Status: Unassigned"}
 Expected Resolution: ${variables.expectedResolutionDate}
 Breached At: ${variables.breachedAt}

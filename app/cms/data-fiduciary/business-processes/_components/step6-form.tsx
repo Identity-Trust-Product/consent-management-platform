@@ -118,7 +118,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
   // Helper function to get business unit name
   const getBusinessUnitName = (id: number) => {
     const unit = businessUnits.find((bu: any) => bu.id === id);
-    return unit?.name || "Unknown Business Unit";
+    return unit?.name || "Unknown Department";
   };
 
   // Helper function to convert duration to display format
@@ -179,7 +179,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
       // Get step 1 data from context
       if (!state.step1Data) {
         console.error("Step 1 data not found in context!");
-        toast.error("Business process data not found");
+        toast.error("Process data not found");
         setIsSavingDraft(false);
         return;
       }
@@ -210,14 +210,14 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
       });
 
       if (result.success) {
-        toast.success("Business process saved as draft");
+        toast.success("Process saved as draft");
         router.push("/cms/data-fiduciary/business-processes");
       } else {
-        toast.error(result.error || "Failed to save business process as draft");
+        toast.error(result.error || "Failed to save process as draft");
       }
     } catch (error) {
       console.error("Error saving draft:", error);
-      toast.error("Failed to save business process as draft");
+      toast.error("Failed to save process as draft");
     } finally {
       setIsSavingDraft(false);
     }
@@ -265,7 +265,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
         // Get step 1 data from context
         if (!state.step1Data) {
           console.error("Step 1 data not found in context!");
-          toast.error("Business process data not found");
+          toast.error("Process data not found");
           return;
         }
 
@@ -287,8 +287,8 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
         if (result.success && result.data) {
           // Show success message with version information
           let message = isEdit
-            ? "Business process updated successfully"
-            : "Business process published successfully";
+            ? "Process updated successfully"
+            : "Process published successfully";
 
           if (result.data.isNewVersion) {
             message += ` (New version created)`;
@@ -297,7 +297,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
           toast.success(message);
           router.push("/cms/data-fiduciary/business-processes");
         } else {
-          toast.error(result.error || "Failed to publish business process");
+          toast.error(result.error || "Failed to publish process");
         }
       } catch (error) {
         console.error("Error publishing business process:", error);
@@ -312,7 +312,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
       <div className="border-b px-6 py-5 flex-shrink-0">
         <div className="flex items-center gap-3 mb-2">
           <h2 className="text-2xl font-bold tracking-tight">
-            {step1Data?.name || businessProcess?.name || "Business Process"}
+            {step1Data?.name || businessProcess?.name || "Process"}
           </h2>
           {businessProcess?.updatedAt && (
             <span className="text-sm text-muted-foreground">
@@ -335,7 +335,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
         <p className="text-muted-foreground">
           {businessProcess?.status === "published"
             ? "Review all information and save your changes"
-            : "Review all information and publish your business process"}
+            : "Review all information and publish your process"}
         </p>
       </div>
 
@@ -350,7 +350,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
               <div className="space-y-4">
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Business Process Name:
+                    Process Name:
                   </span>
                   <p className="mt-1">
                     {step1Data?.name ||
@@ -360,7 +360,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
                 </div>
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Business Unit:
+                    Department:
                   </span>
                   <p className="mt-1">
                     {step1Data?.businessUnitId
@@ -417,7 +417,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-semibold">List of Purpose of Consents</h3>
+            <h3 className="font-semibold">List of Purpose Master</h3>
 
             {contextConsentPurposes.length > 0 ? (
               <div className="border rounded-lg overflow-hidden">
@@ -425,13 +425,13 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
                   <TableHeader>
                     <TableRow>
                       <TableHead className="bg-muted/30 border-r whitespace-normal">
-                        Purpose of Consent
+                        Purpose Master
                       </TableHead>
                       <TableHead className="bg-muted/30 border-r whitespace-normal">
                         Consent Duration
                       </TableHead>
                       <TableHead className="bg-muted/30 border-r whitespace-normal">
-                        Purpose of Processing
+                        Purpose Sub Master
                       </TableHead>
                       <TableHead className="bg-muted/30 border-r whitespace-normal">
                         Attributes
@@ -555,7 +555,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-semibold">List of EULAs</h3>
+            <h3 className="font-semibold">List of Redirectional URLs</h3>
 
             {contextEulas.length > 0 ? (
               <div className="border rounded-lg overflow-hidden">
@@ -563,7 +563,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
                   <TableHeader>
                     <TableRow>
                       <TableHead className="bg-muted/30 border-r">
-                        EULA Name
+                        Redirectional URL Name
                       </TableHead>
                       <TableHead className="bg-muted/30">Link</TableHead>
                     </TableRow>
@@ -602,7 +602,9 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
               </div>
             ) : (
               <div className="rounded-lg border border-dashed p-8 text-center">
-                <p className="text-sm text-muted-foreground">No EULAs added</p>
+                <p className="text-sm text-muted-foreground">
+                  No Redirectional URLs added
+                </p>
               </div>
             )}
           </div>

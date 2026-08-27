@@ -1,0 +1,95 @@
+{
+  "node": {
+    "0060c229d5c44aa39a52b0da063b4e763444cd1280": {
+      "workers": {
+        "app/cms/data-fiduciary/data-processors/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/data-processors/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/data-processors.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/data-processors/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "0080660a4a63d47250789ff590a484c549d274126d": {
+      "workers": {
+        "app/cms/data-fiduciary/data-processors/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/data-processors/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/data-processors.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getDataProcessors",
+          "filename": "actions/data-processors.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/data-processors/page": "rsc"
+      },
+      "exportedName": "getDataProcessors",
+      "filename": "actions/data-processors.ts"
+    },
+    "40392f9ade305ccb324160fdfc16e85638287b3d67": {
+      "workers": {
+        "app/cms/data-fiduciary/data-processors/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/data-processors/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/data-processors.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getDataProcessorById",
+          "filename": "actions/data-processors.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/data-processors/page": "rsc"
+      },
+      "exportedName": "getDataProcessorById",
+      "filename": "actions/data-processors.ts"
+    },
+    "7f5b0fd906a75272105d6149baa8d02656230ed6af": {
+      "workers": {
+        "app/cms/data-fiduciary/data-processors/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/data-processors/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/data-processors.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createDataProcessor",
+          "filename": "actions/data-processors.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/data-processors/page": "rsc"
+      },
+      "exportedName": "createDataProcessor",
+      "filename": "actions/data-processors.ts"
+    },
+    "7f9d9537af0a750a1a3598d72abf93d448c127a8e1": {
+      "workers": {
+        "app/cms/data-fiduciary/data-processors/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/data-processors/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/data-processors.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteDataProcessor",
+          "filename": "actions/data-processors.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/data-processors/page": "action-browser"
+      },
+      "exportedName": "deleteDataProcessor",
+      "filename": "actions/data-processors.ts"
+    },
+    "7fa96640637cb34480e479ad203f6e5fde1d02edfa": {
+      "workers": {
+        "app/cms/data-fiduciary/data-processors/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/data-processors/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/data-processors.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateDataProcessor",
+          "filename": "actions/data-processors.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/data-processors/page": "rsc"
+      },
+      "exportedName": "updateDataProcessor",
+      "filename": "actions/data-processors.ts"
+    }
+  },
+  "edge": {}
+}

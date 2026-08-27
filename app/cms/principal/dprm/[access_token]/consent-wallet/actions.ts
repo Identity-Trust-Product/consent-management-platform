@@ -174,7 +174,7 @@ export async function getReceiptViewDetails(
     });
 
     if (!businessProcess) {
-      return { success: false, error: "Business Process not found" };
+      return { success: false, error: "Process not found" };
     }
 
     const notice = await prisma.notice.findUnique({

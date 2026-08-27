@@ -139,7 +139,7 @@ export async function calculateBusinessProcessDiff(
   });
 
   if (!currentBp) {
-    throw new Error("Business process not found");
+    throw new Error("Process not found");
   }
 
   // Check for newer version

@@ -136,7 +136,7 @@ export function ShowNoticeClient({
 
         {/* Notice Details */}
         <div className="space-y-4">
-          <CopyField value={notice.dataPrincipalId} label="Data Principal ID" />
+          <CopyField value={notice.dataPrincipalId} label="User ID" />
 
           <CopyField value={notice.referenceId} label="Reference ID" />
 

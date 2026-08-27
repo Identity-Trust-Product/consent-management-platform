@@ -30,7 +30,7 @@ import {
  * Schema for creating a new grievance (Data Principal side)
  */
 export const createGrievanceSchema = z.object({
-  dataPrincipalId: z.string().min(1, "Data Principal ID is required"),
+  dataPrincipalId: z.string().min(1, "User ID is required"),
   metadata: z
     .object({
       name: z.string().optional(),
@@ -42,7 +42,7 @@ export const createGrievanceSchema = z.object({
   businessProcessId: z
     .number()
     .int()
-    .positive("Business Process must be selected"),
+    .positive("Process must be selected"),
   category: z.nativeEnum(GrievanceCategory, {
     message: "Please select a valid category",
   }),

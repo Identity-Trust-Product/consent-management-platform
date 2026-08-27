@@ -150,7 +150,7 @@ export function GrievanceDetailClient({
 
             {/* Business Process */}
             <div>
-              <h3 className="text-sm font-medium mb-2">Business Process</h3>
+              <h3 className="text-sm font-medium mb-2">Process</h3>
               <div className="space-y-1">
                 <p className="text-sm">{grievance.businessProcess.name}</p>
                 <p className="text-sm text-muted-foreground font-mono">

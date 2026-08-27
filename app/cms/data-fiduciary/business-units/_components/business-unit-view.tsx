@@ -66,7 +66,7 @@ export function BusinessUnitView({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {businessUnit?.name || "Business Unit"}
+              {businessUnit?.name || "Department"}
             </h2>
             {businessUnit?.updatedAt && (
               <span className="text-sm text-muted-foreground">
@@ -92,7 +92,7 @@ export function BusinessUnitView({
             Edit
           </EditButton>
         </div>
-        <p className="text-muted-foreground">View business unit details</p>
+        <p className="text-muted-foreground">View department details</p>
       </div>
 
       {/* Scrollable Content */}
@@ -106,7 +106,7 @@ export function BusinessUnitView({
               <div className="space-y-4">
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Business Unit Name:
+                    Department Name:
                   </span>
                   <p className="mt-1">
                     {businessUnit?.name || "Not specified"}

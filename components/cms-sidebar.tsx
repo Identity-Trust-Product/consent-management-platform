@@ -19,12 +19,9 @@ import {
 import { Actions, Resources } from "@/lib/constants/rbac";
 import { type UserRole, hasPermission } from "@/lib/rbac";
 import { cn } from "@/lib/utils";
-import { Code, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import PrivyByIdfyLogo from "./icons/privy-by-idfy";
-import PrivyLogo from "./icons/privy-p";
 import {
   ConsentCenterIcon,
   DPOCenterIcon,
@@ -70,107 +67,90 @@ const getDataFiduciaryItems = (userRoles: UserRole[]): SidebarSection[] => {
   ];
 
   // Only add Grievances admin if user has GRIEVANCE_ADMIN:READ permission
-  if (canAccessGrievanceAdmin) {
-    dpoCenterItems.push({
-      title: "Grievances",
-      href: "/cms/data-fiduciary/grievances/admin",
-    });
-  }
+  // if (canAccessGrievanceAdmin) {
+  //   dpoCenterItems.push({
+  //     title: "Grievances",
+  //     href: "/cms/data-fiduciary/grievances/admin",
+  //   });
+  // }
 
   // Only add My Tickets if user has GRIEVANCE:READ permission
-  if (canAccessGrievance) {
-    dpoCenterItems.push({
-      title: "My Tickets",
-      href: "/cms/data-fiduciary/grievances/my-tickets",
-    });
-  }
+  // if (canAccessGrievance) {
+  //   dpoCenterItems.push({
+  //     title: "My Tickets",
+  //     href: "/cms/data-fiduciary/grievances/my-tickets",
+  //   });
+  // }
 
   const sections: SidebarSection[] = [
     {
-      title: "POLICY CENTER",
+      title: "CONSENT MANAGER",
       icon: PolicyCenterIcon,
       defaultOpen: false,
       items: [
         {
-          title: "Business Unit",
+          title: "Departments",
           href: "/cms/data-fiduciary/business-units",
         },
         {
-          title: "Business Process",
+          title: "Process",
           href: "/cms/data-fiduciary/business-processes",
         },
         {
-          title: "Purpose of Consent",
+          title: "Purpose Master",
           href: "/cms/data-fiduciary/consent-purposes",
         },
         {
-          title: "Purpose of Processing",
+          title: "Purpose Sub Master",
           href: "/cms/data-fiduciary/purposes-of-processing",
         },
+        // {
+        //   title: "Processors",
+        //   href: "/cms/data-fiduciary/data-processors",
+        // },
         {
-          title: "Processors",
-          href: "/cms/data-fiduciary/data-processors",
-        },
-        {
-          title: "User Attributes",
+          title: "Purpose Attributes",
           href: "/cms/data-fiduciary/user-attributes",
         },
-        {
-          title: "Data Retention Policy",
-          href: "/cms/data-fiduciary/data-retention",
-        },
+        // {
+        //   title: "Data Retention Policy",
+        //   href: "/cms/data-fiduciary/data-retention",
+        // },
       ],
     },
     {
-      title: "DPO CENTER",
+      title: "ADMIN DEPARTMENT",
       icon: DPOCenterIcon,
       defaultOpen: false,
       items: dpoCenterItems,
     },
     {
-      title: "CONSENT CENTER",
+      title: "NOTICE DETAILS",
       icon: ConsentCenterIcon,
       defaultOpen: false,
       items: [
         {
-          title: "Prospective Consent",
+          title: "View Notice Details",
           href: "/cms/data-fiduciary/notices",
         },
       ],
     },
-    {
-      title: "DEVELOPER CENTER",
-      icon: Code,
-      defaultOpen: false,
-      items: [
-        {
-          title: "API Keys",
-          href: "/cms/data-fiduciary/api-keys",
-        },
-        {
-          title: "Webhooks",
-          href: "/cms/data-fiduciary/webhooks",
-        },
-      ],
-    },
+    // {
+    //   title: "DEVELOPER CENTER",
+    //   icon: Code,
+    //   defaultOpen: false,
+    //   items: [
+    //     {
+    //       title: "API Keys",
+    //       href: "/cms/data-fiduciary/api-keys",
+    //     },
+    //     {
+    //       title: "Webhooks",
+    //       href: "/cms/data-fiduciary/webhooks",
+    //     },
+    //   ],
+    // },
   ];
-
-  // Always show Admin Settings section - pages have auth checks
-  sections.push({
-    title: "ADMIN SETTINGS",
-    icon: Settings,
-    defaultOpen: false,
-    items: [
-      {
-        title: "User Management",
-        href: "/cms/data-fiduciary/users",
-      },
-      {
-        title: "SLA Configuration",
-        href: "/cms/data-fiduciary/sla",
-      },
-    ],
-  });
 
   return sections;
 };
@@ -247,12 +227,12 @@ export function Sidebar({ userRoles }: SidebarProps) {
     >
       {/* Header */}
       <div className="h-[4rem] flex items-center justify-start pl-5 border-b border-sidebar-border">
-        <div className="flex items-center gap-2">
-          {isExpanded ? (
-            <img src={"/cms/lgw.webp"} width={90} alt="" />
-          ) : (
-            <img src={"/cms/lgw.webp"} width={50} alt="" />
-          )}
+        <div
+          className="font-semibold text-xl text-white whitespace-nowrap"
+          aria-label="Consent Management"
+          title="Consent Management"
+        >
+          {isExpanded ? "Consent Management" : "CM"}
         </div>
       </div>
 

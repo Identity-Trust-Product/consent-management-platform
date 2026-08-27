@@ -98,7 +98,7 @@ export function BusinessProcessView({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {businessProcess?.name || "Business Process"}
+              {businessProcess?.name || "Process"}
             </h2>
             {businessProcess?.updatedAt && (
               <span className="text-sm text-muted-foreground">
@@ -130,7 +130,7 @@ export function BusinessProcessView({
             </EditButton>
           </div>
         </div>
-        <p className="text-muted-foreground">View business process details</p>
+        <p className="text-muted-foreground">View process details</p>
       </div>
 
       {/* Scrollable Content */}
@@ -144,7 +144,7 @@ export function BusinessProcessView({
               <div className="space-y-4">
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Business Process Name:
+                    Process Name:
                   </span>
                   <p className="mt-1">
                     {businessProcess?.name || "Not specified"}
@@ -152,7 +152,7 @@ export function BusinessProcessView({
                 </div>
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Business Unit:
+                    Department:
                   </span>
                   <p className="mt-1">
                     {businessProcess?.businessUnit?.name || "Not specified"}
@@ -202,7 +202,7 @@ export function BusinessProcessView({
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-semibold">List of Purpose of Consents</h3>
+            <h3 className="font-semibold">List of Purpose Masters</h3>
 
             {consentPurposeConfigs.length > 0 ? (
               <div className="border rounded-lg overflow-hidden">
@@ -210,13 +210,13 @@ export function BusinessProcessView({
                   <TableHeader className="bg-muted">
                     <TableRow className="p-2">
                       <TableHead className="whitespace-normal">
-                        Purpose of Consent
+                        Name of Purpose Master
                       </TableHead>
                       <TableHead className="whitespace-normal">
                         Consent Duration
                       </TableHead>
                       <TableHead className="whitespace-normal">
-                        Purpose of Processing
+                        Name of Purpose Sub Master
                       </TableHead>
                       <TableHead className="whitespace-normal">
                         Attributes
@@ -347,7 +347,7 @@ export function BusinessProcessView({
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-semibold">List of EULAs</h3>
+            <h3 className="font-semibold">List of Redirectional URLs</h3>
 
             {legalDocumentEntries.length > 0 ? (
               <div className="border rounded-lg overflow-hidden">
@@ -355,7 +355,7 @@ export function BusinessProcessView({
                   <TableHeader>
                     <TableRow>
                       <TableHead className="bg-muted/30 border-r">
-                        EULA Name
+                        Redirectional URL Name
                       </TableHead>
                       <TableHead className="bg-muted/30">Link</TableHead>
                     </TableRow>
@@ -393,7 +393,9 @@ export function BusinessProcessView({
               </div>
             ) : (
               <div className="rounded-lg border border-dashed p-8 text-center">
-                <p className="text-sm text-muted-foreground">No EULAs added</p>
+                <p className="text-sm text-muted-foreground">
+                  No Redirectional URLs added
+                </p>
               </div>
             )}
           </div>

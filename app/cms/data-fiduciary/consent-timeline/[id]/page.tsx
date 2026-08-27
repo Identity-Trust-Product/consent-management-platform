@@ -781,7 +781,7 @@ export default function ConsentDetailPage({ params }) {
                 <span className="text-lg font-bold text-slate-900">
                   {currentType === "reference_id"
                     ? "Reference ID:"
-                    : "Data Principal ID:"}
+                    : "User ID:"}
                 </span>
                 <span className="text-lg font-mono text-gray-600">
                   {referenceId}
@@ -816,7 +816,7 @@ export default function ConsentDetailPage({ params }) {
               icon={currentType === "reference_id" ? Users : Hash}
               label={
                 currentType === "reference_id"
-                  ? "Data Principal IDs"
+                  ? "User IDs"
                   : "Reference IDs"
               }
               options={dropdownOptions}
@@ -834,7 +834,7 @@ export default function ConsentDetailPage({ params }) {
 
             <FilterDropdown
               icon={Briefcase}
-              label="Business Process"
+              label="Process"
               options={bpOptions}
               selectedValues={selectedBpValues}
               onChange={(vals) =>

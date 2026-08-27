@@ -69,7 +69,7 @@ export function VersionWarningDialog({
                 {changeCount} breaking{" "}
                 {changeCount === 1 ? "change" : "changes"}
               </strong>{" "}
-              to this published business process:
+              to this published process:
             </p>
 
             {/* Breaking Changes List */}

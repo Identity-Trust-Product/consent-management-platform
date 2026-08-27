@@ -23,12 +23,7 @@ interface FiduciaryConfig {
 
 function FiduciaryName({ name }: { name?: string | null }) {
   if (!name) {
-    return (
-      <>
-        <span className="font-bold text-xl">Penguin </span>
-        <span className="font-bold text-xl bg-blue-700 text-white p-1 ml-px leading-5">Bank.</span>
-      </>
-    );
+    return null;
   }
   return <>{name}</>;
 }
@@ -78,7 +73,7 @@ export function FiduciaryLogo({
     return (
       <div
         className={cn(
-          "flex text-blue-800 items-center font-bold text-xl",
+          "flex items-center text-blue-800 font-bold text-xl",
           isHighContrast && "text-white!",
           className
         )}

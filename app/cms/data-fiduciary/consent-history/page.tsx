@@ -294,7 +294,7 @@ export default function ConsentHistoryPage() {
                     className="h-12 pl-4 pr-10 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-blue-900 font-medium focus:outline-none focus:ring-1 focus:ring-blue-500 appearance-none cursor-pointer"
                   >
                     <option value="reference_id">Reference ID</option>
-                    <option value="data_principal_id">Principal ID</option>
+                    <option value="data_principal_id">User ID</option>
                   </select>
                   <ChevronDown
                     className="absolute right-3 top-4 text-blue-900 pointer-events-none"
@@ -387,7 +387,7 @@ export default function ConsentHistoryPage() {
                   {/* BP Filter */}
                   <div className="relative">
                     <FilterButton
-                      label="Business Process"
+                      label="Process"
                       name="bp"
                       active={selectedBP.length > 0}
                       count={selectedBP.length}
@@ -730,7 +730,7 @@ export default function ConsentHistoryPage() {
                               className="text-sm text-slate-700 font-medium"
                               title={row.dataPrincipalId}
                             >
-                              <CopyCell value={row.dataPrincipalId} label="Principal ID" />
+                              <CopyCell value={row.dataPrincipalId} label="User ID" />
                             </div>
                           </td>
                           <td className="p-3.5 max-w-[300px]">

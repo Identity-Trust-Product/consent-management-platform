@@ -1,0 +1,110 @@
+{
+  "node": {
+    "0060c229d5c44aa39a52b0da063b4e763444cd1280": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "0089c06116eba5f35732ad2fa20a54a2f54a2933b7": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getUserAttributes",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/page": "rsc"
+      },
+      "exportedName": "getUserAttributes",
+      "filename": "actions/user-attributes.ts"
+    },
+    "40712857139aa383924988a98c23e63d28f306ede9": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getUserAttributeById",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/page": "rsc"
+      },
+      "exportedName": "getUserAttributeById",
+      "filename": "actions/user-attributes.ts"
+    },
+    "6096209706167150df0150ee7b81be2e67e03b7ecd": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "checkUserAttributeNameExists",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/page": "rsc"
+      },
+      "exportedName": "checkUserAttributeNameExists",
+      "filename": "actions/user-attributes.ts"
+    },
+    "7f3625d89c07b001408d22741afefba6284189ad67": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createUserAttribute",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/page": "rsc"
+      },
+      "exportedName": "createUserAttribute",
+      "filename": "actions/user-attributes.ts"
+    },
+    "7fb0323df0acbdbfef96678fea5a8e4c2d63e99681": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateUserAttribute",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/page": "rsc"
+      },
+      "exportedName": "updateUserAttribute",
+      "filename": "actions/user-attributes.ts"
+    },
+    "7fd8ceb1918e176c73f26b58bbc4a6953ee5650e0a": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteUserAttribute",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/page": "action-browser"
+      },
+      "exportedName": "deleteUserAttribute",
+      "filename": "actions/user-attributes.ts"
+    }
+  },
+  "edge": {}
+}

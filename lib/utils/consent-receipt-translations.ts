@@ -17,7 +17,7 @@ export const RECEIPT_TRANSLATIONS = {
     header: "Consent Receipt",
     receiptId: "Receipt ID:",
     dateTime: "Date & Time:",
-    dataPrincipalId: "Data Principal ID:",
+    dataPrincipalId: "User ID:",
     dataFiduciaryName: "Data Fiduciary Name:",
     nameOfGoodsService: "Name of Goods/Service:",
     legalStatementLabel: "Legal Statement:",

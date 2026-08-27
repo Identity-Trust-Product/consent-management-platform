@@ -54,7 +54,7 @@ const DialogLayout = React.forwardRef<
       <DialogHeader className="px-0 mb-4">
         <div className="flex items-center justify-between">
           <DialogTitle className={cn(isHighContrast && "text-white")}>
-            {t("End-User License Agreement")}
+            {t("Redirectional URL")}
           </DialogTitle>
           <button
             onClick={onClose}

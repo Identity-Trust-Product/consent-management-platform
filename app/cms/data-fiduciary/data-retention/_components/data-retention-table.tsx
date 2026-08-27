@@ -154,7 +154,7 @@ export function DataRetentionTable({
     },
     {
       accessorKey: "businessProcesses",
-      header: "Business Processes",
+      header: "Processes",
       cell: ({ row }) => {
         const processes = row.original.businessProcesses;
         if (processes.length === 0) return <span className="text-muted-foreground text-sm">-</span>;

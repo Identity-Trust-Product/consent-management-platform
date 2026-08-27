@@ -255,7 +255,7 @@ export function BreakingChangeWarningDialog({
           {hasAffectedBPs && (
             <div className="mt-4">
               <div className="font-semibold mb-2 text-sm text-blue-900">
-                Select affected business processes to propagate changes to:
+                Select affected processes to propagate changes to:
               </div>
               <div className="border rounded-lg mb-3 overflow-y-auto max-h-[200px]">
                 <Table>
@@ -348,7 +348,7 @@ export function BreakingChangeWarningDialog({
                   processes will also be created.
                 </>
               ) : hasAffectedBPs && selectedBPs.length === 0 ? (
-                <> Affected business processes will remain unchanged.</>
+                <> Affected processes will remain unchanged.</>
               ) : null}
             </p>
           </div>

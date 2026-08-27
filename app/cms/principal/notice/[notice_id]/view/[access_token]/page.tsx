@@ -63,7 +63,10 @@ function processNoticeForViewMode(notice: any): NoticeData {
           processingPurposes: consentPurpose.processingPurposes.map(
             (pp: any) => ({
               ...pp,
-              mandatory: true, // In purpose_of_consent mode, all appear mandatory
+              // Keep the configured rule value. Selection is hidden for
+              // processing purposes in this view, but optional consent
+              // purposes must remain deselectable at the parent level.
+              mandatory: pp.mandatory,
               showSelection: false,
             }),
           ),
@@ -81,7 +84,7 @@ function processNoticeForViewMode(notice: any): NoticeData {
             ...rule,
             processingPurpose: {
               ...rule.processingPurpose,
-              mandatory: true, // In purpose_of_consent mode, all appear mandatory
+              mandatory: rule.mandatory,
               showSelection: false,
             },
           }),

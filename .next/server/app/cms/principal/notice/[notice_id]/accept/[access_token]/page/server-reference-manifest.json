@@ -1,0 +1,20 @@
+{
+  "node": {
+    "40b7859f1e87f7206f724f14ce47ee5928d4ed0e31": {
+      "workers": {
+        "app/cms/principal/notice/[notice_id]/accept/[access_token]/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/principal/notice/[notice_id]/accept/[access_token]/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/dprm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "generateDprmLinkForNotice",
+          "filename": "actions/dprm.ts"
+        }
+      },
+      "layer": {
+        "app/cms/principal/notice/[notice_id]/accept/[access_token]/page": "action-browser"
+      },
+      "exportedName": "generateDprmLinkForNotice",
+      "filename": "actions/dprm.ts"
+    }
+  },
+  "edge": {}
+}

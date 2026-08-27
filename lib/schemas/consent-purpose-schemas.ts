@@ -34,10 +34,10 @@ export const processingPurposeSchema = z.object({
     .string()
     .min(8, "Description should be at least 8 characters long")
     .max(2000),
-  purposeOfProcessingId: z.number().min(1, "Purpose of processing is required"),
+  purposeOfProcessingId: z.number().min(1, "Purpose sub master is required"),
   userAttributeNames: z
     .array(z.string())
-    .min(1, "At least one user attribute is required"),
+    .min(1, "At least one purpose attribute is required"),
 });
 
 // Step 3: Data Processor Mapping Schema
@@ -45,7 +45,7 @@ export const dataProcessorMappingSchema = z.object({
   dataProcessorId: z.string().min(1, "Data processor is required"),
   userAttributeNames: z
     .array(z.string())
-    .min(1, "At least one user attribute is required"),
+    .min(1, "At least one purpose attribute is required"),
   processingPurposeId: z.number().min(1, "Processing purpose is required"),
 });
 

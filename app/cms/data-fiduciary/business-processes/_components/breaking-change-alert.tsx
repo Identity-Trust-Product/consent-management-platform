@@ -38,7 +38,7 @@ export function BreakingChangeAlert({ breakingChanges, currentVersion }: Breakin
       <AlertTitle className="font-semibold">Breaking Changes Detected</AlertTitle>
       <AlertDescription className="mt-2 space-y-3">
         <p className="text-sm">
-          The following changes will create a <strong>new version (v{newVersion})</strong> of this business process.
+          The following changes will create a <strong>new version (v{newVersion})</strong> of this process.
           The current version (v{currentVersion}) will remain unchanged for existing consents.
         </p>
 

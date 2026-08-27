@@ -357,7 +357,7 @@ export function Step3Form({ data, isEdit, consentPurposeId }: Step3FormProps) {
           Step 3. Add Processor
         </h2>
         <p className="text-muted-foreground">
-          Map processing purposes to data processors with user attributes
+          Map processing purposes to data processors with purpose attributes
         </p>
       </div>
 
@@ -372,7 +372,7 @@ export function Step3Form({ data, isEdit, consentPurposeId }: Step3FormProps) {
               </h3>
               <p className="text-sm text-muted-foreground">
                 Map data processors to handle specific processing purposes and
-                user attributes
+                purpose attributes
               </p>
             </div>
             {hasAnyMappings && (
@@ -399,7 +399,7 @@ export function Step3Form({ data, isEdit, consentPurposeId }: Step3FormProps) {
                       Processors Name
                     </TableHead>
                     <TableHead className="bg-muted/30 border-r">
-                      Purposes of Processing
+                      Purpose Sub Masters
                     </TableHead>
                     <TableHead className="bg-muted/30 border-r">
                       Attributes Included

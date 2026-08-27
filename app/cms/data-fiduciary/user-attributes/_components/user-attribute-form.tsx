@@ -112,8 +112,8 @@ export function UserAttributeForm({
     const nameValue = form.getValues("name");
 
     if (!nameValue || nameValue.trim() === "") {
-      toast.error("Please enter a user attribute name first");
-      return { error: "User attribute name is required" };
+      toast.error("Please enter a purpose attribute name first");
+      return { error: "Purpose attribute name is required" };
     }
 
     // CREATE MODE: Use server action to translate text
@@ -142,8 +142,8 @@ export function UserAttributeForm({
 
     // EDIT MODE: Server-side translation with database update
     if (!userAttributeId) {
-      toast.error("User attribute ID not found");
-      return { error: "User attribute ID not found" };
+      toast.error("Purpose attribute ID not found");
+      return { error: "Purpose attribute ID not found" };
     }
 
     const id = parseInt(userAttributeId);
@@ -216,8 +216,8 @@ export function UserAttributeForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "User attribute created successfully"
-            : "User attribute updated successfully"
+            ? "Purpose attribute created successfully"
+            : "Purpose attribute updated successfully"
         );
         router.push("/cms/data-fiduciary/user-attributes");
       } else {
@@ -242,14 +242,16 @@ export function UserAttributeForm({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {mode === "new" ? "New User Attribute" : "Edit User Attribute"}
+              {mode === "new"
+                ? "New Purpose Attribute"
+                : "Edit Purpose Attribute"}
             </h2>
           </div>
         </div>
         <p className="text-muted-foreground">
           {mode === "new"
-            ? "Create a new user attribute"
-            : "Update user attribute details"}
+            ? "Create a new purpose attribute"
+            : "Update purpose attribute details"}
         </p>
       </div>
 
@@ -269,12 +271,12 @@ export function UserAttributeForm({
                     render={({ field }) => (
                       <FormItem className="max-w-lg">
                         <FormLabel>
-                          User Attribute Name{" "}
+                          Purpose Attribute Name{" "}
                           <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Enter user attribute name"
+                            placeholder="Enter purpose attribute name"
                             {...field}
                             disabled={mode === "edit"}
                             className={mode === "edit" ? "bg-muted" : ""}
@@ -319,7 +321,7 @@ export function UserAttributeForm({
               <div className="rounded-lg border p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold">
-                    User Attribute in 22 Indian Languages
+                    Purpose Attribute in 22 Indian Languages
                   </h3>
 
                   {/* Auto-Translate Button - Available in both Create and Edit modes */}

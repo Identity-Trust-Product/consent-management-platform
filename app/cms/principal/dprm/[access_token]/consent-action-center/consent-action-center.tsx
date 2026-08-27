@@ -635,7 +635,7 @@ export default function ConsentActionCenter({
                         <>
                           {/* Title is now INSIDE this conditional block */}
                           <h3 className="text-lg font-semibold mb-2 md:mb-4">
-                            {t("Purpose of Consent")}
+                            {t("Purpose Master")}
                           </h3>
 
                           <Accordion
@@ -1065,7 +1065,7 @@ export default function ConsentActionCenter({
                       currentRevokeServiceData.purposes.length > 0 && (
                         <>
                           <h3 className="text-lg font-semibold mb-2 md:mb-4">
-                            {t("Purpose of Consent")}
+                            {t("Purpose Master")}
                           </h3>
                           <Accordion
                             type="multiple"

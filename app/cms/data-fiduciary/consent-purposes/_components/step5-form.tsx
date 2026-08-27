@@ -210,7 +210,7 @@ export function Step5Form({
         setShowBreakingChangeDialog(true);
         setIsFetchingAffectedBPs(false);
       } catch (err) {
-        toast.error("Failed to fetch affected business processes.");
+        toast.error("Failed to fetch affected processes.");
         setIsFetchingAffectedBPs(false);
       }
       return;
@@ -334,14 +334,14 @@ export function Step5Form({
 
           {/* Purposes of Processing List */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Purposes of Processing List</h3>
+            <h3 className="font-semibold">Purpose Sub Master List</h3>
             {processingPurposes.length > 0 ? (
               <div className="border rounded-lg overflow-hidden">
                 <Table>
                   <TableHeader>
                     <TableRow>
                       <TableHead className="bg-muted/30 border-r w-[200px]">
-                        Purpose of Processing
+                        Purpose Sub Master
                       </TableHead>
                       <TableHead className="bg-muted/30 border-r w-[150px]">
                         Description
@@ -407,7 +407,7 @@ export function Step5Form({
                         Processors Name
                       </TableHead>
                       <TableHead className="bg-muted/30 border-r w-[250px]">
-                        Purpose of Processing
+                        Purpose Sub Master
                       </TableHead>
                       <TableHead className="bg-muted/30">Attributes</TableHead>
                     </TableRow>
