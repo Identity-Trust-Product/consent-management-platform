@@ -400,6 +400,7 @@ export async function getNoticeWithFullDataByPublicId(publicId: string) {
         id: true,
         publicId: true,
         status: true,
+        redirectionUrl: true,
         consentDuration: true,
         dataPrincipalId: true,
         defaultLanguage: true,

@@ -10,15 +10,16 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Nunito } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { SessionProvider } from "@/components/providers/session-provider";
 import "@/app/globals.css";
 
-const geistSans = Geist({
+const nunitoSans = Nunito({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "600", "700", "800", "900"],
 });
 
 const geistMono = Geist_Mono({
@@ -27,11 +28,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Privy",
-  description: "Privy Consent Management System by IDfy",
-  icons: {
-    icon: "/cms/favicon.ico",
-  },
+  title: "Consent Management Platform",
+  description: "Consent Management Platform",
 };
 
 export const viewport: Viewport = {
@@ -47,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${nunitoSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
           <QueryProvider>

@@ -2,10 +2,10 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
@@ -78,14 +78,22 @@ function getStatusBadge(status: WebhookDeliveryStatus) {
 
 function getEventTypeBadge(eventType: string) {
   const colors: Record<string, string> = {
-    CONSENT_CREATED: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-    CONSENT_REVOKED: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
-    CONSENT_EXPIRED: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-    CONSENT_UPDATED: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
-    CONSENT_ARTIFACTS_CREATED_OR_UPDATED: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
-    NOTICE_CREATED: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    NOTICE_SUBMITTED: "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200",
-    DATA_RETENTION_ACTION: "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
+    CONSENT_CREATED:
+      "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+    CONSENT_REVOKED:
+      "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+    CONSENT_EXPIRED:
+      "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+    CONSENT_UPDATED:
+      "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+    CONSENT_ARTIFACTS_CREATED_OR_UPDATED:
+      "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
+    NOTICE_CREATED:
+      "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+    NOTICE_SUBMITTED:
+      "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200",
+    DATA_RETENTION_ACTION:
+      "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
   };
 
   return (
@@ -107,8 +115,22 @@ function truncateUrl(url: string, maxLength = 40) {
   return url.substring(0, maxLength - 3) + "...";
 }
 
+function formatInIst(date: Date | string, includeYear = false) {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    month: includeYear ? "numeric" : "short",
+    day: "numeric",
+    year: includeYear ? "numeric" : undefined,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  }).format(new Date(date));
+}
+
 export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
-  const [selectedLog, setSelectedLog] = useState<WebhookLogWithRelations | null>(null);
+  const [selectedLog, setSelectedLog] =
+    useState<WebhookLogWithRelations | null>(null);
 
   return (
     <>
@@ -118,18 +140,23 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
             <TableRow>
               <TableHead>Timestamp</TableHead>
               <TableHead>Event Type</TableHead>
-              <TableHead>Endpoint</TableHead>
+              {/* <TableHead>Endpoint</TableHead> */}
               <TableHead>Target</TableHead>
+              {/*
               <TableHead>Status</TableHead>
               <TableHead className="text-right">HTTP</TableHead>
               <TableHead className="text-right">Time (ms)</TableHead>
               <TableHead>Error</TableHead>
+              */}
             </TableRow>
           </TableHeader>
           <TableBody>
             {logs.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="text-center text-muted-foreground">
+                <TableCell
+                  colSpan={3}
+                  className="text-center text-muted-foreground"
+                >
                   No webhook logs found
                 </TableCell>
               </TableRow>
@@ -141,16 +168,10 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
                   onClick={() => setSelectedLog(log)}
                 >
                   <TableCell className="font-mono text-xs">
-                    {new Date(log.attemptedAt).toLocaleString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit",
-                    })}
+                    {formatInIst(log.attemptedAt)}
                   </TableCell>
                   <TableCell>{getEventTypeBadge(log.eventType)}</TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
@@ -163,7 +184,7 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell>
                     <div className="flex flex-col gap-1">
                       <Badge
@@ -185,6 +206,7 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
                       )}
                     </div>
                   </TableCell>
+                  {/*
                   <TableCell>{getStatusBadge(log.status)}</TableCell>
                   <TableCell className="text-right font-mono text-sm">
                     {log.httpStatus ?? "-"}
@@ -213,6 +235,7 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
                       <span className="text-muted-foreground text-xs">-</span>
                     )}
                   </TableCell>
+                  */}
                 </TableRow>
               ))
             )}
@@ -232,18 +255,24 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
           {selectedLog && (
             <div className="space-y-4 overflow-y-auto pr-2">
               <div className="grid grid-cols-2 gap-4">
+                {/*
                 <div>
                   <p className="text-sm font-medium">Status</p>
                   <div className="mt-1">{getStatusBadge(selectedLog.status)}</div>
                 </div>
+                */}
                 <div>
                   <p className="text-sm font-medium">Event Type</p>
-                  <div className="mt-1">{getEventTypeBadge(selectedLog.eventType)}</div>
+                  <div className="mt-1">
+                    {getEventTypeBadge(selectedLog.eventType)}
+                  </div>
                 </div>
+                {/*
                 <div>
                   <p className="text-sm font-medium">HTTP Status</p>
                   <p className="mt-1 font-mono">{selectedLog.httpStatus ?? "N/A"}</p>
                 </div>
+                */}
                 <div>
                   <p className="text-sm font-medium">Response Time</p>
                   <p
@@ -261,7 +290,9 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
                 {selectedLog.webhook.dataProcessor && (
                   <div>
                     <p className="text-sm font-medium">Data Processor</p>
-                    <p className="mt-1">{selectedLog.webhook.dataProcessor.legalName}</p>
+                    <p className="mt-1">
+                      {selectedLog.webhook.dataProcessor.legalName}
+                    </p>
                     <p className="text-xs text-muted-foreground">
                       {selectedLog.webhook.dataProcessor.ouId}
                     </p>
@@ -269,21 +300,21 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
                 )}
               </div>
 
-              <div>
+              {/* <div>
                 <p className="text-sm font-medium">Endpoint URL</p>
                 <div className="mt-1 font-mono text-sm break-all overflow-wrap-anywhere">
                   {selectedLog.webhook.endpointUrl}
                 </div>
-              </div>
+              </div> */}
 
               <div>
                 <p className="text-sm font-medium">Attempted At</p>
                 <p className="mt-1 font-mono text-sm">
-                  {new Date(selectedLog.attemptedAt).toLocaleString()}
+                  {formatInIst(selectedLog.attemptedAt, true)}
                 </p>
               </div>
 
-              {selectedLog.errorMessage && (
+              {/* {selectedLog.errorMessage && (
                 <div>
                   <p className="text-sm font-medium text-red-600 dark:text-red-400">
                     Error Message
@@ -292,7 +323,7 @@ export function WebhookLogsTable({ logs }: WebhookLogsTableProps) {
                     {selectedLog.errorMessage}
                   </p>
                 </div>
-              )}
+              )} */}
 
               <div>
                 <p className="text-sm font-medium mb-2">Payload</p>

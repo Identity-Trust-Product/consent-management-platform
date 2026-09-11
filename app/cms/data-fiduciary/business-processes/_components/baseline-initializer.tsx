@@ -74,12 +74,27 @@ export function BaselineInitializer({
             let durationType: "until_purpose_met" | "custom_duration" =
               "until_purpose_met";
             let consentDuration: number | undefined;
-            let durationUnit: "days" | "weeks" | "months" | "years" | undefined;
+            let durationUnit:
+              | "minutes"
+              | "hours"
+              | "days"
+              | "weeks"
+              | "months"
+              | "years"
+              | undefined;
 
             if (relation.consentDuration) {
               durationType = "custom_duration";
-              consentDuration = Math.round(relation.consentDuration / 24);
-              durationUnit = "days";
+              if (relation.consentDuration < 1) {
+                consentDuration = Math.round(relation.consentDuration * 60);
+                durationUnit = "minutes";
+              } else if (relation.consentDuration < 24) {
+                consentDuration = relation.consentDuration;
+                durationUnit = "hours";
+              } else {
+                consentDuration = Math.round(relation.consentDuration / 24);
+                durationUnit = "days";
+              }
             }
 
             return {

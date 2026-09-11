@@ -72,6 +72,13 @@ export function BusinessProcessView({
     }
 
     const durationInHours = config.consentDuration || 0;
+    if (durationInHours < 1) {
+      const durationInMinutes = Math.round(durationInHours * 60);
+      return `${durationInMinutes} ${durationInMinutes === 1 ? "minute" : "minutes"}`;
+    }
+    if (durationInHours < 24) {
+      return `${durationInHours} ${durationInHours === 1 ? "hour" : "hours"}`;
+    }
     const durationInDays = Math.round(durationInHours / 24);
 
     return `${durationInDays} days`;
@@ -304,10 +311,10 @@ export function BusinessProcessView({
                               {(!rule.processingPurpose?.userAttributeNames ||
                                 rule.processingPurpose.userAttributeNames
                                   .length === 0) && (
-                                  <span className="text-xs text-muted-foreground">
-                                    No attributes
-                                  </span>
-                                )}
+                                <span className="text-xs text-muted-foreground">
+                                  No attributes
+                                </span>
+                              )}
                             </div>
                           </TableCell>
                           <TableCell className="text-center">
@@ -327,7 +334,7 @@ export function BusinessProcessView({
                           </TableCell>
                           <TableCell>
                             {rule.retentionDurationValue &&
-                              rule.retentionDurationUnit
+                            rule.retentionDurationUnit
                               ? `${rule.retentionDurationValue} ${rule.retentionDurationUnit}`
                               : "-"}
                           </TableCell>
@@ -407,9 +414,9 @@ export function BusinessProcessView({
             </h3>
 
             {businessProcess?.supportedLanguages &&
-              businessProcess.supportedLanguages.filter(
-                (code: string) => code !== "en",
-              ).length > 0 ? (
+            businessProcess.supportedLanguages.filter(
+              (code: string) => code !== "en",
+            ).length > 0 ? (
               <div className="rounded-lg border p-4">
                 <div className="space-y-2">
                   {Object.entries(SUPPORTED_LANGUAGES)

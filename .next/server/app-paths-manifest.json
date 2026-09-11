@@ -1,6 +1,0 @@
-{
-  "/cms/api/auth/[...nextauth]/route": "app/cms/api/auth/[...nextauth]/route.js",
-  "/cms/api/v1/consents/validate/route": "app/cms/api/v1/consents/validate/route.js",
-  "/cms/api/v1/notices/grant/route": "app/cms/api/v1/notices/grant/route.js",
-  "/cms/principal/notice/[notice_id]/view/[access_token]/page": "app/cms/principal/notice/[notice_id]/view/[access_token]/page.js"
-}

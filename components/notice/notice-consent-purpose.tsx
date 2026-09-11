@@ -86,9 +86,9 @@ export function NoticeConsentPurpose({
                   <span className="px-2 py-1 bg-warning-100 text-warning-700 rounded text-xs font-normal border border-warning-200">
                     Consent Duration:{" "}
                     {consentPurpose.consentDuration
-                      ? `${Math.floor(
-                        consentPurpose.consentDuration / 24,
-                      )} Days`
+                      ? consentPurpose.consentDuration < 24
+                        ? `${consentPurpose.consentDuration} ${consentPurpose.consentDuration === 1 ? "Hour" : "Hours"}`
+                        : `${Math.floor(consentPurpose.consentDuration / 24)} Days`
                       : "Until Purpose Met"}
                   </span>
                 </div>
@@ -129,9 +129,9 @@ export function NoticeConsentPurpose({
                   <span className="px-2 py-1 bg-warning-100 text-warning-700 rounded text-xs font-normal border border-warning-200">
                     Consent Duration:{" "}
                     {consentPurpose.consentDuration
-                      ? `${Math.floor(
-                        consentPurpose.consentDuration / 24,
-                      )} Days`
+                      ? consentPurpose.consentDuration < 24
+                        ? `${consentPurpose.consentDuration} ${consentPurpose.consentDuration === 1 ? "Hour" : "Hours"}`
+                        : `${Math.floor(consentPurpose.consentDuration / 24)} Days`
                       : "Until Purpose Met"}
                   </span>
                 </div>

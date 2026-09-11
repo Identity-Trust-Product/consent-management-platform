@@ -21,7 +21,7 @@ interface ConsentPurposeConfig {
   consentPurposeId: number;
   durationType: "until_purpose_met" | "custom_duration";
   consentDuration?: number;
-  durationUnit?: "days" | "weeks" | "months" | "years";
+  durationUnit?: "minutes" | "hours" | "days" | "weeks" | "months" | "years";
   processingRules: Array<{
     processingPurposeId: number;
     userAttributeNames?: string[];
@@ -185,7 +185,10 @@ export async function getBusinessProcessById(id: number) {
             rule.retentionDuration !== undefined
           ) {
             const hours = rule.retentionDuration;
-            if (hours % (24 * 365) === 0) {
+            if (hours < 24) {
+              value = hours;
+              unit = "hours";
+            } else if (hours % (24 * 365) === 0) {
               value = hours / (24 * 365);
               unit = "years";
             } else if (hours % (24 * 30) === 0) {
@@ -407,6 +410,12 @@ export async function saveOrUpdateBusinessProcess(
             const unit = consentConfig.durationUnit || "days";
 
             switch (unit) {
+              case "minutes":
+                durationInHours = duration / 60;
+                break;
+              case "hours":
+                durationInHours = duration;
+                break;
               case "days":
                 durationInHours = duration * 24;
                 break;
@@ -445,22 +454,22 @@ export async function saveOrUpdateBusinessProcess(
                 revocableByPrincipal: rule.isRevocable,
                 retentionDuration:
                   rule.retentionDurationValue !== undefined &&
-                    rule.retentionDurationValue !== null &&
-                    rule.retentionDurationUnit
+                  rule.retentionDurationValue !== null &&
+                  rule.retentionDurationUnit
                     ? (() => {
-                      const val = rule.retentionDurationValue;
-                      switch (rule.retentionDurationUnit) {
-                        case "years":
-                          return val * 365 * 24;
-                        case "months":
-                          return val * 30 * 24;
-                        case "weeks":
-                          return val * 7 * 24;
-                        case "days":
-                        default:
-                          return val * 24;
-                      }
-                    })()
+                        const val = rule.retentionDurationValue;
+                        switch (rule.retentionDurationUnit) {
+                          case "years":
+                            return val * 365 * 24;
+                          case "months":
+                            return val * 30 * 24;
+                          case "weeks":
+                            return val * 7 * 24;
+                          case "days":
+                          default:
+                            return val * 24;
+                        }
+                      })()
                     : null,
                 createdBy,
               },
@@ -517,6 +526,12 @@ export async function saveBusinessProcess(
           const unit = consentConfig.durationUnit || "days";
 
           switch (unit) {
+            case "minutes":
+              durationInHours = duration / 60;
+              break;
+            case "hours":
+              durationInHours = duration;
+              break;
             case "days":
               durationInHours = duration * 24;
               break;
@@ -555,22 +570,22 @@ export async function saveBusinessProcess(
               revocableByPrincipal: rule.isRevocable,
               retentionDuration:
                 rule.retentionDurationValue !== undefined &&
-                  rule.retentionDurationValue !== null &&
-                  rule.retentionDurationUnit
+                rule.retentionDurationValue !== null &&
+                rule.retentionDurationUnit
                   ? (() => {
-                    const val = rule.retentionDurationValue;
-                    switch (rule.retentionDurationUnit) {
-                      case "years":
-                        return val * 365 * 24;
-                      case "months":
-                        return val * 30 * 24;
-                      case "weeks":
-                        return val * 7 * 24;
-                      case "days":
-                      default:
-                        return val * 24;
-                    }
-                  })()
+                      const val = rule.retentionDurationValue;
+                      switch (rule.retentionDurationUnit) {
+                        case "years":
+                          return val * 365 * 24;
+                        case "months":
+                          return val * 30 * 24;
+                        case "weeks":
+                          return val * 7 * 24;
+                        case "days":
+                        default:
+                          return val * 24;
+                      }
+                    })()
                   : null,
               createdBy,
             },
@@ -886,6 +901,12 @@ export async function saveOrUpdateBusinessProcessWithVersioning(
             const unit = consentConfig.durationUnit || "days";
 
             switch (unit) {
+              case "minutes":
+                durationInHours = duration / 60;
+                break;
+              case "hours":
+                durationInHours = duration;
+                break;
               case "days":
                 durationInHours = duration * 24;
                 break;
@@ -924,22 +945,22 @@ export async function saveOrUpdateBusinessProcessWithVersioning(
                 revocableByPrincipal: rule.isRevocable,
                 retentionDuration:
                   rule.retentionDurationValue !== undefined &&
-                    rule.retentionDurationValue !== null &&
-                    rule.retentionDurationUnit
+                  rule.retentionDurationValue !== null &&
+                  rule.retentionDurationUnit
                     ? (() => {
-                      const val = rule.retentionDurationValue;
-                      switch (rule.retentionDurationUnit) {
-                        case "years":
-                          return val * 365 * 24;
-                        case "months":
-                          return val * 30 * 24;
-                        case "weeks":
-                          return val * 7 * 24;
-                        case "days":
-                        default:
-                          return val * 24;
-                      }
-                    })()
+                        const val = rule.retentionDurationValue;
+                        switch (rule.retentionDurationUnit) {
+                          case "years":
+                            return val * 365 * 24;
+                          case "months":
+                            return val * 30 * 24;
+                          case "weeks":
+                            return val * 7 * 24;
+                          case "days":
+                          default:
+                            return val * 24;
+                        }
+                      })()
                     : null,
                 createdBy,
               },

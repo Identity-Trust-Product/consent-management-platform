@@ -31,6 +31,11 @@ export function NoticeConsentDuration({
 }: NoticeConsentDurationProps) {
   const { isHighContrast } = useHighContrast();
   const { t } = useNoticeTranslation();
+  const formattedDuration = consentDuration
+    ? consentDuration < 24
+      ? `${consentDuration} ${t(consentDuration === 1 ? "Hour" : "Hours")}`
+      : `${Math.floor(consentDuration / 24)} ${t("Days")}`
+    : t("Until Purpose Met");
 
   // Helper function to get tooltip message based on consent duration
   const getConsentDurationTooltip = () => {
@@ -53,9 +58,7 @@ export function NoticeConsentDuration({
       )}
     >
       {t("Consent Duration")}:{" "}
-      {consentDuration
-        ? `${Math.floor(consentDuration / 24)} ${t("Days")}`
-        : t("Until Purpose Met")}
+      {formattedDuration}
       <Tooltip>
         <TooltipTrigger asChild>
           <Info

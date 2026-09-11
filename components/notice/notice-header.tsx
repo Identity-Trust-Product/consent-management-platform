@@ -89,7 +89,7 @@ export function NoticeHeader({
   return (
     <div
       className={cn(
-        "flex items-center justify-between border-b border-blue-800 bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-900 px-10 py-6 text-white",
+        "flex items-center justify-between border-b border-white/10 bg-[#1a1f36] px-8 py-5 text-white shadow-[0_2px_14px_rgba(0,0,0,0.07)]",
         isHighContrast && "hc-bg-header hc-no-border",
         className,
       )}
@@ -117,7 +117,7 @@ export function NoticeHeader({
                   aria-label="Descrease size"
                   size="sm"
                   className={cn(
-                    "h-6.5 w-6 cursor-pointer rounded-md text-blue-100 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
+                    "h-6.5 w-6 cursor-pointer rounded-md text-white/70 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
                     currentFontSize === "s" && "bg-white/20 text-white",
                     isHighContrast && "hc-text-white",
                   )}
@@ -128,7 +128,7 @@ export function NoticeHeader({
                   value="m"
                   aria-label="Default size"
                   className={cn(
-                    "h-6.5 w-6 cursor-pointer rounded-md text-blue-100 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
+                    "h-6.5 w-6 cursor-pointer rounded-md text-white/70 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
                     currentFontSize === "m" && "bg-white/20 text-white",
                     isHighContrast && "hc-text-white",
                   )}
@@ -139,7 +139,7 @@ export function NoticeHeader({
                   value="l"
                   aria-label="Increase size"
                   className={cn(
-                    "h-6.5 w-6 cursor-pointer rounded-md text-blue-100 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
+                    "h-6.5 w-6 cursor-pointer rounded-md text-white/70 hover:bg-white/10 hover:text-white data-[state=on]:text-white",
                     currentFontSize === "l" && "bg-white/20 text-white",
                     isHighContrast && "hc-text-white",
                   )}
@@ -164,7 +164,7 @@ export function NoticeHeader({
           onClick={handleHighContrastToggle}
           className={cn(
             "flex items-center justify-center rounded-md cursor-pointer transition-colors",
-            isHighContrast ? "text-yellow-500" : "text-blue-100",
+            isHighContrast ? "text-yellow-500" : "text-white/80",
             isHighContrast && "hc-text-gold",
           )}
           aria-label="Toggle high contrast mode"

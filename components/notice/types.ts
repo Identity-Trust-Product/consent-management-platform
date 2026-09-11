@@ -13,6 +13,7 @@ export interface NoticeData {
   id: number;
   publicId: string;
   status: string;
+  redirectionUrl?: string | null;
   consentDuration?: number | null;
   dataPrincipalId: string;
   defaultLanguage: string;

@@ -33,7 +33,7 @@ export interface BusinessProcessState {
     consentPurposeId: number;
     durationType: "until_purpose_met" | "custom_duration";
     consentDuration?: number;
-    durationUnit?: "days" | "weeks" | "months" | "years";
+    durationUnit?: "minutes" | "hours" | "days" | "weeks" | "months" | "years";
     processingRules: Array<{
       processingPurposeId: number;
       userAttributes?: string[]; // Changed from userAttributeNames to match context

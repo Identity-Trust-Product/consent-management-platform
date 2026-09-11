@@ -184,7 +184,7 @@ model BusinessProcessRule {
 
 model BusinessProcessToConsentPurpose {
   id                Int             @id @default(autoincrement())
-  consentDuration   Int?            @map("consent_duration")
+  consentDuration   Float?          @map("consent_duration") // Canonical hours; supports fractional hours for minutes
   createdAt         DateTime        @default(now()) @map("created_at")
   updatedAt         DateTime        @updatedAt @map("updated_at")
   businessProcessId Int             @map("business_process_id")

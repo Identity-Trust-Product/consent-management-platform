@@ -9,7 +9,7 @@
  * is strictly prohibited without prior written permission from IDfy.
  */
 
-import { getApiContext } from "@/lib/api-auth-middleware";
+import { getApiContext, validateApiKey } from "@/lib/api-auth-middleware";
 import { ApiErrors } from "@/lib/api-errors";
 import { createSuccessResponse } from "@/lib/api-response";
 import {
@@ -87,8 +87,19 @@ import { NextRequest } from "next/server";
  */
 export async function POST(request: NextRequest) {
   try {
-    // Get authenticated API context from middleware
-    const context = getApiContext(request);
+    // Get authenticated API context from middleware, with a direct API-key
+    // fallback for local/dev servers where forwarded middleware headers are absent.
+    const context = (() => {
+      try {
+        return getApiContext(request);
+      } catch {
+        return null;
+      }
+    })() || await validateApiKey(request);
+
+    if (!context) {
+      return ApiErrors.unauthorized();
+    }
 
     // Parse request body
     const body = await request.json();
@@ -100,7 +111,7 @@ export async function POST(request: NextRequest) {
     } catch (error: any) {
       return ApiErrors.validationError(
         "Invalid request body",
-        error.errors || error.message
+        error.issues || error.errors || error.message
       );
     }
 

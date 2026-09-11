@@ -43,9 +43,9 @@ export type BusinessProcessAction =
   | { type: "UPDATE_FIELD"; field: string; value: any }
   | { type: "ADD_EULA"; payload: { title: string; link: string } }
   | {
-    type: "UPDATE_EULA";
-    payload: { id: number; title: string; link: string };
-  }
+      type: "UPDATE_EULA";
+      payload: { id: number; title: string; link: string };
+    }
   | { type: "DELETE_EULA"; payload: number }
   | { type: "SET_BASELINE"; payload: BusinessProcessState }
   | { type: "INITIALIZE_FROM_EXISTING"; payload: any }
@@ -104,10 +104,10 @@ function businessProcessReducer(
         eulas: state.eulas.map((eula) =>
           eula.id === action.payload.id
             ? {
-              id: eula.id,
-              title: action.payload.title,
-              link: action.payload.link,
-            }
+                id: eula.id,
+                title: action.payload.title,
+                link: action.payload.link,
+              }
             : eula,
         ),
       };
@@ -157,13 +157,27 @@ function businessProcessReducer(
             let durationType: "until_purpose_met" | "custom_duration" =
               "until_purpose_met";
             let consentDuration: number | undefined;
-            let durationUnit: "days" | "weeks" | "months" | "years" | undefined;
+            let durationUnit:
+              | "minutes"
+              | "hours"
+              | "days"
+              | "weeks"
+              | "months"
+              | "years"
+              | undefined;
 
             if (relation.consentDuration) {
               durationType = "custom_duration";
-              // Convert hours back to days (we can enhance this later)
-              consentDuration = Math.round(relation.consentDuration / 24);
-              durationUnit = "days";
+              if (relation.consentDuration < 1) {
+                consentDuration = Math.round(relation.consentDuration * 60);
+                durationUnit = "minutes";
+              } else if (relation.consentDuration < 24) {
+                consentDuration = relation.consentDuration;
+                durationUnit = "hours";
+              } else {
+                consentDuration = Math.round(relation.consentDuration / 24);
+                durationUnit = "days";
+              }
             }
 
             return {

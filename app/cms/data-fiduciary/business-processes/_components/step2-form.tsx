@@ -2,10 +2,10 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
@@ -64,7 +64,7 @@ interface ConsentPurposeConfig {
   // ^^^ --- END OF FIX 1 --- ^^^
 
   consentDuration?: number;
-  durationUnit?: "days" | "weeks" | "months" | "years";
+  durationUnit?: "minutes" | "hours" | "days" | "weeks" | "months" | "years";
   processingRules: Array<{
     processingPurposeId: number;
     processingPurposeName: string;
@@ -91,12 +91,12 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
     // Check if consent purpose already exists to prevent duplicates
     const exists = consentConfigs.some(
       (config: ConsentPurposeConfig) =>
-        config.consentPurposeId === consentData.consentPurposeId
+        config.consentPurposeId === consentData.consentPurposeId,
     );
 
     if (exists) {
       console.warn(
-        "[Step2Form] Consent purpose already exists, skipping duplicate"
+        "[Step2Form] Consent purpose already exists, skipping duplicate",
       );
       setDialogOpen(false);
       return;
@@ -104,7 +104,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
 
     // Convert ConsentPurposeData to ConsentPurposeConfig
     const consentPurpose = data.consentPurposes?.find(
-      (cp) => cp.id === consentData.consentPurposeId
+      (cp) => cp.id === consentData.consentPurposeId,
     );
 
     const consentConfig: ConsentPurposeConfig = {
@@ -127,7 +127,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
       processingRules: consentData.processingRules.map((rule: any) => ({
         processingPurposeId: rule.processingPurposeId,
         processingPurposeName: getProcessingPurposeName(
-          rule.processingPurposeId
+          rule.processingPurposeId,
         ),
         userAttributes: rule.userAttributeNames, // Store as names
         isMandatory: rule.mandatory,
@@ -151,7 +151,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
     if (!editingConsent) return;
 
     const consentPurpose = data.consentPurposes?.find(
-      (cp) => cp.id === consentData.consentPurposeId
+      (cp) => cp.id === consentData.consentPurposeId,
     );
 
     const updatedConfig: ConsentPurposeConfig = {
@@ -168,7 +168,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
       processingRules: consentData.processingRules.map((rule: any) => ({
         processingPurposeId: rule.processingPurposeId,
         processingPurposeName: getProcessingPurposeName(
-          rule.processingPurposeId
+          rule.processingPurposeId,
         ),
         userAttributes: rule.userAttributeNames, // Store as names
         isMandatory: rule.mandatory,
@@ -180,7 +180,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
     };
 
     const updatedConfigs = consentConfigs.map((config: ConsentPurposeConfig) =>
-      config.id === editingConsent.id ? updatedConfig : config
+      config.id === editingConsent.id ? updatedConfig : config,
     );
 
     dispatch({
@@ -195,7 +195,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
 
   const handleDeleteConsent = (id: number) => {
     const updatedConfigs = consentConfigs.filter(
-      (config: ConsentPurposeConfig) => config.id !== id
+      (config: ConsentPurposeConfig) => config.id !== id,
     );
 
     dispatch({
@@ -246,7 +246,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
   const getProcessingPurposeName = (id: number) => {
     for (const consentPurpose of data.consentPurposes || []) {
       const processingPurpose = consentPurpose.processingPurposes?.find(
-        (pp: any) => pp.id === id
+        (pp: any) => pp.id === id,
       );
       if (processingPurpose) {
         return processingPurpose.name;
@@ -262,6 +262,13 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
 
     const duration = config.consentDuration || 0;
     const unit = config.durationUnit || "days";
+
+    if (unit === "hours") {
+      return `${duration} ${duration === 1 ? "hour" : "hours"}`;
+    }
+    if (unit === "minutes") {
+      return `${duration} ${duration === 1 ? "minute" : "minutes"}`;
+    }
 
     let totalDays = duration;
     switch (unit) {
@@ -385,17 +392,33 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
                 <Table>
                   <TableHeader className="bg-muted">
                     <TableRow>
-                      <TableHead className="whitespace-normal">Purpose Master</TableHead>
-                      <TableHead className="whitespace-normal">Consent Duration</TableHead>
-                      <TableHead className="whitespace-normal">Purpose of Processing</TableHead>
-                      <TableHead className="whitespace-normal">Attributes</TableHead>
-                      <TableHead className="text-center whitespace-normal">Mandatory</TableHead>
+                      <TableHead className="whitespace-normal">
+                        Purpose Master
+                      </TableHead>
+                      <TableHead className="whitespace-normal">
+                        Consent Duration
+                      </TableHead>
+                      <TableHead className="whitespace-normal">
+                        Purpose Sub Master
+                      </TableHead>
+                      <TableHead className="whitespace-normal">
+                        Attributes
+                      </TableHead>
+                      <TableHead className="text-center whitespace-normal">
+                        Mandatory
+                      </TableHead>
                       <TableHead className="text-center whitespace-normal">
                         Re-consentable by Principal
                       </TableHead>
-                      <TableHead className="text-center whitespace-normal border-r py-2">Revocable by Principal</TableHead>
-                      <TableHead className="whitespace-normal">Retention Duration</TableHead>
-                      <TableHead className="text-center whitespace-normal">Actions</TableHead>
+                      <TableHead className="text-center whitespace-normal border-r py-2">
+                        Revocable by Principal
+                      </TableHead>
+                      <TableHead className="whitespace-normal">
+                        Retention Duration
+                      </TableHead>
+                      <TableHead className="text-center whitespace-normal">
+                        Actions
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -492,7 +515,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
                                   >
                                     {attrName}
                                   </Badge>
-                                )
+                                ),
                               )}
                             </div>
                           </TableCell>
@@ -507,7 +530,7 @@ export function Step2Form({ data, isEdit, businessProcessId }: Step2FormProps) {
                           </TableCell>
                           <TableCell>
                             {rule.retentionDurationValue &&
-                              rule.retentionDurationUnit
+                            rule.retentionDurationUnit
                               ? `${rule.retentionDurationValue} ${rule.retentionDurationUnit}`
                               : "-"}
                           </TableCell>

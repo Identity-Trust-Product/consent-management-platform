@@ -135,21 +135,21 @@ const getDataFiduciaryItems = (userRoles: UserRole[]): SidebarSection[] => {
         },
       ],
     },
-    // {
-    //   title: "DEVELOPER CENTER",
-    //   icon: Code,
-    //   defaultOpen: false,
-    //   items: [
-    //     {
-    //       title: "API Keys",
-    //       href: "/cms/data-fiduciary/api-keys",
-    //     },
-    //     {
-    //       title: "Webhooks",
-    //       href: "/cms/data-fiduciary/webhooks",
-    //     },
-    //   ],
-    // },
+    {
+      title: "DEVELOPER CENTER",
+      icon: DPOCenterIcon,
+      defaultOpen: false,
+      items: [
+        {
+          title: "API Keys",
+          href: "/cms/data-fiduciary/api-keys",
+        },
+        {
+          title: "Webhooks",
+          href: "/cms/data-fiduciary/webhooks",
+        },
+      ],
+    },
   ];
 
   return sections;

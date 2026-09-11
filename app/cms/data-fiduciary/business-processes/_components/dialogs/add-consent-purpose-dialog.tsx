@@ -2,10 +2,10 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
@@ -56,12 +56,12 @@ import { useEffect, useState } from "react";
 
 export interface ConsentPurposeData {
   consentPurpose: {
-    hasNewerVersion: boolean
-  },
+    hasNewerVersion: boolean;
+  };
   consentPurposeId: number;
   durationType: "until_purpose_met" | "custom_duration";
   consentDuration?: number;
-  durationUnit?: "days" | "weeks" | "months" | "years";
+  durationUnit?: "minutes" | "hours" | "days" | "weeks" | "months" | "years";
   processingRules: {
     processingPurposeId: number;
     userAttributeNames: string[];
@@ -103,8 +103,8 @@ export function AddConsentPurposeDialog({
     durationUnit: "days",
     processingRules: [],
     consentPurpose: {
-      hasNewerVersion: false
-    }
+      hasNewerVersion: false,
+    },
   });
 
   // Initialize form data when dialog opens or editData changes
@@ -120,8 +120,8 @@ export function AddConsentPurposeDialog({
           durationUnit: "days",
           processingRules: [],
           consentPurpose: {
-            hasNewerVersion: false
-          }
+            hasNewerVersion: false,
+          },
         });
       }
     }
@@ -129,13 +129,13 @@ export function AddConsentPurposeDialog({
 
   // Get processing purposes for selected consent purpose
   const selectedConsentPurpose = consentPurposes.find(
-    (cp) => cp.id === formData.consentPurposeId
+    (cp) => cp.id === formData.consentPurposeId,
   );
   const processingPurposes = selectedConsentPurpose?.processingPurposes || [];
 
   // Filter published consent purposes and exclude already selected ones
   const existingConsentPurposeIds = existingConsentConfigs.map(
-    (config) => config.consentPurposeId
+    (config) => config.consentPurposeId,
   );
 
   // Get codes that are already selected in existing configs
@@ -170,8 +170,8 @@ export function AddConsentPurposeDialog({
       durationUnit: "days",
       processingRules: [],
       consentPurpose: {
-        hasNewerVersion: false
-      }
+        hasNewerVersion: false,
+      },
     });
     setConsentPurposeComboboxOpen(false);
     onOpenChange(false);
@@ -179,7 +179,7 @@ export function AddConsentPurposeDialog({
 
   const handleConsentPurposeSelect = (consentPurposeId: number) => {
     const selectedPurpose = consentPurposes.find(
-      (cp) => cp.id === consentPurposeId
+      (cp) => cp.id === consentPurposeId,
     );
     const newProcessingRules =
       selectedPurpose?.processingPurposes?.map((pp: any) => ({
@@ -203,7 +203,7 @@ export function AddConsentPurposeDialog({
   const handleProcessingRuleUpdate = (
     processingPurposeId: number,
     field: string,
-    value: any
+    value: any,
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -242,9 +242,7 @@ export function AddConsentPurposeDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-6xl h-[700px] flex flex-col">
         <DialogHeader className="flex-shrink-0">
-          <DialogTitle>
-            {isEdit ? "Edit" : "Add"} Purpose Master
-          </DialogTitle>
+          <DialogTitle>{isEdit ? "Edit" : "Add"} Purpose Master</DialogTitle>
         </DialogHeader>
 
         <div className="flex-1 flex flex-col space-y-6 overflow-hidden">
@@ -274,22 +272,22 @@ export function AddConsentPurposeDialog({
                   >
                     {formData.consentPurposeId
                       ? (() => {
-                        const selectedPurpose = consentPurposes.find(
-                          (cp) => cp.id === formData.consentPurposeId
-                        );
-                        return selectedPurpose ? (
-                          <div className="flex flex-col text-left">
-                            <span className="font-medium">
-                              {selectedPurpose.name} (
-                              {selectedPurpose.code || selectedPurpose.id}
-                              {selectedPurpose.version
-                                ? ` - v${selectedPurpose.version}`
-                                : ""}
-                              )
-                            </span>
-                          </div>
-                        ) : null;
-                      })()
+                          const selectedPurpose = consentPurposes.find(
+                            (cp) => cp.id === formData.consentPurposeId,
+                          );
+                          return selectedPurpose ? (
+                            <div className="flex flex-col text-left">
+                              <span className="font-medium">
+                                {selectedPurpose.name} (
+                                {selectedPurpose.code || selectedPurpose.id}
+                                {selectedPurpose.version
+                                  ? ` - v${selectedPurpose.version}`
+                                  : ""}
+                                )
+                              </span>
+                            </div>
+                          ) : null;
+                        })()
                       : "Select a purpose master..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
@@ -307,8 +305,9 @@ export function AddConsentPurposeDialog({
                         {publishedConsentPurposes.map((purpose) => (
                           <CommandItem
                             key={purpose.id}
-                            value={`${purpose.name} (${purpose.code || purpose.id
-                              }) v${purpose.version || 1}`}
+                            value={`${purpose.name} (${
+                              purpose.code || purpose.id
+                            }) v${purpose.version || 1}`}
                             onSelect={() =>
                               handleConsentPurposeSelect(purpose.id)
                             }
@@ -318,7 +317,7 @@ export function AddConsentPurposeDialog({
                                 "mr-2 h-4 w-4",
                                 formData.consentPurposeId === purpose.id
                                   ? "opacity-100"
-                                  : "opacity-0"
+                                  : "opacity-0",
                               )}
                             />
                             <div className="flex flex-col">
@@ -351,7 +350,7 @@ export function AddConsentPurposeDialog({
                 <RadioGroup
                   value={formData.durationType}
                   onValueChange={(
-                    value: "until_purpose_met" | "custom_duration"
+                    value: "until_purpose_met" | "custom_duration",
                   ) =>
                     setFormData((prev) => ({ ...prev, durationType: value }))
                   }
@@ -404,7 +403,13 @@ export function AddConsentPurposeDialog({
                       <Select
                         value={formData.durationUnit}
                         onValueChange={(
-                          value: "days" | "weeks" | "months" | "years"
+                          value:
+                            | "minutes"
+                            | "hours"
+                            | "days"
+                            | "weeks"
+                            | "months"
+                            | "years",
                         ) =>
                           setFormData((prev) => ({
                             ...prev,
@@ -416,6 +421,8 @@ export function AddConsentPurposeDialog({
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="minutes">Minutes</SelectItem>
+                          <SelectItem value="hours">Hours</SelectItem>
                           <SelectItem value="days">Days</SelectItem>
                           <SelectItem value="weeks">Weeks</SelectItem>
                           <SelectItem value="months">Months</SelectItem>
@@ -445,13 +452,15 @@ export function AddConsentPurposeDialog({
                         <TableHead className="text-center">
                           Revocable by Principal
                         </TableHead>
-                        <TableHead className="w-[200px]">Retention Duration</TableHead>
+                        <TableHead className="w-[200px]">
+                          Retention Duration
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {processingPurposes.map((pp: any) => {
                         const rule = formData.processingRules.find(
-                          (r) => r.processingPurposeId === pp.id
+                          (r) => r.processingPurposeId === pp.id,
                         );
                         if (!rule) return null;
 
@@ -480,7 +489,7 @@ export function AddConsentPurposeDialog({
                                   handleProcessingRuleUpdate(
                                     pp.id,
                                     "mandatory",
-                                    checked as boolean
+                                    checked as boolean,
                                   )
                                 }
                               />
@@ -492,7 +501,7 @@ export function AddConsentPurposeDialog({
                                   handleProcessingRuleUpdate(
                                     pp.id,
                                     "reconsentableByPrincipal",
-                                    checked as boolean
+                                    checked as boolean,
                                   )
                                 }
                               />
@@ -505,7 +514,7 @@ export function AddConsentPurposeDialog({
                                   handleProcessingRuleUpdate(
                                     pp.id,
                                     "revocableByPrincipal",
-                                    checked as boolean
+                                    checked as boolean,
                                   )
                                 }
                               />
@@ -521,7 +530,7 @@ export function AddConsentPurposeDialog({
                                     handleProcessingRuleUpdate(
                                       pp.id,
                                       "retentionDurationValue",
-                                      parseInt(e.target.value) || 0
+                                      parseInt(e.target.value) || 0,
                                     )
                                   }
                                 />
@@ -531,7 +540,7 @@ export function AddConsentPurposeDialog({
                                     handleProcessingRuleUpdate(
                                       pp.id,
                                       "retentionDurationUnit",
-                                      value
+                                      value,
                                     )
                                   }
                                 >
@@ -541,7 +550,9 @@ export function AddConsentPurposeDialog({
                                   <SelectContent>
                                     <SelectItem value="days">Days</SelectItem>
                                     <SelectItem value="weeks">Weeks</SelectItem>
-                                    <SelectItem value="months">Months</SelectItem>
+                                    <SelectItem value="months">
+                                      Months
+                                    </SelectItem>
                                     <SelectItem value="years">Years</SelectItem>
                                   </SelectContent>
                                 </Select>

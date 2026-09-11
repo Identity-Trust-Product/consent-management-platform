@@ -53,9 +53,9 @@ export function NoticeButton({
       size={size}
       className={cn(
         purpose === "accept" &&
-          "border-0 bg-gradient-to-r from-sky-600 to-blue-800 text-white shadow-md hover:from-sky-700 hover:to-blue-900",
+          "rounded-lg border-0 bg-[#4e73df] font-black text-white shadow-[0_6px_14px_rgba(78,115,223,0.24)] hover:bg-[#224abe]",
         purpose === "reject" &&
-          "border border-blue-800 bg-white text-blue-900 shadow-sm hover:bg-blue-50",
+          "rounded-lg border border-[#d9e2ef] bg-white font-black text-[#4e73df] shadow-sm hover:border-[#4e73df] hover:bg-[#f4f7fb] hover:text-[#224abe]",
         className,
         isHighContrast && "hc-footer-button",
       )}

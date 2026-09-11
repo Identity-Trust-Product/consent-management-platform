@@ -130,6 +130,13 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
     const duration = config.consentDuration || 0;
     const unit = config.durationUnit || "days";
 
+    if (unit === "hours") {
+      return `${duration} ${duration === 1 ? "hour" : "hours"}`;
+    }
+    if (unit === "minutes") {
+      return `${duration} ${duration === 1 ? "minute" : "minutes"}`;
+    }
+
     let totalDays = duration;
     switch (unit) {
       case "weeks":
@@ -518,10 +525,10 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
                               ))}
                               {(!rule.userAttributes ||
                                 rule.userAttributes.length === 0) && (
-                                  <span className="text-xs text-muted-foreground">
-                                    No attributes
-                                  </span>
-                                )}
+                                <span className="text-xs text-muted-foreground">
+                                  No attributes
+                                </span>
+                              )}
                             </div>
                           </TableCell>
                           <TableCell className="text-center border-r">
@@ -535,7 +542,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
                           </TableCell>
                           <TableCell>
                             {rule.retentionDurationValue &&
-                              rule.retentionDurationUnit
+                            rule.retentionDurationUnit
                               ? `${rule.retentionDurationValue} ${rule.retentionDurationUnit}`
                               : "-"}
                           </TableCell>

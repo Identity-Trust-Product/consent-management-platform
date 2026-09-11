@@ -1,1 +1,0 @@
-"use strict";exports.id=5354,exports.ids=[5354],exports.modules={25354:(a,b,c)=>{function d(a,b,c){let d=new Date().toISOString(),e=c?` ${JSON.stringify(c)}`:"";return`[${d}] [${a.toUpperCase()}] ${b}${e}`}c.d(b,{logger:()=>e});let e={info(a,b){console.log(d("info",a,b))},warn(a,b){console.warn(d("warn",a,b))},error(a,b){console.error(d("error",a,b))},debug(a,b){}}}};
