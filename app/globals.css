@@ -143,6 +143,8 @@ IDfy Lokey 2.0 Light Theme
 ============================================
 */
 :root {
+  --font-geist-sans: Nunito, Arial, Helvetica, sans-serif;
+  --font-geist-mono: "Courier New", Consolas, monospace;
   --primary-20: rgba(235, 246, 254, 1.0);
   --primary-50: rgba(224, 240, 253, 1.0);
   --primary-100: rgba(207, 234, 252, 1.0);
