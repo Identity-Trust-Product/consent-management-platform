@@ -10,22 +10,10 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Nunito } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { SessionProvider } from "@/components/providers/session-provider";
 import "@/app/globals.css";
-
-const nunitoSans = Nunito({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700", "800", "900"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Consent Management Platform",
@@ -44,9 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${nunitoSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <SessionProvider>
           <QueryProvider>
             <main className="min-h-screen w-full">{children}</main>
