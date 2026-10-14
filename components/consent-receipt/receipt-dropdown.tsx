@@ -108,14 +108,6 @@ export function ReceiptDropdown({
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold text-gray-900 w-32 shrink-0">
-                        Process Code:
-                      </span>
-                      <span className="text-sm font-medium text-gray-500 font-mono">
-                        {opt.processCode}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-gray-900 w-32 shrink-0">
                         Version:
                       </span>
                       <span className="text-sm font-medium text-gray-500 font-mono">

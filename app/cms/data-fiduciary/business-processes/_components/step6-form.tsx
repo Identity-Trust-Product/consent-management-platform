@@ -51,7 +51,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
   const [showVersionWarning, setShowVersionWarning] = useState(false);
   const [highestVersion, setHighestVersion] = useState<number | null>(null);
 
-  const { businessProcess, businessUnits = [], consentPurposes = [] } = data;
+  const { businessProcess, businessUnits = [] } = data;
 
   // Get data from context
   const step1Data = state.step1Data;
@@ -118,7 +118,7 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
   // Helper function to get business unit name
   const getBusinessUnitName = (id: number) => {
     const unit = businessUnits.find((bu: any) => bu.id === id);
-    return unit?.name || "Unknown Department";
+    return unit?.name || "Unknown Organization";
   };
 
   // Helper function to convert duration to display format
@@ -367,22 +367,12 @@ export function Step6Form({ data, isEdit, businessProcessId }: Step6FormProps) {
                 </div>
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Department:
+                    Organization:
                   </span>
                   <p className="mt-1">
                     {step1Data?.businessUnitId
                       ? getBusinessUnitName(step1Data.businessUnitId)
                       : businessProcess?.businessUnit?.name || "Not specified"}
-                  </p>
-                </div>
-                <div>
-                  <span className="font-medium text-muted-foreground">
-                    Code:
-                  </span>
-                  <p className="mt-1">
-                    {step1Data?.code ||
-                      businessProcess?.code ||
-                      "Not specified"}
                   </p>
                 </div>
               </div>

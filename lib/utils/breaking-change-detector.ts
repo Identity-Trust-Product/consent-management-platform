@@ -108,7 +108,7 @@ export function detectBreakingChanges(
       if (removedAttributes.length > 0) {
         breakingChanges.push({
           type: "ua_removed",
-          description: `Processing purpose "${baselinePP.name}": Purpose attributes removed`,
+          description: `Processing purpose "${baselinePP.name}": Data attributes removed`,
           oldValue: baselinePP.userAttributeNames,
           newValue: modifiedPP.userAttributeNames,
         });
@@ -122,7 +122,7 @@ export function detectBreakingChanges(
       if (addedAttributes.length > 0) {
         breakingChanges.push({
           type: "pp_modified",
-          description: `Processing purpose "${baselinePP.name}": Purpose attributes added`,
+          description: `Processing purpose "${baselinePP.name}": Data attributes added`,
           oldValue: baselinePP.userAttributeNames,
           newValue: modifiedPP.userAttributeNames,
         });

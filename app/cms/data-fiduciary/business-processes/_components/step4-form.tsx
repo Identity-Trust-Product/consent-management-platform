@@ -571,7 +571,7 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
 
               <div>
                 <h4 className="font-semibold mb-2">
-                  Revoke Description (Optional)
+                  Revoke Description
                 </h4>
                 <Textarea
                   placeholder={`Enter revoke description in ${selectedLangInfo.name}`}
@@ -591,7 +591,7 @@ export function Step4Form({ data, isEdit, businessProcessId }: Step4FormProps) {
 
               <div>
                 <h4 className="font-semibold mb-2">
-                  Reconsent Description (Optional)
+                  Reconsent Description
                 </h4>
                 <Textarea
                   placeholder={`Enter reconsent description in ${selectedLangInfo.name}`}

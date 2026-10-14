@@ -47,10 +47,6 @@ export function BusinessProcessView({
 
   const {
     businessProcess,
-    businessUnits = [],
-    consentPurposes = [],
-    dataProcessors = [],
-    userAttributes = [],
   } = data;
 
   const formatLastUpdated = (dateStr: string) => {
@@ -159,18 +155,10 @@ export function BusinessProcessView({
                 </div>
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Department:
+                    Organization:
                   </span>
                   <p className="mt-1">
                     {businessProcess?.businessUnit?.name || "Not specified"}
-                  </p>
-                </div>
-                <div>
-                  <span className="font-medium text-muted-foreground">
-                    Code:
-                  </span>
-                  <p className="mt-1">
-                    {businessProcess?.code || "Not specified"}
                   </p>
                 </div>
               </div>

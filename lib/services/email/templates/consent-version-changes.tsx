@@ -176,7 +176,7 @@ ConsentVersionChanges.PreviewProps = {
             "Enhanced biometric identity verification using government ID and facial recognition",
         },
         {
-          field: "Purpose Attributes",
+          field: "Data attributes",
           before: "Name, ID Number",
           after: "Name, ID Number, Facial Biometrics",
         },

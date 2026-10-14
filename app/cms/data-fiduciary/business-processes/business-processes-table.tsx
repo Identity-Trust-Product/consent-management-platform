@@ -10,13 +10,13 @@
  * is strictly prohibited without prior written permission from IDfy.
  */
 
-import { ActionButtonsGroup } from "@/components/ui/action-buttons";
+import { EditButton } from "@/components/ui/action-buttons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { Prisma } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Eye } from "lucide-react";
 
 export type BusinessProcess = {
   id: number;
@@ -40,21 +40,17 @@ export type BusinessProcess = {
 interface BusinessProcessesTableProps {
   data: BusinessProcess[];
   onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
   onView: (id: number) => void;
   filterValue?: string;
   canUpdate: boolean;
-  canDelete: boolean;
 }
 
 export function BusinessProcessesTable({
   data,
   onEdit,
-  onDelete,
   onView,
   filterValue = "",
   canUpdate,
-  canDelete,
 }: BusinessProcessesTableProps) {
   const columns: ColumnDef<BusinessProcess>[] = [
     {
@@ -72,13 +68,6 @@ export function BusinessProcessesTable({
       },
       cell: ({ row }) => (
         <div className="capitalize">{row.getValue("name")}</div>
-      ),
-    },
-    {
-      accessorKey: "code",
-      header: "Code",
-      cell: ({ row }) => (
-        <div className="font-mono text-sm">{row.getValue("code")}</div>
       ),
     },
     {
@@ -170,49 +159,46 @@ export function BusinessProcessesTable({
       id: "actions",
       header: "Actions",
       enableHiding: false,
-      cell: ({ row, table }) => {
+      cell: ({ row }) => {
         const businessProcess = row.original;
-        const isPublished = businessProcess.status === "published";
-        const meta = table.options.meta as {
-          onEdit?: (item: BusinessProcess) => void;
-          onDelete?: (item: BusinessProcess) => void;
-        };
 
         return (
-          <ActionButtonsGroup
-            onEdit={(e) => {
-              e?.stopPropagation();
-              onEdit(businessProcess.id);
-            }}
-            onDelete={(e) => {
-              e?.stopPropagation();
-              !isPublished && meta?.onDelete?.(businessProcess);
-            }}
-            deleteDisabled={isPublished}
-          />
+          <div className="flex items-center gap-2">
+            {canUpdate && (
+              <EditButton
+                onClick={(e) => {
+                  e?.stopPropagation();
+                  onEdit(businessProcess.id);
+                }}
+              />
+            )}
+            <Button
+              variant="ghost"
+              size="sm"
+              aria-label="View create notice template"
+              className="hover:bg-primary/10"
+              onClick={(e) => {
+                e.stopPropagation();
+                onView(businessProcess.id);
+              }}
+            >
+              <Eye className="h-4 w-4 text-primary" />
+            </Button>
+          </div>
         );
       },
     },
   ];
 
-  const handleDelete = (businessProcess: BusinessProcess) => {
-    onDelete(businessProcess.id);
-  };
-
   return (
     <DataTable
       data={data}
       columns={columns}
-      onDelete={handleDelete}
       onRowClick={(businessProcess: BusinessProcess) =>
         onView(businessProcess.id)
       }
       filterValue={filterValue}
       filterKey="name"
-      deleteDialogTitle="Delete Process"
-      deleteDialogDescription={(businessProcess: BusinessProcess) =>
-        `Are you sure you want to delete the process "${businessProcess.name}"? This action cannot be undone.`
-      }
       getItemName={(businessProcess: BusinessProcess) => businessProcess.name}
     />
   );

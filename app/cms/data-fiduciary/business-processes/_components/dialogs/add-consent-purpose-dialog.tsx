@@ -444,7 +444,7 @@ export function AddConsentPurposeDialog({
                     <TableHeader className="bg-muted">
                       <TableRow>
                         <TableHead>Purpose Sub Master</TableHead>
-                        <TableHead>Purpose Attributes</TableHead>
+                        <TableHead>Data attributes</TableHead>
                         <TableHead className="text-center">Mandatory</TableHead>
                         <TableHead className="text-center">
                           Re-consentable by Principal

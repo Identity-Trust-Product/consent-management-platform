@@ -270,7 +270,7 @@ export function AddDataProcessorDialog({
             <div className="space-y-4 flex-1 min-h-0">
               <div>
                 <Label className="text-base font-medium">
-                  Map Processing Purposes & Purpose Attributes
+                  Map Processing Purposes & Data attributes
                 </Label>
                 <p className="text-sm text-muted-foreground">
                   Select which purpose attributes this data processor will handle
@@ -291,7 +291,7 @@ export function AddDataProcessorDialog({
                           Attributes
                         </TableHead>
                         <TableHead className="bg-muted/30">
-                          Choose Purpose Attributes
+                          Choose Data attributes
                         </TableHead>
                       </TableRow>
                     </TableHeader>

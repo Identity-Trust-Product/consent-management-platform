@@ -10,7 +10,7 @@
  * is strictly prohibited without prior written permission from IDfy.
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -91,10 +91,14 @@ export function BusinessUnitForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Department created successfully"
-            : "Department updated successfully"
+            ? "Organization created successfully. Continue with Data attributes."
+            : "Organization updated successfully"
         );
-        router.push("/cms/data-fiduciary/business-units");
+        router.push(
+          mode === "new"
+            ? "/cms/data-fiduciary/user-attributes"
+            : "/cms/data-fiduciary/business-units"
+        );
       } else {
         toast.error(result.error || "An error occurred");
       }
@@ -117,7 +121,7 @@ export function BusinessUnitForm({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {mode === "new" ? "New Department" : "Edit Department"}
+              {mode === "new" ? "New Organization" : "Edit Organization"}
             </h2>
           </div>
         </div>
@@ -144,12 +148,12 @@ export function BusinessUnitForm({
                     render={({ field }) => (
                       <FormItem className="max-w-lg">
                         <FormLabel>
-                          Department Name{" "}
+                          Organization Name{" "}
                           <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Enter Department name"
+                            placeholder="Enter Organization name"
                             {...field}
                           />
                         </FormControl>
@@ -158,32 +162,6 @@ export function BusinessUnitForm({
                     )}
                   />
 
-                  {/* Code */}
-                  <FormField
-                    control={form.control}
-                    name="code"
-                    render={({ field }) => (
-                      <FormItem className="max-w-lg">
-                        <FormLabel>
-                          Code <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Auto-generated code"
-                            {...field}
-                            disabled={mode === "edit"}
-                            className={mode === "edit" ? "bg-muted" : ""}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                        {mode === "edit" && (
-                          <p className="text-xs text-muted-foreground">
-                            Code cannot be changed once set
-                          </p>
-                        )}
-                      </FormItem>
-                    )}
-                  />
                 </div>
               </div>
             </div>

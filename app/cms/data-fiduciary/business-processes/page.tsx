@@ -18,6 +18,7 @@ import Link from "next/link";
 import { checkPermission } from "@/lib/rbac";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { Forbidden } from "@/components/forbidden";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 async function BusinessProcessesContent() {
   const canRead = await checkPermission(Resources.BUSINESS_PROCESS, Actions.READ);
@@ -31,25 +32,24 @@ async function BusinessProcessesContent() {
   // Check permissions
   const canCreate = await checkPermission(Resources.BUSINESS_PROCESS, Actions.CREATE);
   const canUpdate = await checkPermission(Resources.BUSINESS_PROCESS, Actions.UPDATE);
-  const canDelete = await checkPermission(Resources.BUSINESS_PROCESS, Actions.DELETE);
 
   const newButton = canCreate ? (
     <Button asChild>
       <Link href="/cms/data-fiduciary/business-processes/new" className="group">
         <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-        <p className="text-base">New Process</p>
+        <p className="text-base">Create New Notice Template</p>
       </Link>
     </Button>
   ) : null;
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={5} />
       <div className="mx-auto">
         <BusinessProcessesClient
           data={businessProcesses}
           newButton={newButton}
           canUpdate={canUpdate}
-          canDelete={canDelete}
         />
       </div>
     </div>
@@ -64,7 +64,7 @@ export default function BusinessProcessesPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Loading processes...
+              Loading notice templates...
             </p>
           </div>
         </div>

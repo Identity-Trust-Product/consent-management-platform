@@ -2,10 +2,10 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
@@ -23,11 +23,13 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Plus, Delete } from "lucide-react";
 import {
+  GUARDIAN_VERIFICATION_METHOD_OPTIONS,
   NOTICE_METADATA_KEYS,
   RELATIONSHIP_OPTIONS,
 } from "@/lib/constants/notice-metadata";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -113,46 +115,62 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
   // Handle forMinor checkbox changes
   useEffect(() => {
     if (forMinor) {
-      // Add major_data_principal_id and relationship_with_minor metadata if not already present
-      const hasMajorMetadata = metadataRows.some(
-        (row) => row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
-      );
-      const hasRelationshipMetadata = metadataRows.some(
-        (row) => row.key === NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
-      );
-
-      const newRows = [];
-
-      if (!hasMajorMetadata) {
-        newRows.push({
-          id: uuidv4(),
+      const requiredMinorRows = [
+        {
           key: NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID,
-          value: "",
-          isLocked: true,
-        });
-      }
-
-      if (!hasRelationshipMetadata) {
-        newRows.push({
-          id: uuidv4(),
+          isSelect: false,
+        },
+        {
           key: NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR,
-          value: "",
-          isLocked: true,
           isSelect: true,
-        });
-      }
+        },
+        {
+          key: NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_METHOD,
+          isSelect: true,
+        },
+        {
+          key: NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_REFERENCE,
+          isSelect: false,
+        },
+        {
+          key: NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT,
+          isSelect: false,
+        },
+      ];
+
+      const newRows = requiredMinorRows
+        .filter(
+          (requiredRow) =>
+            !metadataRows.some((row) => row.key === requiredRow.key),
+        )
+        .map((requiredRow) => ({
+          id: uuidv4(),
+          key: requiredRow.key,
+          value:
+            requiredRow.key === NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT
+              ? new Date().toISOString()
+              : "",
+          isLocked: true,
+          isSelect: requiredRow.isSelect,
+        }));
 
       if (newRows.length > 0) {
         setMetadataRows([...newRows, ...metadataRows]);
       }
     } else {
-      // Remove major_data_principal_id and relationship_with_minor metadata
+      // Remove locked minor-specific metadata
+      const minorMetadataKeys = new Set<string>([
+        NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID,
+        NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR,
+        NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_METHOD,
+        NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_REFERENCE,
+        NOTICE_METADATA_KEYS.GUARDIAN_EVIDENCE_ARTIFACT_URL,
+        NOTICE_METADATA_KEYS.GUARDIAN_EVIDENCE_ARTIFACT_HASH,
+        NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT,
+        NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_BY,
+      ]);
       setMetadataRows(
-        metadataRows.filter(
-          (row) =>
-            row.key !== NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID &&
-            row.key !== NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
-        )
+        metadataRows.filter((row) => !minorMetadataKeys.has(row.key)),
       );
     }
   }, [forMinor]);
@@ -180,12 +198,12 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
   const updateMetadataRow = (
     id: string,
     field: "key" | "value",
-    value: string
+    value: string,
   ) => {
     setMetadataRows(
       metadataRows.map((row) =>
-        row.id === id ? { ...row, [field]: value } : row
-      )
+        row.id === id ? { ...row, [field]: value } : row,
+      ),
     );
   };
 
@@ -196,15 +214,26 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
       // Validate major data principal ID and relationship if forMinor is checked
       if (data.forMinor) {
         const majorMetadata = metadataRows.find(
-          (row) => row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
+          (row) => row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID,
         );
         const relationshipMetadata = metadataRows.find(
-          (row) => row.key === NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
+          (row) => row.key === NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR,
+        );
+        const verificationMethodMetadata = metadataRows.find(
+          (row) =>
+            row.key === NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_METHOD,
+        );
+        const verificationReferenceMetadata = metadataRows.find(
+          (row) =>
+            row.key === NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_REFERENCE,
+        );
+        const verifiedAtMetadata = metadataRows.find(
+          (row) => row.key === NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT,
         );
 
         if (!majorMetadata || !majorMetadata.value.trim()) {
           toast.error(
-            "Major User ID is required when creating a notice for a minor"
+            "Major User ID is required when creating a notice for a minor",
           );
           setIsSubmitting(false);
           return;
@@ -213,9 +242,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
         // Validate major data principal ID format (UUID with min 3 characters)
         const majorIdValue = majorMetadata.value.trim();
         if (majorIdValue.length < 3) {
-          toast.error(
-            "Major User ID must be at least 3 characters long"
-          );
+          toast.error("Major User ID must be at least 3 characters long");
           setIsSubmitting(false);
           return;
         }
@@ -223,7 +250,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
         const uuidRegex = /^[0-9a-z-]{3,}$/i;
         if (!uuidRegex.test(majorIdValue)) {
           toast.error(
-            "Major User ID must be a valid UUID format (e.g., 123e4567-e89b-12d3-a456-426614174000)"
+            "Major User ID must be a valid UUID format (e.g., 123e4567-e89b-12d3-a456-426614174000)",
           );
           setIsSubmitting(false);
           return;
@@ -231,7 +258,41 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
 
         if (!relationshipMetadata || !relationshipMetadata.value.trim()) {
           toast.error(
-            "Relationship with minor is required when creating a notice for a minor"
+            "Relationship with minor is required when creating a notice for a minor",
+          );
+          setIsSubmitting(false);
+          return;
+        }
+
+        if (
+          !verificationMethodMetadata ||
+          !verificationMethodMetadata.value.trim()
+        ) {
+          toast.error(
+            "Guardian verification method is required when creating a notice for a minor",
+          );
+          setIsSubmitting(false);
+          return;
+        }
+
+        if (
+          !verificationReferenceMetadata ||
+          !verificationReferenceMetadata.value.trim()
+        ) {
+          toast.error(
+            "Guardian verification reference is required when creating a notice for a minor",
+          );
+          setIsSubmitting(false);
+          return;
+        }
+
+        if (
+          !verifiedAtMetadata ||
+          !verifiedAtMetadata.value.trim() ||
+          Number.isNaN(new Date(verifiedAtMetadata.value.trim()).getTime())
+        ) {
+          toast.error(
+            "Guardian verified-at timestamp must be a valid date/time",
           );
           setIsSubmitting(false);
           return;
@@ -240,7 +301,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
 
       // Filter out empty metadata rows and add to form data
       const validMetadata = metadataRows.filter(
-        (row) => row.key.trim() !== "" && row.value.trim() !== ""
+        (row) => row.key.trim() !== "" && row.value.trim() !== "",
       );
 
       const submitData = {
@@ -254,7 +315,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
         toast.success("Notice created successfully");
         // Redirect to the show notice page with the public ID and query param to show dialog
         router.push(
-          `/cms/data-fiduciary/notices/${result.data.publicId}?copy_notice_link=true`
+          `/cms/data-fiduciary/notices/${result.data.publicId}?copy_notice_link=true`,
         );
       } else {
         toast.error(result.error || "Failed to create notice");
@@ -321,6 +382,30 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
             )}
           />
 
+          {/* Minor Consent */}
+          <FormField
+            control={form.control}
+            name="forMinor"
+            render={({ field }) => (
+              <FormItem className="flex max-w-xl flex-row items-start gap-3 rounded-md border p-4">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={(checked) =>
+                      field.onChange(checked === true)
+                    }
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>Notice for minor</FormLabel>
+                  <p className="text-sm text-muted-foreground">
+                    Requires parent or guardian verification evidence.
+                  </p>
+                </div>
+              </FormItem>
+            )}
+          />
+
           {/* Business Process */}
           <FormField
             control={form.control}
@@ -339,13 +424,13 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                       >
                         {field.value
                           ? (() => {
-                            const selectedProcess = businessProcesses.find(
-                              (process) => process.id === field.value
-                            );
-                            return selectedProcess
-                              ? `${selectedProcess.name} (${selectedProcess.code}) (v${selectedProcess.version})`
-                              : "Select process";
-                          })()
+                              const selectedProcess = businessProcesses.find(
+                                (process) => process.id === field.value,
+                              );
+                              return selectedProcess
+                                ? `${selectedProcess.name} (${selectedProcess.code}) (v${selectedProcess.version})`
+                                : "Select process";
+                            })()
                           : "Select process"}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
@@ -371,7 +456,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                                   "mr-2 h-4 w-4",
                                   field.value === process.id
                                     ? "opacity-100"
-                                    : "opacity-0"
+                                    : "opacity-0",
                                 )}
                               />
                               <div>
@@ -617,7 +702,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                       disabled={row.isLocked}
                       className={cn(
                         "text-destructive hover:text-destructive hover:bg-transparent -scale-x-100 -mx-2 p-0 self-center",
-                        row.isLocked && "opacity-0 cursor-not-allowed"
+                        row.isLocked && "opacity-0 cursor-not-allowed",
                       )}
                     >
                       <Delete className="h-5! w-5!" />
@@ -625,23 +710,47 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                     <Input
                       placeholder={
                         row.isLocked &&
-                          row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
+                        row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
                           ? "Major User ID"
                           : row.isLocked &&
-                            row.key ===
-                            NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
+                              row.key ===
+                                NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
                             ? "Relationship with Minor"
-                            : "-- Enter Metadata Key --"
+                            : row.isLocked &&
+                                row.key ===
+                                  NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_METHOD
+                              ? "Guardian Verification Method"
+                              : row.isLocked &&
+                                  row.key ===
+                                    NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_REFERENCE
+                                ? "Verification Reference"
+                                : row.isLocked &&
+                                    row.key ===
+                                      NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT
+                                  ? "Verified At"
+                                  : "-- Enter Metadata Key --"
                       }
                       value={
                         row.isLocked &&
-                          row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
+                        row.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
                           ? "Major User ID"
                           : row.isLocked &&
-                            row.key ===
-                            NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
+                              row.key ===
+                                NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
                             ? "Relationship with Minor"
-                            : row.key
+                            : row.isLocked &&
+                                row.key ===
+                                  NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_METHOD
+                              ? "Guardian Verification Method"
+                              : row.isLocked &&
+                                  row.key ===
+                                    NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_REFERENCE
+                                ? "Verification Reference"
+                                : row.isLocked &&
+                                    row.key ===
+                                      NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT
+                                  ? "Verified At"
+                                  : row.key
                       }
                       onChange={(e) =>
                         !row.isLocked &&
@@ -649,7 +758,7 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                       }
                       disabled={row.isLocked}
                       className={cn(
-                        row.isLocked && "bg-muted cursor-not-allowed"
+                        row.isLocked && "bg-muted cursor-not-allowed",
                       )}
                     />
                     {row.isSelect ? (
@@ -662,13 +771,24 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                         <SelectTrigger
                           className={cn(
                             "border-blue",
-                            !row.value && "text-muted-foreground"
+                            !row.value && "text-muted-foreground",
                           )}
                         >
-                          <SelectValue placeholder="Select relationship *" />
+                          <SelectValue
+                            placeholder={
+                              row.key ===
+                              NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
+                                ? "Select relationship *"
+                                : "Select verification method *"
+                            }
+                          />
                         </SelectTrigger>
                         <SelectContent>
-                          {RELATIONSHIP_OPTIONS.map((option) => (
+                          {(row.key ===
+                          NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
+                            ? RELATIONSHIP_OPTIONS
+                            : GUARDIAN_VERIFICATION_METHOD_OPTIONS
+                          ).map((option) => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
@@ -678,9 +798,16 @@ export function NewNoticeForm({ businessProcesses }: NewNoticeFormProps) {
                     ) : (
                       <Input
                         placeholder={
-                          row.isLocked
+                          row.key ===
+                          NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
                             ? "Enter major/guardian ID *"
-                            : "-- Enter Metadata Value --"
+                            : row.key ===
+                                NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_REFERENCE
+                              ? "Enter verification reference *"
+                              : row.key ===
+                                  NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT
+                                ? "ISO timestamp *"
+                                : "-- Enter Metadata Value --"
                         }
                         value={row.value}
                         onChange={(e) =>

@@ -1,10 +1,10 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
@@ -14,6 +14,48 @@ import { NOTICE_METADATA_KEYS } from "@/lib/constants/notice-metadata";
 
 // Validation regex for alphanumeric with allowed special characters
 const alphanumericWithSpecialChars = /^[a-zA-Z0-9()._\-\/\s]+$/;
+const majorDataPrincipalRegex = /^[0-9a-z-]{3,}$/i;
+const guardianVerificationRequiredKeys = [
+  NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID,
+  NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR,
+  NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_METHOD,
+  NOTICE_METADATA_KEYS.GUARDIAN_VERIFICATION_REFERENCE,
+  NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT,
+] as const;
+
+function hasMetadataValue(
+  metadata: Array<{ key: string; value: string }> | undefined,
+  key: string,
+) {
+  return metadata?.some(
+    (item) => item.key === key && item.value.trim().length > 0,
+  );
+}
+
+function getMetadataValue(
+  metadata: Array<{ key: string; value: string }> | undefined,
+  key: string,
+) {
+  return metadata?.find((item) => item.key === key)?.value.trim();
+}
+
+function hasGuardianVerificationMetadata(
+  metadata: Array<{ key: string; value: string }> | undefined,
+) {
+  return guardianVerificationRequiredKeys.every((key) =>
+    hasMetadataValue(metadata, key),
+  );
+}
+
+function hasValidGuardianVerifiedAt(
+  metadata: Array<{ key: string; value: string }> | undefined,
+) {
+  const value = getMetadataValue(
+    metadata,
+    NOTICE_METADATA_KEYS.GUARDIAN_VERIFIED_AT,
+  );
+  return !!value && !Number.isNaN(new Date(value).getTime());
+}
 
 export const createNoticeSchema = z
   .object({
@@ -23,7 +65,7 @@ export const createNoticeSchema = z
       .max(255, "Reference ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "Reference ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "Reference ID can only contain alphanumeric characters and these special characters: ( ) . _ - /",
       ),
     dataPrincipalId: z
       .string()
@@ -31,12 +73,9 @@ export const createNoticeSchema = z
       .max(255, "User ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /",
       ),
-    businessProcessId: z
-      .number()
-      .int()
-      .positive("Please select a process"),
+    businessProcessId: z.number().int().positive("Please select a process"),
     noticeDuration: z
       .number()
       .int()
@@ -58,7 +97,7 @@ export const createNoticeSchema = z
         z.object({
           key: z.string().min(1, "Key is required"),
           value: z.string().min(1, "Value is required"),
-        })
+        }),
       )
       .max(20, "Maximum 20 metadata entries allowed")
       .optional(),
@@ -75,7 +114,7 @@ export const createNoticeSchema = z
     {
       message: "Duration type is required when consent duration is provided",
       path: ["consentDurationType"],
-    }
+    },
   )
   .refine(
     (data) => {
@@ -106,7 +145,7 @@ export const createNoticeSchema = z
     {
       message: "Notice duration cannot exceed 6 months",
       path: ["noticeDuration"],
-    }
+    },
   );
 
 export type CreateNoticeData = z.infer<typeof createNoticeSchema>;
@@ -120,7 +159,7 @@ export const createNoticeApiSchema = z
       .max(255, "Reference ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "Reference ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "Reference ID can only contain alphanumeric characters and these special characters: ( ) . _ - /",
       ),
     data_principal_id: z
       .string()
@@ -128,12 +167,9 @@ export const createNoticeApiSchema = z
       .max(255, "User ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /",
       ),
-    business_process_id: z
-      .number()
-      .int()
-      .positive("Please select a process"),
+    business_process_id: z.number().int().positive("Please select a process"),
     notice_duration: z
       .number()
       .int()
@@ -162,7 +198,7 @@ export const createNoticeApiSchema = z
     {
       message: "Duration type is required when consent duration is provided",
       path: ["consent_duration_type"],
-    }
+    },
   )
   .refine(
     (data) => {
@@ -193,7 +229,7 @@ export const createNoticeApiSchema = z
     {
       message: "Notice duration cannot exceed 6 months",
       path: ["notice_duration"],
-    }
+    },
   );
 
 export type CreateNoticeApiData = z.infer<typeof createNoticeApiSchema>;
@@ -207,7 +243,7 @@ export const createGrantNoticeApiSchema = z
       .max(255, "Reference ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "Reference ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "Reference ID can only contain alphanumeric characters and these special characters: ( ) . _ - /",
       ),
     data_principal_id: z
       .string()
@@ -215,7 +251,7 @@ export const createGrantNoticeApiSchema = z
       .max(255, "User ID must not exceed 255 characters")
       .regex(
         alphanumericWithSpecialChars,
-        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /"
+        "User ID can only contain alphanumeric characters and these special characters: ( ) . _ - /",
       ),
     notice_settings: z.object({
       expires_in_hours: z
@@ -239,17 +275,14 @@ export const createGrantNoticeApiSchema = z
     }),
     business_process: z.object({
       code: z.string().min(1, "Process code is required"),
-      version: z
-        .number()
-        .int()
-        .positive("Process version must be positive"),
+      version: z.number().int().positive("Process version must be positive"),
     }),
     metadata: z
       .array(
         z.object({
           key: z.string().min(1, "Metadata key is required"),
           value: z.string().min(1, "Metadata value is required"),
-        })
+        }),
       )
       .optional(),
     for_minor: z.boolean().optional().default(false),
@@ -258,33 +291,22 @@ export const createGrantNoticeApiSchema = z
     (data) => {
       // If for_minor is true, validate that required metadata fields exist
       if (data.for_minor) {
-        if (!data.metadata || data.metadata.length === 0) {
-          return false;
-        }
-
-        const hasMajorId = data.metadata.some(
-          (m) => m.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
-        );
-        const hasRelationship = data.metadata.some(
-          (m) => m.key === NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
-        );
-
-        return hasMajorId && hasRelationship;
+        return hasGuardianVerificationMetadata(data.metadata);
       }
       return true;
     },
     {
       message:
-        "When for_minor is true, metadata must include major_dataprincipal_id and relationship_with_minor fields",
+        "When for_minor is true, metadata must include major_data_principal_id, relationship_with_minor, guardian_verification_method, guardian_verification_reference, and guardian_verified_at fields",
       path: ["metadata"],
-    }
+    },
   )
   .refine(
     (data) => {
       // If for_minor is true, validate major_dataprincipal_id format
       if (data.for_minor && data.metadata) {
         const majorMetadata = data.metadata.find(
-          (m) => m.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID
+          (m) => m.key === NOTICE_METADATA_KEYS.MAJOR_DATA_PRINCIPAL_ID,
         );
         if (majorMetadata) {
           const majorIdValue = majorMetadata.value.trim();
@@ -292,8 +314,7 @@ export const createGrantNoticeApiSchema = z
           if (majorIdValue.length < 3) {
             return false;
           }
-          const uuidRegex = /^[0-9a-z-]{3,}$/i;
-          return uuidRegex.test(majorIdValue);
+          return majorDataPrincipalRegex.test(majorIdValue);
         }
       }
       return true;
@@ -302,14 +323,14 @@ export const createGrantNoticeApiSchema = z
       message:
         "Major User ID must be at least 3 characters and in valid UUID format",
       path: ["metadata"],
-    }
+    },
   )
   .refine(
     (data) => {
       // If for_minor is true, validate relationship_with_minor is not empty
       if (data.for_minor && data.metadata) {
         const relationshipMetadata = data.metadata.find(
-          (m) => m.key === NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR
+          (m) => m.key === NOTICE_METADATA_KEYS.RELATIONSHIP_WITH_MINOR,
         );
         if (relationshipMetadata) {
           return relationshipMetadata.value.trim().length > 0;
@@ -321,7 +342,19 @@ export const createGrantNoticeApiSchema = z
       message:
         "Relationship with minor must not be empty when for_minor is true",
       path: ["metadata"],
-    }
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.for_minor) {
+        return hasValidGuardianVerifiedAt(data.metadata);
+      }
+      return true;
+    },
+    {
+      message: "guardian_verified_at must be a valid date/time",
+      path: ["metadata"],
+    },
   );
 
 export type CreateGrantNoticeApiData = z.infer<

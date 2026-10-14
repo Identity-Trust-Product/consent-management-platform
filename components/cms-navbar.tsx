@@ -17,8 +17,8 @@ export default async function Navbar() {
   const user = await getCurrentUser();
 
   return (
-    <nav className="border-b border-neutral-50 h-[4rem] flex justify-between items-center px-4 pr-6">
-      <h1 className="text-neutral-300 font-medium">
+    <nav className="h-[4rem] border-b border-slate-200/80 bg-white/95 flex justify-between items-center px-4 pr-6 shadow-sm backdrop-blur">
+      <h1 className="text-slate-700 font-semibold">
         Consent Management System
       </h1>
       <div className="flex items-center space-x-4">

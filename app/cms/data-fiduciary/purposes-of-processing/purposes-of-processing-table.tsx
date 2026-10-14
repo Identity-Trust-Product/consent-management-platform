@@ -63,13 +63,6 @@ export function PurposesOfProcessingTable({
       ),
     },
     {
-      accessorKey: "code",
-      header: "Code",
-      cell: ({ row }) => (
-        <div className="font-mono text-sm">{row.getValue("code")}</div>
-      ),
-    },
-    {
       accessorKey: "updatedAt",
       header: ({ column }) => {
         return (

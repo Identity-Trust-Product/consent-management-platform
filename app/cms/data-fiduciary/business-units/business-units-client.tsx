@@ -48,7 +48,7 @@ export function BusinessUnitsClient({
     try {
       const result = await deleteBusinessUnit({ id });
       if (result.success) {
-        toast.success("Department deleted successfully");
+        toast.success("Organization deleted successfully");
         router.refresh();
       } else {
         toast.error(result.error || "Failed to delete department");
@@ -63,7 +63,7 @@ export function BusinessUnitsClient({
       {/* Filter and New Button Group */}
       <div className="flex items-center justify-end gap-4">
         <h5 className="flex-1 tracking-tight">
-          List of Departments ({data.length} Entries)
+          List of Organization ({data.length} Entries)
         </h5>
         <Input
           id="filter-names"

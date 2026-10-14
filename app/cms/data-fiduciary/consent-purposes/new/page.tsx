@@ -13,6 +13,7 @@ import { redirect } from "next/navigation";
 import { verifyPermission } from "@/lib/safe-action";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { ConsentPurposeForm } from "../_components/consent-purpose-form";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 interface PageProps {
   searchParams: Promise<{ step?: string; id?: string }>;
@@ -21,12 +22,13 @@ interface PageProps {
 export default async function NewConsentPurposePage({ searchParams }: PageProps) {
   try {
     await verifyPermission(Resources.CONSENT_PURPOSE, Actions.CREATE);
-  } catch (error) {
+  } catch {
     redirect("/cms/forbidden");
   }
 
   return (
     <div className="h-full flex flex-col pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={4} />
       <ConsentPurposeForm searchParams={searchParams} mode="new" />
     </div>
   );

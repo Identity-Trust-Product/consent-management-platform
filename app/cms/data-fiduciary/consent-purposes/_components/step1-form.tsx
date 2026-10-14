@@ -78,7 +78,7 @@ export function Step1Form({ data, isEdit, consentPurposeId }: Step1FormProps) {
   });
 
   const watchedCode = form.watch("code");
-  const { isValid, errors } = form.formState;
+  const { isValid } = form.formState;
 
   // Mark as initialized after first render
   useEffect(() => {
@@ -171,12 +171,6 @@ export function Step1Form({ data, isEdit, consentPurposeId }: Step1FormProps) {
                       </p>
                     )}
                   </div>
-                  <p className="text-sm text-blue-700 mt-1">
-                    Code:{" "}
-                    <span className="font-mono">
-                      {data.consentPurpose.code}
-                    </span>
-                  </p>
                 </div>
               )}
 
@@ -196,36 +190,6 @@ export function Step1Form({ data, isEdit, consentPurposeId }: Step1FormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {/* Code Field */}
-              <FormField
-                control={form.control}
-                name="code"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Purpose ID{" "}
-                      <span className="text-neutral-200">(Optional)</span>
-                      <span className="text-destructive">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="9HUttbeIL7"
-                        {...field}
-                        disabled={isEdit}
-                        className={isEdit ? "bg-muted cursor-not-allowed" : ""}
-                      />
-                    </FormControl>
-                    {isEdit && (
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Purpose ID cannot be changed for existing consent
-                        purposes
-                      </p>
-                    )}
                     <FormMessage />
                   </FormItem>
                 )}

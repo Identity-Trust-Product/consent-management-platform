@@ -15,7 +15,8 @@ import { ConsentPurposeProvider } from "@/contexts/consent-purpose-context";
 import { StepProgress } from "@/components/step-progress";
 import { Step1Form } from "./step1-form";
 import { Step2Form } from "./step2-form";
-import { Step3Form } from "./step3-form";
+// Step 3 Add Processor is intentionally hidden from the Purpose Master UI flow.
+// import { Step3Form } from "./step3-form";
 import { Step4Form } from "./step4-form";
 import { Step5Form } from "./step5-form";
 import { BaselineInitializer } from "./baseline-initializer";
@@ -42,9 +43,10 @@ const steps = [
     title: "Add Purpose Sub Master",
     description: "Processing purposes",
   },
-  { number: 3, title: "Add Processor", description: "Data processors" },
-  { number: 4, title: "Translations", description: "General settings" },
-  { number: 5, title: "Review & Save", description: "Review and publish" },
+  // Step 3 Add Processor is intentionally hidden from the Purpose Master UI flow.
+  // { number: 3, title: "Add Processor", description: "Data processors" },
+  { number: 3, title: "Translations", description: "General settings" },
+  { number: 4, title: "Review & Save", description: "Review and publish" },
 ];
 
 async function ConsentPurposeFormContent({
@@ -52,7 +54,8 @@ async function ConsentPurposeFormContent({
   mode,
 }: ConsentPurposeFormProps) {
   const resolvedSearchParams = await searchParams;
-  const step = parseInt(resolvedSearchParams.step || "1");
+  const requestedStep = parseInt(resolvedSearchParams.step || "1");
+  const step = requestedStep > 4 ? 4 : requestedStep;
   const consentPurposeId = resolvedSearchParams.id;
   const isEdit = mode === "edit" || !!consentPurposeId;
 
@@ -74,11 +77,12 @@ async function ConsentPurposeFormContent({
         return <Step1Form {...commonProps} />;
       case 2:
         return <Step2Form {...commonProps} />;
+      // Step 3 Add Processor is intentionally hidden from the Purpose Master UI flow.
+      // case 3:
+      //   return <Step3Form {...commonProps} />;
       case 3:
-        return <Step3Form {...commonProps} />;
-      case 4:
         return <Step4Form {...commonProps} />;
-      case 5:
+      case 4:
         return <Step5Form {...commonProps} />;
       default:
         return <Step1Form {...commonProps} />;
@@ -92,7 +96,7 @@ async function ConsentPurposeFormContent({
 
       {/* Step Progress - Full Width */}
       <div className="-mx-14">
-        <StepProgress currentStep={step} totalSteps={5} steps={steps} />
+        <StepProgress currentStep={step} totalSteps={4} steps={steps} />
       </div>
 
       {/* Step Content */}

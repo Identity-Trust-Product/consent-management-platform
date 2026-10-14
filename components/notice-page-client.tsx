@@ -200,11 +200,11 @@ function NoticePageContent({
     >
       <div
         className={cn(
-          "mx-auto max-w-[900px]",
+          "mx-auto max-w-[1180px]",
           isMobile ? "pb-24" : "pb-16",
         )}
       >
-        <div className="max-w-[900px] mx-auto">
+        <div className="mx-auto max-w-[1180px]">
           <Card
             className={cn(
               "min-h-[calc(100vh-4rem)] gap-0 overflow-hidden rounded-lg border border-[#d9e2ef] bg-white p-0 shadow-[0_18px_50px_rgba(31,41,55,0.12)]",

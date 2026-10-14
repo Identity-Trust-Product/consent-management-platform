@@ -11,7 +11,6 @@
  */
 
 import { useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
 import { EditButton } from "@/components/ui/action-buttons";
 
 interface PurposeOfProcessingWithDetails {
@@ -103,14 +102,6 @@ export function PurposeOfProcessingView({
                   </span>
                   <p className="mt-1">
                     {purposeOfProcessing?.name || "Not specified"}
-                  </p>
-                </div>
-                <div>
-                  <span className="font-medium text-muted-foreground">
-                    Code:
-                  </span>
-                  <p className="mt-1">
-                    {purposeOfProcessing?.code || "Not specified"}
                   </p>
                 </div>
               </div>

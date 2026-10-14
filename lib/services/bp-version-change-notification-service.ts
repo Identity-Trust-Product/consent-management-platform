@@ -195,7 +195,7 @@ export async function detectVersionChanges(
             newRule.processingPurpose.userAttributeNames.sort();
           if (JSON.stringify(oldAttrs) !== JSON.stringify(newAttrs)) {
             ppChanges.push({
-              field: "Purpose Attributes",
+              field: "Data attributes",
               before: oldAttrs.join(", "),
               after: newAttrs.join(", "),
             });

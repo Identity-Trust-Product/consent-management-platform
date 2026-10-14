@@ -13,23 +13,20 @@ import Navbar from "@/components/cms-navbar";
 import Header from "@/components/header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Sidebar } from "@/components/cms-sidebar";
-import { getCurrentUserRoles } from "@/lib/auth-utils";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const userRoles = await getCurrentUserRoles();
-
   return (
-    <div className="relative h-screen flex flex-col">
+    <div className="relative h-screen flex flex-col bg-background">
       <SidebarProvider defaultOpen={false}>
-        <Sidebar userRoles={userRoles} />
-        <div className="ml-[5rem] flex flex-col h-full w-[100%] relative">
+        <Sidebar />
+        <div className="ml-[5rem] flex h-full w-[100%] flex-col bg-background relative">
           <Navbar />
           <Header />
-          <div className="flex-1 overflow-auto">{children}</div>
+          <div className="flex-1 overflow-auto bg-background">{children}</div>
         </div>
       </SidebarProvider>
     </div>

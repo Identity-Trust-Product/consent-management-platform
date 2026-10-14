@@ -167,6 +167,7 @@ export function Step2Form({ data, isEdit, consentPurposeId }: Step2FormProps) {
 
     // Navigate to next step
     const params = new URLSearchParams();
+    // Step 3 is now Translations because Add Processor is hidden.
     params.set("step", "3");
     if (consentPurposeId) {
       params.set("id", consentPurposeId);

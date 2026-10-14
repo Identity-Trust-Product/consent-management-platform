@@ -2,10 +2,10 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
@@ -21,6 +21,7 @@ import {
   getNoticeById as getNoticeByIdService,
   getNoticeByPublicId as getNoticeByPublicIdService,
 } from "@/lib/services/notices-service";
+import { createGuardianVerificationEvidence } from "@/lib/services/guardian-verification-service";
 import { triggerWebhookEvent } from "@/lib/services/webhook-service";
 import { WebhookEventType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -29,7 +30,7 @@ import { z } from "zod";
 // Helper function to convert duration to hours
 function convertToHours(
   duration: number,
-  type: "hours" | "days" | "weeks" | "months"
+  type: "hours" | "days" | "weeks" | "months",
 ): number {
   switch (type) {
     case "hours":
@@ -48,7 +49,7 @@ function convertToHours(
 // Helper function to calculate expiry date
 function calculateExpiryDate(
   duration: number,
-  type: "hours" | "days" | "weeks" | "months"
+  type: "hours" | "days" | "weeks" | "months",
 ): Date {
   const now = new Date();
   const hoursToAdd = convertToHours(duration, type);
@@ -94,7 +95,7 @@ export const deleteNotice = createSafeAction(
     await deleteNoticeService(input.id);
     revalidatePath("/cms/data-fiduciary/notices");
     return true;
-  }
+  },
 );
 
 export async function generateNoticeLink(noticeId: number) {
@@ -115,7 +116,7 @@ export const createNotice = createSafeAction(
     // Calculate link expiry date
     const linkExpiresAt = calculateExpiryDate(
       data.noticeDuration,
-      data.noticeDurationType
+      data.noticeDurationType,
     );
 
     // Calculate consent duration in hours if provided
@@ -147,11 +148,11 @@ export const createNotice = createSafeAction(
         forMinor: data.forMinor || false,
         metadata: data.metadata?.length
           ? {
-            create: data.metadata.map((item) => ({
-              key: item.key,
-              value: item.value,
-            })),
-          }
+              create: data.metadata.map((item) => ({
+                key: item.key,
+                value: item.value,
+              })),
+            }
           : undefined,
       },
       include: {
@@ -164,6 +165,14 @@ export const createNotice = createSafeAction(
         },
       },
     });
+
+    if (data.forMinor) {
+      await createGuardianVerificationEvidence({
+        noticeId: notice.id,
+        minorDataPrincipalId: notice.dataPrincipalId,
+        metadata: data.metadata,
+      });
+    }
 
     // Trigger NOTICE_CREATED webhook
     try {
@@ -187,5 +196,5 @@ export const createNotice = createSafeAction(
 
     revalidatePath("/cms/data-fiduciary/notices");
     return notice;
-  }
+  },
 );

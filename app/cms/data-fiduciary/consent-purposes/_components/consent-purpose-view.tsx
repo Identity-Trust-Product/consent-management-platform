@@ -47,7 +47,6 @@ export function ConsentPurposeView({
     consentPurpose,
     processingPurposes = [],
     dataProcessorMappings = [],
-    userAttributes = [],
     purposesOfProcessing = [],
     dataProcessors = [],
   } = data;
@@ -75,10 +74,6 @@ export function ConsentPurposeView({
     return purpose?.name || "Unknown";
   };
 
-  const getUserAttributeName = (userAttributeId: number) => {
-    const attr = userAttributes.find((ua: any) => ua.id === userAttributeId);
-    return attr?.name || "Unknown";
-  };
   const handleEdit = () => {
     router.push(`/cms/data-fiduciary/consent-purposes/${consentPurposeId}/edit`);
   };
@@ -128,12 +123,6 @@ export function ConsentPurposeView({
           <div className="rounded-lg border p-4">
             <h3 className="font-semibold mb-3">General Information</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="font-medium text-muted-foreground">Code:</span>
-                <p className="mt-1">
-                  {consentPurpose?.code || "Not specified"}
-                </p>
-              </div>
               <div className="col-span-2">
                 <span className="font-medium text-muted-foreground">
                   Description:

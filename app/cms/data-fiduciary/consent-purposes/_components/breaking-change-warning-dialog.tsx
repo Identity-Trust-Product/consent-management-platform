@@ -271,7 +271,6 @@ export function BreakingChangeWarningDialog({
                         />
                       </TableHead>
                       <TableHead>Name</TableHead>
-                      <TableHead>Code</TableHead>
                       <TableHead>From</TableHead>
                       <TableHead>To</TableHead>
                     </TableRow>
@@ -295,7 +294,6 @@ export function BreakingChangeWarningDialog({
                             />
                           </TableCell>
                           <TableCell>{bp.name}</TableCell>
-                          <TableCell>{bp.code}</TableCell>
                           <TableCell>
                             <Select
                               value={String(bp.id)}
