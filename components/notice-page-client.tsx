@@ -106,7 +106,7 @@ function NoticePageContent({
 
       if (result.success) {
         // Show the success message before returning to the configured caller.
-        toast.success("Consent selected for request successfully!");
+        toast.success("Consent selected successfully!");
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         if (notice.redirectionUrl) {
