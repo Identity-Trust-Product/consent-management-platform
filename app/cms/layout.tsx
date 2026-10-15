@@ -16,8 +16,8 @@ import { SessionProvider } from "@/components/providers/session-provider";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
-  title: "Consent Management Platform",
-  description: "Consent Management Platform",
+  title: "Consent Management System",
+  description: "Consent Management System",
 };
 
 export const viewport: Viewport = {

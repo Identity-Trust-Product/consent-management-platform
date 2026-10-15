@@ -21,7 +21,6 @@ import {
   Eye,
   EyeOff,
   FileCheck2,
-  KeyRound,
   Loader2,
   Lock,
   Mail,
@@ -82,7 +81,7 @@ function SubmitButton() {
   return (
     <Button
       type="submit"
-      className="h-12 w-full rounded-lg bg-[#0b3a9a] text-base font-semibold shadow-[0_14px_28px_-16px_rgba(11,58,154,0.65)] transition-all hover:bg-[#07287c] hover:shadow-[0_18px_34px_-18px_rgba(11,58,154,0.75)]"
+      className="h-12 w-full rounded-xl bg-primary text-base font-semibold shadow-sm hover:bg-primary-600"
       disabled={pending}
     >
       {pending ? (
@@ -151,25 +150,21 @@ function LoginFormContent() {
   }, [state, form, callbackUrl, router]);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#f7f9fc] text-slate-950 dark:bg-slate-950 dark:text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(224,240,253,0.9)_0%,rgba(255,255,255,0.92)_42%,rgba(230,249,221,0.72)_100%)] dark:bg-[linear-gradient(115deg,rgba(8,20,53,0.98)_0%,rgba(15,23,42,0.98)_55%,rgba(10,47,50,0.94)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(11,58,154,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(11,58,154,0.12)_1px,transparent_1px)] bg-[size:56px_56px] opacity-[0.36] dark:opacity-[0.16]" />
-      <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-[#0b3a9a] via-[#007fad] to-[#1a7a1e]" />
-
-      <section className="relative mx-auto grid min-h-screen w-full max-w-7xl items-center gap-10 px-5 py-8 sm:px-8 lg:grid-cols-[1.03fr_0.97fr] lg:px-12">
-        <div className="mx-auto w-full max-w-2xl space-y-8 lg:mx-0">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/70 px-3 py-1.5 text-sm font-semibold text-[#0b3a9a] shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-blue-100">
-            <KeyRound className="h-4 w-4" />
-            Trusted consent operations
-          </div>
+    <main className="cms-theme min-h-screen bg-background text-foreground">
+      <section className="grid min-h-screen w-full lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="flex flex-col justify-center gap-8 bg-sidebar px-6 py-12 text-white sm:px-12 lg:px-16">
+          {/* <div className="flex items-center gap-3">
+            <span className="grid size-10 place-items-center rounded-xl bg-primary text-sm font-bold">CM</span>
+            <span className="text-lg font-semibold">Consent Management System</span>
+          </div> */}
 
           <div className="space-y-5">
-            <h1 className="max-w-3xl text-[clamp(2.2rem,5.2vw,4.9rem)] font-black leading-[0.98] tracking-normal text-[#09132a] dark:text-white">
-              Consent Management Platform
+            <h1 className="max-w-xl text-[clamp(1.5rem,2.5vw,2.5rem)] font-bold leading-tight tracking-tight text-white">
+              Consent Management System
             </h1>
-            <p className="max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-              Access your workspace for consent lifecycle management, evidence
-              capture, privacy requests, and governance reporting.
+            <p className="max-w-xl text-lg leading-8 text-sidebar-foreground">
+              A framework for capturing, governing and auditing user consent. Built for regulatory
+              compliance, transparency and user trust.
             </p>
           </div>
 
@@ -179,15 +174,15 @@ function LoginFormContent() {
               return (
                 <article
                   key={feature.title}
-                  className="rounded-lg border border-white/75 bg-[rgba(255,255,255,0.78)] p-4 shadow-[0_20px_45px_-34px_rgba(15,23,42,0.65)] backdrop-blur dark:border-white/10 dark:bg-white/10"
+                  className="rounded-xl border border-sidebar-border bg-white/5 p-4"
                 >
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-md bg-[#ebf6fe] text-[#0b3a9a] dark:bg-white/10 dark:text-blue-100">
+                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/20 text-blue-200">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h2 className="text-sm font-bold text-slate-950 dark:text-white">
+                  <h2 className="text-sm font-bold text-white">
                     {feature.title}
                   </h2>
-                  <p className="mt-1 text-sm leading-5 text-slate-600 dark:text-slate-300">
+                  <p className="mt-1 text-sm leading-5 text-sidebar-foreground">
                     {feature.description}
                   </p>
                 </article>
@@ -196,17 +191,17 @@ function LoginFormContent() {
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-[520px] animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <div className="rounded-lg border border-white/80 bg-[rgba(255,255,255,0.82)] p-2 shadow-[0_30px_80px_-36px_rgba(7,40,124,0.55)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(15,23,42,0.78)]">
-            <div className="rounded-md border border-slate-200/80 bg-white p-7 shadow-sm dark:border-white/10 dark:bg-slate-950/70 sm:p-9">
+        <div className="mx-auto flex w-full max-w-[600px] items-center px-5 py-12 sm:px-10">
+          <div className="w-full rounded-2xl border border-border bg-card shadow-sm">
+            <div className="p-7 sm:p-9">
               <div className="mb-8">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-[#09132a] text-white shadow-lg shadow-slate-900/20 dark:bg-white dark:text-[#09132a]">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-primary">
                   <Lock className="h-6 w-6" />
                 </div>
-                <h2 className="text-3xl font-black tracking-normal text-slate-950 dark:text-white">
+                <h2 className="text-3xl font-bold tracking-tight text-foreground">
                   Welcome back
                 </h2>
-                <p className="mt-2 text-base text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-base text-muted-foreground">
                   Sign in with your authorized CMP account.
                 </p>
               </div>
@@ -218,7 +213,7 @@ function LoginFormContent() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-bold text-slate-700 dark:text-slate-200">
+                        <FormLabel className="text-sm font-semibold text-foreground">
                           Email address
                         </FormLabel>
                         <FormControl>
@@ -228,7 +223,7 @@ function LoginFormContent() {
                               placeholder="you@example.com"
                               type="email"
                               autoComplete="email"
-                              className="h-12 rounded-lg border-slate-300 bg-white pl-11 text-base shadow-none transition-colors focus-visible:border-[#1766d6] focus-visible:ring-[#a1d1fa]/70 dark:border-slate-700 dark:bg-slate-900 dark:focus-visible:border-blue-300"
+                              className="h-12 rounded-xl border-input bg-white pl-11 text-base shadow-none focus-visible:border-primary focus-visible:ring-ring/50"
                               {...field}
                             />
                           </div>
@@ -242,7 +237,7 @@ function LoginFormContent() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-bold text-slate-700 dark:text-slate-200">
+                        <FormLabel className="text-sm font-semibold text-foreground">
                           Password
                         </FormLabel>
                         <FormControl>
@@ -252,13 +247,13 @@ function LoginFormContent() {
                               type={showPassword ? "text" : "password"}
                               placeholder="Password"
                               autoComplete="current-password"
-                              className="h-12 rounded-lg border-slate-300 bg-white pl-11 pr-12 text-base shadow-none transition-colors focus-visible:border-[#1766d6] focus-visible:ring-[#a1d1fa]/70 dark:border-slate-700 dark:bg-slate-900 dark:focus-visible:border-blue-300"
+                              className="h-12 rounded-xl border-input bg-white pl-11 pr-12 text-base shadow-none focus-visible:border-primary focus-visible:ring-ring/50"
                               {...field}
                             />
                             <button
                               type="button"
                               onClick={() => setShowPassword(!showPassword)}
-                              className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a1d1fa] dark:hover:bg-white/10 dark:hover:text-slate-100"
+                              className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                               aria-label={
                                 showPassword ? "Hide password" : "Show password"
                               }
@@ -279,22 +274,7 @@ function LoginFormContent() {
                 </form>
               </Form>
 
-              <div className="mt-7 border-t border-slate-200 pt-5 dark:border-white/10">
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-semibold text-slate-600 dark:text-slate-300">
-                  <span className="inline-flex items-center gap-1.5">
-                    <ShieldCheck className="h-4 w-4 text-[#1a7a1e]" />
-                    Secure session
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <BadgeCheck className="h-4 w-4 text-[#007fad]" />
-                    Transparent audit
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <FileCheck2 className="h-4 w-4 text-[#0b3a9a]" />
-                    Compliance ready
-                  </span>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -307,17 +287,16 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#f7f9fc] dark:bg-slate-950">
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(224,240,253,0.9)_0%,rgba(255,255,255,0.92)_42%,rgba(230,249,221,0.72)_100%)] dark:bg-[linear-gradient(115deg,rgba(8,20,53,0.98)_0%,rgba(15,23,42,0.98)_55%,rgba(10,47,50,0.94)_100%)]" />
+        <main className="relative flex min-h-screen items-center justify-center overflow-hidden cms-theme bg-background">
           <div className="relative mx-4 w-full max-w-4xl">
             <div className="mb-8 text-center">
-              <h1 className="text-[clamp(2rem,5vw,4rem)] font-black tracking-normal text-[#09132a] dark:text-white">
+              <h1 className="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight text-foreground">
                 Consent Management Platform
               </h1>
             </div>
-            <div className="mx-auto max-w-xl rounded-lg border border-white/80 bg-[rgba(255,255,255,0.82)] p-12 shadow-[0_30px_80px_-36px_rgba(7,40,124,0.55)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(15,23,42,0.78)]">
+            <div className="mx-auto max-w-xl rounded-2xl border border-border bg-card p-12 shadow-sm">
               <div className="flex justify-center">
-                <Loader2 className="h-8 w-8 animate-spin text-[#0b3a9a]" />
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
             </div>
           </div>

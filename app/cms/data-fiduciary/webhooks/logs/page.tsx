@@ -1,15 +1,15 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
 
-import { getWebhookLogs, getWebhookLogsAnalytics } from "@/actions/webhook-logs";
+import { getWebhookLogs } from "@/actions/webhook-logs";
 import { checkPermission } from "@/lib/rbac";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { Forbidden } from "@/components/forbidden";
@@ -23,9 +23,11 @@ export const dynamic = "force-dynamic";
 interface PageProps {
   searchParams: Promise<{
     page?: string;
-    status?: WebhookDeliveryStatus;
-    eventType?: WebhookEventType;
+    status?: WebhookDeliveryStatus | WebhookDeliveryStatus[];
+    eventType?: WebhookEventType | WebhookEventType[];
     dateRange?: string;
+    query?: string;
+    targetType?: string;
   }>;
 }
 
@@ -41,9 +43,23 @@ async function WebhookLogsContent({ searchParams }: PageProps) {
   const params = await searchParams;
 
   // Parse filters
-  const page = parseInt(params.page || "1");
-  const status = params.status;
-  const eventType = params.eventType;
+  const requestedPage = Number(params.page || 1);
+  const page =
+    Number.isSafeInteger(requestedPage) && requestedPage > 0
+      ? requestedPage
+      : 1;
+  const status = [params.status]
+    .flat()
+    .filter(
+      (value): value is WebhookDeliveryStatus =>
+        !!value && Object.values(WebhookDeliveryStatus).includes(value),
+    );
+  const eventType = [params.eventType]
+    .flat()
+    .filter(
+      (value): value is WebhookEventType =>
+        !!value && Object.values(WebhookEventType).includes(value),
+    );
   const dateRange = params.dateRange || "7d";
 
   // Calculate date range
@@ -52,30 +68,34 @@ async function WebhookLogsContent({ searchParams }: PageProps) {
 
   switch (dateRange) {
     case "24h":
-      dateFrom = new Date();
-      dateFrom.setHours(dateFrom.getHours() - 24);
+      dateFrom = new Date(dateTo.getTime() - 24 * 60 * 60 * 1000);
       break;
     case "7d":
-      dateFrom = new Date();
-      dateFrom.setDate(dateFrom.getDate() - 7);
+      dateFrom = new Date(dateTo.getTime() - 7 * 24 * 60 * 60 * 1000);
       break;
     case "30d":
-      dateFrom = new Date();
-      dateFrom.setDate(dateFrom.getDate() - 30);
+      dateFrom = new Date(dateTo.getTime() - 30 * 24 * 60 * 60 * 1000);
       break;
     case "90d":
-      dateFrom = new Date();
-      dateFrom.setDate(dateFrom.getDate() - 90);
+      dateFrom = new Date(dateTo.getTime() - 90 * 24 * 60 * 60 * 1000);
       break;
     case "all":
       dateFrom = undefined;
       break;
+    default:
+      dateFrom = new Date(dateTo.getTime() - 7 * 24 * 60 * 60 * 1000);
   }
 
   // Fetch logs
   const logsResult = await getWebhookLogs({
     page,
-    pageSize: 50,
+    pageSize: 10,
+    query: params.query,
+    targetType:
+      params.targetType === "DATA_FIDUCIARY" ||
+      params.targetType === "DATA_PROCESSOR"
+        ? params.targetType
+        : undefined,
     status,
     eventType,
     dateFrom,
@@ -84,31 +104,28 @@ async function WebhookLogsContent({ searchParams }: PageProps) {
     sortOrder: "desc",
   });
 
-  // Fetch analytics
-  const analyticsResult = await getWebhookLogsAnalytics({
-    dateFrom,
-    dateTo,
-  });
-
-  if (!logsResult.success || !analyticsResult.success) {
+  if (!logsResult.success) {
     return (
-      <div className="pt-4 px-6">
+      <div className="px-5 py-6 sm:px-8 lg:px-10">
         <div className="text-center py-12">
           <p className="text-red-600">
-            {logsResult.error || analyticsResult.error || "Failed to load webhook logs"}
+            {logsResult.error || "Failed to load audit logs"}
           </p>
         </div>
       </div>
     );
   }
 
-  const { logs, pagination } = logsResult.data!;
-  const analytics = analyticsResult.data!;
+  const { logs, summary, pagination } = logsResult.data!;
 
   return (
-    <div className="pt-4 px-6">
+    <div className="px-5 py-6 sm:px-8 lg:px-10">
       <div className="mx-auto pb-4">
-        <WebhookLogsClient logs={logs} analytics={analytics} pagination={pagination} />
+        <WebhookLogsClient
+          logs={logs}
+          summary={summary}
+          pagination={pagination}
+        />
       </div>
     </div>
   );
@@ -121,7 +138,9 @@ export default function WebhookLogsPage({ searchParams }: PageProps) {
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto" />
-            <p className="mt-2 text-sm text-muted-foreground">Loading webhook logs...</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Loading audit logs...
+            </p>
           </div>
         </div>
       }

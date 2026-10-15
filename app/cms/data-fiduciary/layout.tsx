@@ -9,26 +9,24 @@
  * is strictly prohibited without prior written permission from IDfy.
  */
 
-import Navbar from "@/components/cms-navbar";
 import Header from "@/components/header";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { getCurrentUser } from "@/lib/auth-utils";
 import { Sidebar } from "@/components/cms-sidebar";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getCurrentUser();
+
   return (
-    <div className="relative h-screen flex flex-col bg-background">
-      <SidebarProvider defaultOpen={false}>
-        <Sidebar />
-        <div className="ml-[5rem] flex h-full w-[100%] flex-col bg-background relative">
-          <Navbar />
-          <Header />
-          <div className="flex-1 overflow-auto bg-background">{children}</div>
-        </div>
-      </SidebarProvider>
+    <div className="cms-theme min-h-screen bg-background text-foreground">
+      <Sidebar userName={user?.name || user?.email} organizationName={process.env.NEXT_PUBLIC_DATA_FIDUCIARY_NAME} />
+      <div className="min-w-0 lg:ml-[19.5rem]">
+        <Header />
+        <div className="min-w-0 pb-8">{children}</div>
+      </div>
     </div>
   );
 }

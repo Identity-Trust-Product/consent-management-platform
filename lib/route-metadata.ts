@@ -47,11 +47,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     ],
   },
   "/cms/data-fiduciary/webhooks/logs": {
-    title: "Webhook Logs",
+    title: "Audit Logs",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
-      { type: "link", label: "Webhooks", href: "/cms/data-fiduciary/webhooks" },
-      { type: "page", label: "Logs" },
+      { type: "page", label: "Audit Logs" },
     ],
   },
   "/cms/data-fiduciary/api-keys": {
@@ -357,11 +356,19 @@ export const routeMetadata: Record<string, RouteMetadata> = {
       { type: "page", label: "Current Page" },
     ],
   },
+  "/cms/data-fiduciary/dashboard/active-consents": {
+    title: "Active Consents",
+    breadcrumb_items: [
+      { type: "link", label: "CMS", href: "/cms" },
+      { type: "link", label: "Dashboard", href: "/cms/data-fiduciary/dashboard" },
+      { type: "page", label: "Active Consents" },
+    ],
+  },
   "/cms/data-fiduciary/dashboard": {
     title: "Analytics Dashboard",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
-      { type: "page", label: "Current Page" },
+      { type: "page", label: "Dashboard" },
     ],
   },
   "/cms/data-fiduciary/consent-history": {

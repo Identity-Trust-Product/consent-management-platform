@@ -71,11 +71,12 @@ export interface WebhookLogsAnalytics {
  * Filters for webhook logs
  */
 export interface WebhookLogsFilters {
-  status?: WebhookDeliveryStatus;
-  eventType?: WebhookEventType;
+  status?: WebhookDeliveryStatus | WebhookDeliveryStatus[];
+  eventType?: WebhookEventType | WebhookEventType[];
   targetType?: "DATA_FIDUCIARY" | "DATA_PROCESSOR";
   dateFrom?: Date;
   dateTo?: Date;
+  query?: string;
   webhookId?: string;
   page?: number;
   pageSize?: number;
@@ -90,6 +91,7 @@ export async function getWebhookLogs(filters: WebhookLogsFilters = {}): Promise<
   success: boolean;
   data?: {
     logs: WebhookLogWithRelations[];
+    summary: { total: number; successful: number; failed: number; pending: number };
     pagination: {
       total: number;
       page: number;
@@ -108,12 +110,12 @@ export async function getWebhookLogs(filters: WebhookLogsFilters = {}): Promise<
     // Build where clause
     const where: any = {};
 
-    if (filters.status) {
-      where.status = filters.status;
+    if (filters.status && (!Array.isArray(filters.status) || filters.status.length)) {
+      where.status = Array.isArray(filters.status) ? { in: filters.status } : filters.status;
     }
 
-    if (filters.eventType) {
-      where.eventType = filters.eventType;
+    if (filters.eventType && (!Array.isArray(filters.eventType) || filters.eventType.length)) {
+      where.eventType = Array.isArray(filters.eventType) ? { in: filters.eventType } : filters.eventType;
     }
 
     if (filters.webhookId) {
@@ -139,6 +141,19 @@ export async function getWebhookLogs(filters: WebhookLogsFilters = {}): Promise<
       }
     }
 
+    const query = filters.query?.trim();
+    if (query) {
+      const matchingEvents = Object.values(WebhookEventType).filter((event) => event.replace(/_/g, " ").toLowerCase().includes(query.replace(/_/g, " ").toLowerCase()));
+      where.OR = [
+        { eventId: { contains: query, mode: "insensitive" } },
+        { publicId: { contains: query, mode: "insensitive" } },
+        { errorMessage: { contains: query, mode: "insensitive" } },
+        { webhook: { endpointUrl: { contains: query, mode: "insensitive" } } },
+        { webhook: { dataProcessor: { is: { OR: [{ legalName: { contains: query, mode: "insensitive" } }, { brandName: { contains: query, mode: "insensitive" } }] } } } },
+        ...(matchingEvents.length ? [{ eventType: { in: matchingEvents } }] : []),
+      ];
+    }
+
     // Pagination
     const page = filters.page ?? 1;
     const pageSize = filters.pageSize ?? 50;
@@ -148,8 +163,11 @@ export async function getWebhookLogs(filters: WebhookLogsFilters = {}): Promise<
     const sortBy = filters.sortBy ?? "attemptedAt";
     const sortOrder = filters.sortOrder ?? "desc";
 
-    // Get total count
-    const total = await prisma.webhookLog.count({ where });
+    // Summary uses the full matching result set, not only this page.
+    const statusCounts = await prisma.webhookLog.groupBy({ by: ["status"], where, _count: { _all: true } });
+    const countFor = (status: WebhookDeliveryStatus) => statusCounts.find((item) => item.status === status)?._count._all ?? 0;
+    const total = statusCounts.reduce((sum, item) => sum + item._count._all, 0);
+    const summary = { total, successful: countFor("DELIVERED"), failed: countFor("FAILED") + countFor("TIMEOUT"), pending: countFor("PENDING") };
 
     // Get logs
     const logs = await prisma.webhookLog.findMany({
@@ -183,6 +201,7 @@ export async function getWebhookLogs(filters: WebhookLogsFilters = {}): Promise<
       success: true,
       data: {
         logs: logs as WebhookLogWithRelations[],
+        summary,
         pagination: {
           total,
           page,

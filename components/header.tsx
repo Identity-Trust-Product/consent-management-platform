@@ -19,11 +19,11 @@ export default function Header() {
   const { title, breadcrumbItems } = getRouteData(pathname);
 
   return (
-    <div className="border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur">
-      <div className="px-4 py-4">
+    <div className="bg-background">
+      <div className="px-5 pb-2 pt-20 sm:px-8 lg:px-10 lg:pt-8">
         <div className="flex flex-col">
           <BreadcrumbNavigation items={breadcrumbItems} />
-          <h1 className="text-xl font-semibold text-shades-black">{title}</h1>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground">{title}</h1>
         </div>
       </div>
     </div>

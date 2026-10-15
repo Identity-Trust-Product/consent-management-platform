@@ -784,3 +784,93 @@ body.high-contrast .notice-language-dropdown-content [role="menuitem"] {
 .items-start-imp {
   align-items: start !important;
 }
+
+/* Consent administration theme, based on the supplied platform references.
+   Scoped to keep public notices and their accessibility themes independent. */
+.cms-theme {
+  --font-geist-sans: Arial, Helvetica, sans-serif;
+  --background: #f5f6f8;
+  --foreground: #1e2632;
+  --card: #ffffff;
+  --card-foreground: #1e2632;
+  --popover: #ffffff;
+  --popover-foreground: #1e2632;
+  --primary: #245cff;
+  --primary-foreground: #ffffff;
+  --primary-20: #f0f4ff;
+  --primary-50: #eaf0ff;
+  --primary-100: #dbe5ff;
+  --primary-200: #b8cdff;
+  --primary-500: #245cff;
+  --primary-600: #194bd9;
+  --primary-700: #163fad;
+  --secondary: #edf1f6;
+  --secondary-foreground: #1e2632;
+  --muted: #f7f8fa;
+  --muted-foreground: #65758f;
+  --accent: #eaf0ff;
+  --accent-foreground: #245cff;
+  --border: #dfe4ec;
+  --input: #ccd5e2;
+  --ring: #92b0ff;
+  --radius: 0.875rem;
+  --sidebar: #0e192a;
+  --sidebar-foreground: #c7d1df;
+  --sidebar-border: #243041;
+  --sidebar-primary: #245cff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #19273a;
+  --sidebar-accent-foreground: #ffffff;
+  --success-50: #e1f4ed;
+  --success-500: #108460;
+  --success-600: #087858;
+  font-family: var(--font-geist-sans);
+  color-scheme: light;
+}
+
+.cms-theme [data-slot="card"] {
+  border-color: var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 5px rgb(20 35 55 / 6%);
+}
+
+.cms-theme [data-slot="table-container"] {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.cms-theme [data-slot="table-header"] {
+  background: #f8f9fb;
+}
+
+.cms-theme [data-slot="table-head"] {
+  height: 3.25rem;
+  padding-inline: 1.25rem;
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cms-theme [data-slot="table-cell"] {
+  padding: 1rem 1.25rem;
+}
+
+.cms-theme [data-slot="button"] {
+  border-radius: 0.625rem;
+}
+
+@keyframes dashboard-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.dashboard-metric { animation: dashboard-enter 450ms ease-out both; }
+@media (prefers-reduced-motion: no-preference) {
+  .dashboard-metric { transition: transform 200ms ease; }
+  .dashboard-metric:hover { transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-metric, .dashboard-metric * { animation: none !important; transition: none !important; }
+}

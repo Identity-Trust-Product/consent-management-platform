@@ -174,18 +174,20 @@ export function NoticesTable({ data, onView }: NoticesTableProps) {
         return (
           <div className="text-xs pb-4">
             <div>
-              {date.toLocaleDateString("en-GB", {
+              {date.toLocaleDateString("en-IN", {
+                timeZone: "Asia/Kolkata",
                 day: "2-digit",
                 month: "2-digit",
                 year: "numeric",
               })}
             </div>
             <div className="text-muted-foreground">
-              {date.toLocaleTimeString("en-GB", {
+              {date.toLocaleTimeString("en-IN", {
+                timeZone: "Asia/Kolkata",
                 hour: "2-digit",
                 minute: "2-digit",
                 hour12: true,
-              })}
+              })} IST
             </div>
           </div>
         );
@@ -212,18 +214,20 @@ export function NoticesTable({ data, onView }: NoticesTableProps) {
         return (
           <div className="text-xs pb-4">
             <div>
-              {date.toLocaleDateString("en-GB", {
+              {date.toLocaleDateString("en-IN", {
+                timeZone: "Asia/Kolkata",
                 day: "2-digit",
                 month: "2-digit",
                 year: "numeric",
               })}
             </div>
             <div className="text-muted-foreground">
-              {date.toLocaleTimeString("en-GB", {
+              {date.toLocaleTimeString("en-IN", {
+                timeZone: "Asia/Kolkata",
                 hour: "2-digit",
                 minute: "2-digit",
                 hour12: true,
-              })}
+              })} IST
             </div>
           </div>
         );

@@ -46,9 +46,7 @@ export function ConsentPurposeView({
   const {
     consentPurpose,
     processingPurposes = [],
-    dataProcessorMappings = [],
     purposesOfProcessing = [],
-    dataProcessors = [],
   } = data;
 
   const formatLastUpdated = (dateStr: string) => {
@@ -58,13 +56,6 @@ export function ConsentPurposeView({
       month: "2-digit",
       year: "numeric",
     });
-  };
-
-  const getDataProcessorName = (dataProcessorId: string) => {
-    const processor = dataProcessors.find(
-      (dp: any) => dp.ouId === dataProcessorId
-    );
-    return processor?.brandName || processor?.legalName || "Unknown";
   };
 
   const getPurposeOfProcessingName = (purposeOfProcessingId: number) => {
@@ -127,7 +118,7 @@ export function ConsentPurposeView({
                 <span className="font-medium text-muted-foreground">
                   Description:
                 </span>
-                <p className="mt-1">
+                <p className="mt-1 whitespace-pre-wrap break-words">
                   {consentPurpose?.description || "No description provided"}
                 </p>
               </div>
@@ -197,114 +188,6 @@ export function ConsentPurposeView({
               </div>
             )}
           </div>
-        </div>
-
-        {/* Data Processors */}
-        <div className="space-y-4">
-          <h3 className="font-semibold">Processors List</h3>
-
-          {dataProcessorMappings && dataProcessorMappings.length > 0 ? (
-            <div className="border rounded-lg overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="bg-muted/30 border-r w-[200px]">
-                      Processors Name
-                    </TableHead>
-                    <TableHead className="bg-muted/30 border-r w-[250px]">
-                      Purpose Sub Master
-                    </TableHead>
-                    <TableHead className="bg-muted/30">Attributes</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {(() => {
-                    // Group data processor mappings by processor (same logic as step5)
-                    const groupedMappings = dataProcessorMappings.reduce(
-                      (acc: any, mapping: any) => {
-                        if (!acc[mapping.dataProcessorId]) {
-                          acc[mapping.dataProcessorId] = [];
-                        }
-                        acc[mapping.dataProcessorId].push(mapping);
-                        return acc;
-                      },
-                      {}
-                    );
-
-                    return Object.entries(groupedMappings).map(
-                      ([dataProcessorId, mappings]: [string, any]) => {
-                        const processingPurposeIds = [
-                          ...new Set(
-                            mappings.map((m: any) => m.processingPurposeId)
-                          ),
-                        ];
-                        const uniquePurposes = processingPurposeIds.map(
-                          (id) => {
-                            const pp = processingPurposes.find(
-                              (p: any) => p.id === id
-                            );
-                            return getPurposeOfProcessingName(
-                              pp?.purposeOfProcessingId
-                            );
-                          }
-                        );
-                        const allUserAttributes = [
-                          ...new Set(
-                            mappings.flatMap((m: any) => m.userAttributeNames)
-                          ),
-                        ] as string[];
-
-                        return (
-                          <TableRow
-                            key={dataProcessorId}
-                            className="hover:bg-muted/20"
-                          >
-                            <TableCell className="border-r w-[200px]">
-                              <div className="font-medium">
-                                {getDataProcessorName(dataProcessorId)}
-                              </div>
-                            </TableCell>
-                            <TableCell className="border-r w-[250px]">
-                              <div className="flex flex-wrap gap-1">
-                                {uniquePurposes.map((purpose, index) => (
-                                  <Badge
-                                    key={index}
-                                    variant="secondary"
-                                    className="text-xs"
-                                  >
-                                    {purpose}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <div className="flex flex-wrap gap-1">
-                                {allUserAttributes.map((attrName) => (
-                                  <Badge
-                                    key={attrName}
-                                    variant="outline"
-                                    className="text-xs"
-                                  >
-                                    {attrName}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      }
-                    );
-                  })()}
-                </TableBody>
-              </Table>
-            </div>
-          ) : (
-            <div className="rounded-lg border border-dashed p-8 text-center">
-              <p className="text-sm text-muted-foreground">
-                No processors defined
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Translations Section */}

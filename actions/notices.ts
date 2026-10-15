@@ -57,9 +57,9 @@ function calculateExpiryDate(
 }
 
 // Read operations - No RBAC wrapper needed (handled at page level)
-export async function getNotices() {
+export async function getNotices(view?: string) {
   try {
-    return await getAllNoticesService();
+    return await getAllNoticesService(view);
   } catch (error) {
     console.error("Error in getNotices action:", error);
     return [];

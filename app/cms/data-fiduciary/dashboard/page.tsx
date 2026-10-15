@@ -3,11 +3,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import prisma from "@/lib/prisma";
 import {
+  activeConsentFilter,
+  activityWindowStart,
+  INDIA_TIME_ZONE,
+  buildTrend,
+  noticeFilter,
+} from "@/lib/dashboard-data";
+import { checkPermission } from "@/lib/rbac";
+import { Resources, Actions } from "@/lib/constants/rbac";
+import { Forbidden } from "@/components/forbidden";
+import { DashboardRefresh } from "./dashboard-refresh";
+import {
   CheckCircle2,
   Clock3,
   FileText,
   ShieldCheck,
-  Users,
+  ArrowUpRight,
   XCircle,
 } from "lucide-react";
 import Link from "next/link";
@@ -16,13 +27,17 @@ import { DashboardCharts } from "./dashboard-charts";
 export const dynamic = "force-dynamic";
 
 function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en-IN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(date);
+  return (
+    new Intl.DateTimeFormat("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: INDIA_TIME_ZONE,
+    }).format(date) + " IST"
+  );
 }
 
 function formatStatus(status: string) {
@@ -30,10 +45,10 @@ function formatStatus(status: string) {
 }
 
 export default async function DashboardPage() {
+  if (!(await checkPermission(Resources.NOTICE, Actions.READ)))
+    return <Forbidden requiredRole="privy_cgp_user" />;
   const now = new Date();
-  const activityStart = new Date(now);
-  activityStart.setDate(activityStart.getDate() - 29);
-  activityStart.setHours(0, 0, 0, 0);
+  const activityStart = activityWindowStart(now);
   const [
     totalNotices,
     pendingNotices,
@@ -41,23 +56,17 @@ export default async function DashboardPage() {
     acceptedNotices,
     rejectedNotices,
     activeConsents,
-    users,
+    otherNotices,
     recentNotices,
     activityNotices,
   ] = await Promise.all([
     prisma.notice.count(),
-    prisma.notice.count({ where: { status: "pending" } }),
+    prisma.notice.count({ where: noticeFilter("pending") }),
     prisma.notice.count({ where: { status: "completed" } }),
     prisma.notice.count({ where: { consentStatus: "accepted" } }),
     prisma.notice.count({ where: { consentStatus: "rejected" } }),
-    prisma.consent.count({
-      where: {
-        status: "accepted",
-        isExpired: false,
-        OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
-      },
-    }),
-    prisma.notice.groupBy({ by: ["dataPrincipalId"] }),
+    prisma.consent.count({ where: activeConsentFilter(now) }),
+    prisma.notice.count({ where: noticeFilter("other") }),
     prisma.notice.findMany({
       orderBy: { createdAt: "desc" },
       take: 8,
@@ -72,10 +81,18 @@ export default async function DashboardPage() {
       },
     }),
     prisma.notice.findMany({
-      where: { createdAt: { gte: activityStart } },
+      where: {
+        OR: [
+          { createdAt: { gte: activityStart, lte: now } },
+          { markCompletedTimestamp: { gte: activityStart, lte: now } },
+          { updatedAt: { gte: activityStart, lte: now } },
+        ],
+      },
       select: {
         createdAt: true,
         consentStatus: true,
+        markCompletedTimestamp: true,
+        updatedAt: true,
         businessProcess: { select: { name: true } },
       },
     }),
@@ -86,56 +103,32 @@ export default async function DashboardPage() {
     ? Math.round((acceptedNotices / resolvedNotices) * 100)
     : 0;
 
-  const dateKey = (date: Date) => date.toISOString().slice(0, 10);
-  const trendMap = new Map<
-    string,
-    { date: string; label: string; notices: number; accepted: number; rejected: number }
-  >();
-
-  for (let offset = 0; offset < 30; offset += 1) {
-    const date = new Date(activityStart);
-    date.setDate(activityStart.getDate() + offset);
-    trendMap.set(dateKey(date), {
-      date: dateKey(date),
-      label: new Intl.DateTimeFormat("en-IN", {
-        day: "2-digit",
-        month: "short",
-      }).format(date),
-      notices: 0,
-      accepted: 0,
-      rejected: 0,
-    });
-  }
-
+  const trend = buildTrend(activityNotices, now);
   const processCounts = new Map<string, number>();
   for (const notice of activityNotices) {
-    const point = trendMap.get(dateKey(notice.createdAt));
-    if (point) {
-      point.notices += 1;
-      if (notice.consentStatus === "accepted") point.accepted += 1;
-      if (notice.consentStatus === "rejected") point.rejected += 1;
-    }
-
-    const processName = notice.businessProcess.name;
-    processCounts.set(processName, (processCounts.get(processName) || 0) + 1);
+    if (notice.createdAt < activityStart || notice.createdAt > now) continue;
+    const name = notice.businessProcess.name;
+    processCounts.set(name, (processCounts.get(name) || 0) + 1);
   }
-
-  const trend = Array.from(trendMap.values());
   const statuses = [
     { name: "Accepted", value: acceptedNotices },
     { name: "Rejected", value: rejectedNotices },
     { name: "Pending", value: pendingNotices },
     {
       name: "Other",
-      value: Math.max(totalNotices - acceptedNotices - rejectedNotices - pendingNotices, 0),
+      value: otherNotices,
     },
   ];
-  const processes = Array.from(processCounts, ([name, value]) => ({ name, value }))
+  const processes = Array.from(processCounts, ([name, value]) => ({
+    name,
+    value,
+  }))
     .sort((left, right) => right.value - left.value)
     .slice(0, 8);
 
   const metrics = [
     {
+      href: "/cms/data-fiduciary/notices",
       title: "Total Notices",
       value: totalNotices,
       detail: `${completedNotices} completed`,
@@ -143,6 +136,7 @@ export default async function DashboardPage() {
       color: "bg-blue-100 text-blue-700",
     },
     {
+      href: "/cms/data-fiduciary/notices?view=pending",
       title: "Pending Notices",
       value: pendingNotices,
       detail: "Awaiting user action",
@@ -150,6 +144,7 @@ export default async function DashboardPage() {
       color: "bg-amber-100 text-amber-700",
     },
     {
+      href: "/cms/data-fiduciary/notices?view=accepted",
       title: "Accepted Notices",
       value: acceptedNotices,
       detail: `${acceptanceRate}% acceptance rate`,
@@ -157,6 +152,7 @@ export default async function DashboardPage() {
       color: "bg-green-100 text-green-700",
     },
     {
+      href: "/cms/data-fiduciary/notices?view=rejected",
       title: "Rejected Notices",
       value: rejectedNotices,
       detail: "Consent declined",
@@ -164,55 +160,64 @@ export default async function DashboardPage() {
       color: "bg-red-100 text-red-700",
     },
     {
+      href: "/cms/data-fiduciary/dashboard/active-consents",
       title: "Active Consents",
       value: activeConsents,
       detail: "Accepted and not expired",
       icon: ShieldCheck,
       color: "bg-indigo-100 text-indigo-700",
     },
-    {
-      title: "Unique Users",
-      value: users.length,
-      detail: "Users with notice records",
-      icon: Users,
-      color: "bg-violet-100 text-violet-700",
-    },
   ];
 
   return (
-    <div className="min-h-screen space-y-6 bg-slate-50/70 p-6">
-      <div className="rounded-2xl bg-linear-to-r from-blue-950 via-blue-900 to-indigo-900 px-6 py-7 text-white shadow-lg">
-        <h1 className="text-3xl font-bold tracking-tight">Consent Analytics Dashboard</h1>
-        <p className="mt-2 text-sm text-blue-100">
-          Live overview of notices and consent activity.
+    <div className="space-y-6 bg-background px-5 py-6 sm:px-8 lg:px-10">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <p className="text-sm text-muted-foreground">
+          Live notice and consent records from your database.
         </p>
+        <DashboardRefresh updatedAt={now.toISOString()} />
       </div>
-
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {metrics.map((metric) => (
-          <Card
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+        {metrics.map((metric, index) => (
+          <Link
             key={metric.title}
-            className="border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            href={metric.href}
+            className="dashboard-metric group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+            style={{ animationDelay: `${index * 65}ms` }}
           >
-            <CardContent className="flex items-center justify-between p-5">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  {metric.title}
+            <Card className="h-full overflow-hidden border-border bg-card py-0 transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-lg">
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-semibold text-muted-foreground">
+                    {metric.title}
+                  </p>
+                  <div
+                    className={`shrink-0 rounded-xl p-2.5 transition-transform duration-300 group-hover:scale-110 ${metric.color}`}
+                  >
+                    <metric.icon className="size-5" />
+                  </div>
+                </div>
+                <p className="mt-5 text-4xl font-bold tracking-tight tabular-nums">
+                  {metric.value.toLocaleString("en-IN")}
                 </p>
-                <p className="mt-1 text-3xl font-bold">{metric.value}</p>
-                <p className="mt-1 text-xs text-muted-foreground">
+                <p className="mt-2 min-h-10 text-xs leading-5 text-muted-foreground">
                   {metric.detail}
                 </p>
-              </div>
-              <div className={`rounded-full p-3 ${metric.color}`}>
-                <metric.icon className="h-5 w-5" />
-              </div>
-            </CardContent>
-          </Card>
+                <div className="mt-4 flex items-center justify-between border-t pt-3 text-xs font-semibold text-primary">
+                  View records
+                  <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
 
-      <DashboardCharts trend={trend} statuses={statuses} processes={processes} />
+      <DashboardCharts
+        trend={trend}
+        statuses={statuses}
+        processes={processes}
+      />
 
       <Card className="border-slate-200 shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between">
@@ -248,7 +253,12 @@ export default async function DashboardPage() {
                   {recentNotices.map((notice) => (
                     <tr key={notice.publicId} className="border-t">
                       <td className="max-w-48 truncate px-4 py-3 font-mono text-xs">
-                        {notice.referenceId || "-"}
+                        <Link
+                          href={`/cms/data-fiduciary/notices/${notice.publicId}`}
+                          className="text-primary hover:underline"
+                        >
+                          {notice.referenceId || notice.publicId}
+                        </Link>
                       </td>
                       <td className="max-w-48 truncate px-4 py-3 font-mono text-xs">
                         {notice.dataPrincipalId}
@@ -270,8 +280,8 @@ export default async function DashboardPage() {
                             variant="outline"
                             className={
                               notice.consentStatus === "accepted"
-                                ? "border-green-300 text-green-700"
-                                : "border-red-300 text-red-700"
+                                ? "border-transparent bg-success-50 text-success-600"
+                                : "border-transparent bg-red-50 text-red-700"
                             }
                           >
                             {formatStatus(notice.consentStatus)}

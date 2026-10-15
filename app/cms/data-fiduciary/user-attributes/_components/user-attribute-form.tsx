@@ -216,14 +216,10 @@ export function UserAttributeForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Data attributes created successfully. Continue with Purpose Sub Master."
+            ? "Data attributes created successfully"
             : "Data attributes updated successfully"
         );
-        router.push(
-          mode === "new"
-            ? "/cms/data-fiduciary/purposes-of-processing"
-            : "/cms/data-fiduciary/user-attributes"
-        );
+        router.push("/cms/data-fiduciary/user-attributes");
       } else {
         toast.error(result.error || "An error occurred");
       }

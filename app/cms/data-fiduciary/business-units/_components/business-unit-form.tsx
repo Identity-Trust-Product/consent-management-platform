@@ -91,14 +91,10 @@ export function BusinessUnitForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Organization created successfully. Continue with Data attributes."
+            ? "Organization created successfully"
             : "Organization updated successfully"
         );
-        router.push(
-          mode === "new"
-            ? "/cms/data-fiduciary/user-attributes"
-            : "/cms/data-fiduciary/business-units"
-        );
+        router.push("/cms/data-fiduciary/business-units");
       } else {
         toast.error(result.error || "An error occurred");
       }

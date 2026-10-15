@@ -16,6 +16,7 @@ import {
 } from "@/app/cms/principal/dprm/[access_token]/consent-action-center/consent-diff";
 import { BusinessProcessRuleSelection } from "@/components/notice";
 import prisma from "@/lib/prisma";
+import { noticeFilter } from "@/lib/dashboard-data";
 import { generateAccessToken } from "@/lib/utils";
 import { WebhookEventType } from "@prisma/client";
 import { createConsents } from "./consents-service";
@@ -182,13 +183,10 @@ export async function validateNoticeSubmission(
   }
 }
 
-export async function getAllNotices() {
+export async function getAllNotices(view?: string) {
   try {
-    getConsentNotice(
-      "2ea3c6a7-da30-424a-b86f-a27d059fe927",
-      "eb24e488-8eb7-42af-a4c5-1abcf25dd669",
-    );
     const notices = await prisma.notice.findMany({
+      where: noticeFilter(view),
       include: {
         businessProcess: {
           select: {

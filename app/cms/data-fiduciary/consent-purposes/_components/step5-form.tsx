@@ -73,7 +73,6 @@ export function Step5Form({
   const {
     consentPurpose,
     purposesOfProcessing = [],
-    dataProcessors = [],
   } = data;
 
   // Get processing purposes from context (source of truth)
@@ -98,38 +97,9 @@ export function Step5Form({
     }));
   }, [state.step2Data, purposesOfProcessing]);
 
-  // Group mappings by processor
-  const groupedMappings = useMemo(() => {
-    const modifiedMappingIds = new Set(
-      state.step3Data.modified.map((m) => m.id).filter(Boolean)
-    );
-    const existingMappings = state.step3Data.existing
-      .filter((m) => !modifiedMappingIds.has(m.id))
-      .filter((m) => !state.step3Data.deleted.includes(m.id!));
-    const modifiedMappings = state.step3Data.modified.filter(
-      (m) => !state.step3Data.deleted.includes(m.id!)
-    );
-    const newMappings = state.step3Data.new;
-
-    return [...existingMappings, ...modifiedMappings, ...newMappings].reduce(
-      (acc: any, mapping: any) => {
-        if (!acc[mapping.dataProcessorId]) acc[mapping.dataProcessorId] = [];
-        acc[mapping.dataProcessorId].push(mapping);
-        return acc;
-      },
-      {}
-    );
-  }, [state.step3Data]);
-
   // Helpers
   const getPurposeOfProcessingName = (id: number) =>
     purposesOfProcessing.find((p: any) => p.id === id)?.name || "Unknown";
-  const getDataProcessorName = (dataProcessorId: string) => {
-    const processor = dataProcessors.find(
-      (dp: any) => dp.ouId === dataProcessorId
-    );
-    return processor?.brandName || processor?.legalName || "Unknown";
-  };
   const formatLastUpdated = (date: string | Date) =>
     !date
       ? ""
@@ -161,14 +131,10 @@ export function Step5Form({
         toast.success(
           isEdit
             ? "Consent purpose saved as draft"
-            : "Purpose Master saved successfully. Continue with Create Notice Template."
+            : "Purpose Master saved successfully"
         );
         dispatch({ type: "RESET" });
-        router.push(
-          isEdit
-            ? "/cms/data-fiduciary/consent-purposes"
-            : "/cms/data-fiduciary/business-processes"
-        );
+        router.push("/cms/data-fiduciary/consent-purposes");
       } else {
         toast.error(
           result.error || "Failed to save consent purpose as draft"
@@ -245,16 +211,12 @@ export function Step5Form({
                 ? "Consent purpose updated successfully"
                 : isEdit
                   ? "Consent purpose published successfully"
-                  : "Purpose Master published successfully. Continue with Create Notice Template."
+                  : "Purpose Master published successfully"
           );
           dispatch({ type: "RESET" });
           setShowBreakingChangeDialog(false);
           setSelectedBPsToPropagate([]); // Reset selection
-          router.push(
-            isEdit
-              ? "/cms/data-fiduciary/consent-purposes"
-              : "/cms/data-fiduciary/business-processes"
-          );
+          router.push("/cms/data-fiduciary/consent-purposes");
         } else {
           toast.error(
             result.error ||
@@ -287,7 +249,7 @@ export function Step5Form({
       <div className="border-b px-6 py-5 flex-shrink-0">
         <div className="flex items-center gap-3 mb-2">
           <h2 className="text-2xl font-bold tracking-tight">
-            {consentPurpose?.name || "Consent Purpose"}
+            {(state.step1Data?.name ?? consentPurpose?.name) || "Consent Purpose"}
           </h2>
           {consentPurpose?.updatedAt && (
             <span className="text-sm text-muted-foreground">
@@ -325,8 +287,8 @@ export function Step5Form({
                 <span className="font-medium text-muted-foreground">
                   Description:
                 </span>
-                <p className="mt-1">
-                  {consentPurpose?.description || "No description provided"}
+                <p className="mt-1 whitespace-pre-wrap break-words">
+                  {(state.step1Data?.description ?? consentPurpose?.description) || "No description provided"}
                 </p>
               </div>
             </div>
@@ -395,101 +357,6 @@ export function Step5Form({
             )}
           </div>
 
-          {/* Processors List */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Processors List</h3>
-            {Object.keys(groupedMappings).length > 0 ? (
-              <div className="border rounded-lg overflow-hidden">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="bg-muted/30 border-r w-[200px]">
-                        Processors Name
-                      </TableHead>
-                      <TableHead className="bg-muted/30 border-r w-[250px]">
-                        Purpose Sub Master
-                      </TableHead>
-                      <TableHead className="bg-muted/30">Attributes</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {Object.entries(groupedMappings).map(
-                      ([dataProcessorId, mappings]: [string, any]) => {
-                        const processingPurposeRefs = [
-                          ...new Set(
-                            mappings.map((m: any) => m.processingPurposeRef)
-                          ),
-                        ];
-                        const uniquePurposes = processingPurposeRefs.map(
-                          (ref) => {
-                            const pp = processingPurposes.find(
-                              (p: any) =>
-                                (p.id && p.id.toString() === ref) ||
-                                p.tempId === ref ||
-                                p.purposeOfProcessingCode === ref
-                            );
-                            return getPurposeOfProcessingName(
-                              pp?.purposeOfProcessingId
-                            );
-                          }
-                        );
-                        const allUserAttributes = [
-                          ...new Set(
-                            mappings.flatMap((m: any) => m.userAttributeNames)
-                          ),
-                        ] as string[];
-
-                        return (
-                          <TableRow
-                            key={dataProcessorId}
-                            className="hover:bg-muted/20"
-                          >
-                            <TableCell className="border-r w-[200px]">
-                              <div className="font-medium">
-                                {getDataProcessorName(dataProcessorId)}
-                              </div>
-                            </TableCell>
-                            <TableCell className="border-r w-[250px]">
-                              <div className="flex flex-wrap gap-1">
-                                {uniquePurposes.map((purpose, index) => (
-                                  <Badge
-                                    key={index}
-                                    variant="secondary"
-                                    className="text-xs"
-                                  >
-                                    {purpose}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <div className="flex flex-wrap gap-1">
-                                {allUserAttributes.map((attrName) => (
-                                  <Badge
-                                    key={attrName}
-                                    variant="outline"
-                                    className="text-xs"
-                                  >
-                                    {attrName}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      }
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-            ) : (
-              <div className="rounded-lg border border-dashed p-8 text-center">
-                <p className="text-sm text-muted-foreground">
-                  No processors defined
-                </p>
-              </div>
-            )}
-          </div>
         </div>
       </div>
 

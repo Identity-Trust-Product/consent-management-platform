@@ -95,14 +95,10 @@ export function PurposeOfProcessingForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Purpose sub master created successfully. Continue with Purpose Master."
+            ? "Purpose sub master created successfully"
             : "Purpose sub master updated successfully"
         );
-        router.push(
-          mode === "new"
-            ? "/cms/data-fiduciary/consent-purposes"
-            : "/cms/data-fiduciary/purposes-of-processing"
-        );
+        router.push("/cms/data-fiduciary/purposes-of-processing");
       } else {
         toast.error(result.error || "An error occurred");
       }
