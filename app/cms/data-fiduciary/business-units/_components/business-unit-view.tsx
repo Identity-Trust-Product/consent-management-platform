@@ -10,7 +10,6 @@
  * is strictly prohibited without prior written permission from IDfy.
  */
 
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
 import { EditButton } from "@/components/ui/action-buttons";
@@ -66,7 +65,7 @@ export function BusinessUnitView({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {businessUnit?.name || "Department"}
+              {businessUnit?.name || "Organization"}
             </h2>
             {businessUnit?.updatedAt && (
               <span className="text-sm text-muted-foreground">
@@ -106,18 +105,10 @@ export function BusinessUnitView({
               <div className="space-y-4">
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Department Name:
+                    Organization Name:
                   </span>
                   <p className="mt-1">
                     {businessUnit?.name || "Not specified"}
-                  </p>
-                </div>
-                <div>
-                  <span className="font-medium text-muted-foreground">
-                    Code:
-                  </span>
-                  <p className="mt-1">
-                    {businessUnit?.code || "Not specified"}
                   </p>
                 </div>
               </div>

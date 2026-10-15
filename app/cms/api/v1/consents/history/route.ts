@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return ApiErrors.validationError("Invalid reference ID", error.errors);
+      return ApiErrors.validationError("Invalid reference ID", error.issues);
     }
 
     console.error("Error fetching consent history by reference ID:", error);

@@ -13,16 +13,18 @@ import { redirect } from "next/navigation";
 import { verifyPermission } from "@/lib/safe-action";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { UserAttributeForm } from "../_components/user-attribute-form";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 export default async function NewUserAttributePage() {
   try {
     await verifyPermission(Resources.USER_ATTRIBUTE, Actions.CREATE);
-  } catch (error) {
+  } catch {
     redirect("/cms/forbidden");
   }
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={2} />
       <UserAttributeForm mode="new" />
     </div>
   );

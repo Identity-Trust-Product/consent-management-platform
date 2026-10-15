@@ -1,10 +1,10 @@
 /**
  * Open Bharat Digital Consent by IDfy
  * Copyright (c) 2025 Baldor Technologies Private Limited (IDfy)
- * 
+ *
  * This software is licensed under the Privy Public License.
  * See LICENSE.md for the full terms of use.
- * 
+ *
  * Unauthorized copying, modification, distribution, or commercial use
  * is strictly prohibited without prior written permission from IDfy.
  */
@@ -21,6 +21,7 @@ import {
   createGrantNoticeApiSchema,
   type CreateGrantNoticeApiData,
 } from "@/lib/schemas/notice-schemas";
+import { createGuardianVerificationEvidence } from "@/lib/services/guardian-verification-service";
 import {
   generateNoticeLinkFromObject,
   getNoticeResourceType,
@@ -59,8 +60,11 @@ import { NextRequest } from "next/server";
  *   }
  *
  * Note: When for_minor is true, metadata must include:
- *   - "major_dataprincipal_id": Valid UUID (min 3 chars)
+ *   - "major_data_principal_id": Guardian Data Principal ID
  *   - "relationship_with_minor": Non-empty string (e.g., "parent", "guardian")
+ *   - "guardian_verification_method": Verification method used
+ *   - "guardian_verification_reference": Verification transaction/reference ID
+ *   - "guardian_verified_at": ISO timestamp for completed verification
  *
  * Response:
  *   {
@@ -89,13 +93,14 @@ export async function POST(request: NextRequest) {
   try {
     // Get authenticated API context from middleware, with a direct API-key
     // fallback for local/dev servers where forwarded middleware headers are absent.
-    const context = (() => {
-      try {
-        return getApiContext(request);
-      } catch {
-        return null;
-      }
-    })() || await validateApiKey(request);
+    const context =
+      (() => {
+        try {
+          return getApiContext(request);
+        } catch {
+          return null;
+        }
+      })() || (await validateApiKey(request));
 
     if (!context) {
       return ApiErrors.unauthorized();
@@ -111,19 +116,19 @@ export async function POST(request: NextRequest) {
     } catch (error: any) {
       return ApiErrors.validationError(
         "Invalid request body",
-        error.issues || error.errors || error.message
+        error.issues || error.errors || error.message,
       );
     }
 
     // Find business process by code and version
     const businessProcess = await findBusinessProcessByCodeAndVersion(
       validatedData.business_process.code,
-      validatedData.business_process.version
+      validatedData.business_process.version,
     );
 
     if (!businessProcess) {
       return ApiErrors.notFound(
-        `Process with code '${validatedData.business_process.code}' and version '${validatedData.business_process.version}' not found`
+        `Process with code '${validatedData.business_process.code}' and version '${validatedData.business_process.version}' not found`,
       );
     }
 
@@ -137,7 +142,7 @@ export async function POST(request: NextRequest) {
     // Calculate link expiry date from hours
     const linkExpiresAt = new Date(
       Date.now() +
-      validatedData.notice_settings.expires_in_hours * 60 * 60 * 1000
+        validatedData.notice_settings.expires_in_hours * 60 * 60 * 1000,
     );
 
     // Calculate consent duration in hours if provided
@@ -168,6 +173,14 @@ export async function POST(request: NextRequest) {
     // Create metadata if provided
     if (validatedData.metadata && validatedData.metadata.length > 0) {
       await createNoticeMetadata(notice.id, validatedData.metadata);
+    }
+
+    if (validatedData.for_minor) {
+      await createGuardianVerificationEvidence({
+        noticeId: notice.id,
+        minorDataPrincipalId: notice.dataPrincipalId,
+        metadata: validatedData.metadata,
+      });
     }
 
     // Generate notice links

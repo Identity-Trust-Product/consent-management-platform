@@ -461,7 +461,7 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
     toast.success("Translations saved");
 
     const params = new URLSearchParams();
-    params.set("step", "5");
+    params.set("step", "4");
     if (consentPurposeId) {
       params.set("id", consentPurposeId);
     }
@@ -476,7 +476,8 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
 
   const handlePrevious = () => {
     const params = new URLSearchParams();
-    params.set("step", "3");
+    // Step 3 Add Processor is hidden, so go back directly to Purpose Sub Master.
+    params.set("step", "2");
     if (consentPurposeId) {
       params.set("id", consentPurposeId);
     }
@@ -501,7 +502,7 @@ export function Step4Form({ data, isEdit, consentPurposeId }: Step4FormProps) {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              Step 4. Translations
+              Step 3. Translations
             </h2>
             <AutoTranslateButton
               targetLanguages={getTargetLanguages()}

@@ -17,6 +17,7 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { Actions, Resources, checkPermission } from "@/lib/rbac";
 import { Forbidden } from "@/components/forbidden";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 async function BusinessUnitsContent() {
   const canRead = await checkPermission(Resources.BUSINESS_UNIT, Actions.READ);
@@ -34,13 +35,14 @@ async function BusinessUnitsContent() {
     <Button asChild>
       <Link href="/cms/data-fiduciary/business-units/new" className="group">
         <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-        <p className="text-base">New Department</p>
+        <p className="text-base">New Organization</p>
       </Link>
     </Button>
   ) : null;
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={1} />
       <div className="mx-auto">
         <BusinessUnitsClient
           data={businessUnits}

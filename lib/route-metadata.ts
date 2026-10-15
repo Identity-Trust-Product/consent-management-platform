@@ -69,86 +69,86 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     ],
   },
   "/cms/data-fiduciary/business-units": {
-    title: "Department",
+    title: "Organization",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-units/new": {
-    title: "Add New Department",
+    title: "Add New Organization",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Department",
+        label: "Organization",
         href: "/cms/data-fiduciary/business-units",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-units/:id": {
-    title: "View Department",
+    title: "View Organization",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Department",
+        label: "Organization",
         href: "/cms/data-fiduciary/business-units",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/business-units/:id/edit": {
-    title: "Edit Department",
+    title: "Edit Organization",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Department",
+        label: "Organization",
         href: "/cms/data-fiduciary/business-units",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes": {
-    title: "Purpose Attributes",
+    title: "Data attributes",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes/new": {
-    title: "New Purpose Attribute",
+    title: "New Data attributes",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purpose Attributes",
+        label: "Data attributes",
         href: "/cms/data-fiduciary/user-attributes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes/:id": {
-    title: "View Purpose Attribute",
+    title: "View Data attributes",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purpose Attributes",
+        label: "Data attributes",
         href: "/cms/data-fiduciary/user-attributes",
       },
       { type: "page", label: "Current Page" },
     ],
   },
   "/cms/data-fiduciary/user-attributes/:id/edit": {
-    title: "Edit Purpose Attribute",
+    title: "Edit Data attributes",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       {
         type: "link",
-        label: "Purpose Attributes",
+        label: "Data attributes",
         href: "/cms/data-fiduciary/user-attributes",
       },
       { type: "page", label: "Current Page" },
@@ -284,7 +284,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     ],
   },
   "/cms/data-fiduciary/business-processes": {
-    title: "Process",
+    title: "Create Notice Template",
     breadcrumb_items: [
       { type: "link", label: "CMS", href: "/cms" },
       { type: "page", label: "Current Page" },

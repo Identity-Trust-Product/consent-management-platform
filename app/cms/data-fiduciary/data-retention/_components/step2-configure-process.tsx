@@ -326,7 +326,7 @@ export function Step2ConfigureProcess({
                         <TableRow>
                           <TableHead>Consent Purpose</TableHead>
                           <TableHead>Purpose Sub Master</TableHead>
-                          <TableHead>Purpose Attribute</TableHead>
+                          <TableHead>Data attributes</TableHead>
                           <TableHead>Retention Duration</TableHead>
                           <TableHead className="w-[200px]">Trigger*</TableHead>
                           <TableHead className="w-[300px]">

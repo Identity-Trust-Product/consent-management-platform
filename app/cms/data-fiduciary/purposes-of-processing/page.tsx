@@ -18,6 +18,7 @@ import Link from "next/link";
 import { checkPermission } from "@/lib/rbac";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { Forbidden } from "@/components/forbidden";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 async function PurposesOfProcessingContent() {
   const canRead = await checkPermission(Resources.PURPOSE_OF_PROCESSING, Actions.READ);
@@ -44,6 +45,7 @@ async function PurposesOfProcessingContent() {
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={3} />
       <div className="mx-auto">
         <PurposesOfProcessingClient
           data={purposesOfProcessing}

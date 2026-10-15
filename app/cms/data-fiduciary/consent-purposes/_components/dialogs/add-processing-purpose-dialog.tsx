@@ -333,7 +333,7 @@ export function AddProcessingPurposeDialog({
                 </Button>
                 <div>
                   <h3 className="text-lg font-medium">
-                    Select Purpose Attributes
+                    Select Data attributes
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     Choose which purpose attributes will be collected for:{" "}
@@ -345,7 +345,7 @@ export function AddProcessingPurposeDialog({
 
             <div className="flex-1 space-y-3 overflow-hidden">
               <Label>
-                Purpose Attributes ({formData.userAttributeNames.length} selected)
+                Data attributes ({formData.userAttributeNames.length} selected)
               </Label>
 
               {/* Selected Attributes Display - Fixed height container */}

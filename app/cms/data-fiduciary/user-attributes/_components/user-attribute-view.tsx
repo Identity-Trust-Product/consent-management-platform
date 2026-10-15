@@ -68,7 +68,7 @@ export function UserAttributeView({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
-              {userAttribute?.name || "Purpose Attribute"}
+              {userAttribute?.name || "Data attributes"}
             </h2>
             {userAttribute?.updatedAt && (
               <span className="text-sm text-muted-foreground">
@@ -108,7 +108,7 @@ export function UserAttributeView({
               <div className="space-y-4">
                 <div>
                   <span className="font-medium text-muted-foreground">
-                    Purpose Attribute Name:
+                    Data attributes Name:
                   </span>
                   <p className="mt-1">
                     {userAttribute?.name || "Not specified"}
@@ -155,7 +155,7 @@ export function UserAttributeView({
         <div className="space-y-4">
           <div className="rounded-lg border p-4">
             <h3 className="font-semibold mb-4">
-              Purpose Attribute in 22 Indian Languages
+              Data attributes in 22 Indian Languages
             </h3>
 
             {userAttribute.supportedLanguages && userAttribute.supportedLanguages.filter(code => code !== "en").length > 0 ? (

@@ -18,6 +18,7 @@ import Link from "next/link";
 import { checkPermission } from "@/lib/rbac";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { Forbidden } from "@/components/forbidden";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 async function UserAttributesContent() {
   const canRead = await checkPermission(Resources.USER_ATTRIBUTE, Actions.READ);
@@ -37,13 +38,14 @@ async function UserAttributesContent() {
     <Button asChild>
       <Link href="/cms/data-fiduciary/user-attributes/new" className="group">
         <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-        <p className="text-base">New Purpose Attribute</p>
+        <p className="text-base">New Data attributes</p>
       </Link>
     </Button>
   ) : null;
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={2} />
       <div className="mx-auto">
         <UserAttributesClient
           data={userAttributes}

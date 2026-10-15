@@ -29,7 +29,6 @@ import {
 import { BreakingChangeWarningDialog } from "./breaking-change-warning-dialog";
 import { useConsentPurposeForm } from "@/contexts/consent-purpose-context";
 import { detectBreakingChanges } from "@/lib/utils/breaking-change-detector";
-import { getBusinessProcessesUsingConsentPurposeForView } from "@/lib/services/business-processes-service";
 import { getHighestVersionForConsentPurposeCode } from "@/actions/consent-purposes";
 
 export interface StepData {
@@ -73,8 +72,6 @@ export function Step5Form({
 
   const {
     consentPurpose,
-    dataProcessorMappings = [],
-    userAttributes = [],
     purposesOfProcessing = [],
     dataProcessors = [],
   } = data;
@@ -127,8 +124,6 @@ export function Step5Form({
   // Helpers
   const getPurposeOfProcessingName = (id: number) =>
     purposesOfProcessing.find((p: any) => p.id === id)?.name || "Unknown";
-  const getUserAttributeName = (id: number) =>
-    userAttributes.find((a: any) => a.id === id)?.name || "Unknown";
   const getDataProcessorName = (dataProcessorId: string) => {
     const processor = dataProcessors.find(
       (dp: any) => dp.ouId === dataProcessorId
@@ -150,9 +145,6 @@ export function Step5Form({
   const breakingChanges = state.baseline
     ? detectBreakingChanges(state.baseline, state)
     : [];
-  const hasBreakingChanges = breakingChanges.length > 0;
-  const isPublishedCP = consentPurpose?.status === "published";
-
   const handleSaveAsDraft = async () => {
     if (!state.step1Data) {
       toast.error("Please complete Step 1 first");
@@ -166,9 +158,17 @@ export function Step5Form({
         consentPurposeId: consentPurposeId ? parseInt(consentPurposeId) : undefined
       });
       if (result.success) {
-        toast.success("Consent purpose saved as draft");
+        toast.success(
+          isEdit
+            ? "Consent purpose saved as draft"
+            : "Purpose Master saved successfully. Continue with Create Notice Template."
+        );
         dispatch({ type: "RESET" });
-        router.push("/cms/data-fiduciary/consent-purposes");
+        router.push(
+          isEdit
+            ? "/cms/data-fiduciary/consent-purposes"
+            : "/cms/data-fiduciary/business-processes"
+        );
       } else {
         toast.error(
           result.error || "Failed to save consent purpose as draft"
@@ -209,7 +209,7 @@ export function Step5Form({
         setSelectedBPsToPropagate([]);
         setShowBreakingChangeDialog(true);
         setIsFetchingAffectedBPs(false);
-      } catch (err) {
+      } catch {
         toast.error("Failed to fetch affected processes.");
         setIsFetchingAffectedBPs(false);
       }
@@ -243,12 +243,18 @@ export function Step5Form({
               } published successfully`
               : consentPurpose?.status === "published"
                 ? "Consent purpose updated successfully"
-                : "Consent purpose published successfully"
+                : isEdit
+                  ? "Consent purpose published successfully"
+                  : "Purpose Master published successfully. Continue with Create Notice Template."
           );
           dispatch({ type: "RESET" });
           setShowBreakingChangeDialog(false);
           setSelectedBPsToPropagate([]); // Reset selection
-          router.push("/cms/data-fiduciary/consent-purposes");
+          router.push(
+            isEdit
+              ? "/cms/data-fiduciary/consent-purposes"
+              : "/cms/data-fiduciary/business-processes"
+          );
         } else {
           toast.error(
             result.error ||
@@ -266,7 +272,7 @@ export function Step5Form({
 
   const handlePrevious = () => {
     const params = new URLSearchParams();
-    params.set("step", "4");
+    params.set("step", "3");
     if (consentPurposeId) params.set("id", consentPurposeId);
     const basePath =
       isEdit && consentPurposeId
@@ -315,12 +321,6 @@ export function Step5Form({
           <div className="rounded-lg border p-4">
             <h3 className="font-semibold mb-3">General Information</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="font-medium text-muted-foreground">Code:</span>
-                <p className="mt-1">
-                  {consentPurpose?.code || "Not specified"}
-                </p>
-              </div>
               <div className="col-span-2">
                 <span className="font-medium text-muted-foreground">
                   Description:

@@ -13,16 +13,18 @@ import { redirect } from "next/navigation";
 import { verifyPermission } from "@/lib/safe-action";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { BusinessUnitForm } from "@/app/cms/data-fiduciary/business-units/_components/business-unit-form";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 export default async function NewBusinessUnitPage() {
   try {
     await verifyPermission(Resources.BUSINESS_UNIT, Actions.CREATE);
-  } catch (error) {
+  } catch {
     redirect("/cms/forbidden");
   }
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={1} />
       <BusinessUnitForm mode="new" />
     </div>
   );

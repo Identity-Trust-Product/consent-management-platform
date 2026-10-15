@@ -16,22 +16,18 @@ import {
   ConsentPurposesTable,
   type ConsentPurpose,
 } from "@/app/cms/data-fiduciary/consent-purposes/consent-purposes-table";
-import { deleteConsentPurpose } from "@/actions/consent-purposes";
-import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 
 interface ConsentPurposesClientProps {
   data: ConsentPurpose[];
   newButton: React.ReactNode;
   canUpdate: boolean;
-  canDelete: boolean;
 }
 
 export function ConsentPurposesClient({
   data,
   newButton,
   canUpdate,
-  canDelete,
 }: ConsentPurposesClientProps) {
   const router = useRouter();
   const [filterValue, setFilterValue] = useState("");
@@ -42,20 +38,6 @@ export function ConsentPurposesClient({
 
   const handleView = (id: number) => {
     router.push(`/cms/data-fiduciary/consent-purposes/${id}`);
-  };
-
-  const handleDelete = async (id: number) => {
-    try {
-      const result = await deleteConsentPurpose({ id });
-      if (result.success) {
-        toast.success("Consent purpose deleted successfully");
-        router.refresh();
-      } else {
-        toast.error(result.error || "Failed to delete consent purpose");
-      }
-    } catch (error) {
-      toast.error("An error occurred while deleting the consent purpose");
-    }
   };
 
   return (
@@ -80,10 +62,8 @@ export function ConsentPurposesClient({
         data={data}
         onEdit={handleEdit}
         onView={handleView}
-        onDelete={handleDelete}
         filterValue={filterValue}
         canUpdate={canUpdate}
-        canDelete={canDelete}
       />
     </div>
   );

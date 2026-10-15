@@ -18,6 +18,7 @@ import Link from "next/link";
 import { checkPermission } from "@/lib/rbac";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { Forbidden } from "@/components/forbidden";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 async function ConsentPurposesContent() {
   const canRead = await checkPermission(Resources.CONSENT_PURPOSE, Actions.READ);
@@ -31,25 +32,24 @@ async function ConsentPurposesContent() {
   // Check permissions
   const canCreate = await checkPermission(Resources.CONSENT_PURPOSE, Actions.CREATE);
   const canUpdate = await checkPermission(Resources.CONSENT_PURPOSE, Actions.UPDATE);
-  const canDelete = await checkPermission(Resources.CONSENT_PURPOSE, Actions.DELETE);
 
   const newButton = canCreate ? (
     <Button asChild>
       <Link href="/cms/data-fiduciary/consent-purposes/new" className="group">
         <Plus className="h-4 w-4 group-hover:scale-125 transition-transform" />
-        <p className="text-base">New Consent Purpose</p>
+        <p className="text-base">New Purpose Master</p>
       </Link>
     </Button>
   ) : null;
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={4} />
       <div className="mx-auto">
         <ConsentPurposesClient
           data={consentPurposes}
           newButton={newButton}
           canUpdate={canUpdate}
-          canDelete={canDelete}
         />
       </div>
     </div>
@@ -64,7 +64,7 @@ export default function ConsentPurposesPage() {
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Loading consent purposes...
+              Loading purpose masters...
             </p>
           </div>
         </div>

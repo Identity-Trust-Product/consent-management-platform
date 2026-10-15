@@ -113,7 +113,7 @@ export function UserAttributeForm({
 
     if (!nameValue || nameValue.trim() === "") {
       toast.error("Please enter a purpose attribute name first");
-      return { error: "Purpose attribute name is required" };
+      return { error: "Data attributes name is required" };
     }
 
     // CREATE MODE: Use server action to translate text
@@ -142,8 +142,8 @@ export function UserAttributeForm({
 
     // EDIT MODE: Server-side translation with database update
     if (!userAttributeId) {
-      toast.error("Purpose attribute ID not found");
-      return { error: "Purpose attribute ID not found" };
+      toast.error("Data attributes ID not found");
+      return { error: "Data attributes ID not found" };
     }
 
     const id = parseInt(userAttributeId);
@@ -216,10 +216,14 @@ export function UserAttributeForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Purpose attribute created successfully"
-            : "Purpose attribute updated successfully"
+            ? "Data attributes created successfully. Continue with Purpose Sub Master."
+            : "Data attributes updated successfully"
         );
-        router.push("/cms/data-fiduciary/user-attributes");
+        router.push(
+          mode === "new"
+            ? "/cms/data-fiduciary/purposes-of-processing"
+            : "/cms/data-fiduciary/user-attributes"
+        );
       } else {
         toast.error(result.error || "An error occurred");
       }
@@ -243,8 +247,8 @@ export function UserAttributeForm({
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold tracking-tight">
               {mode === "new"
-                ? "New Purpose Attribute"
-                : "Edit Purpose Attribute"}
+                ? "New Data attributes"
+                : "Edit Data attributes"}
             </h2>
           </div>
         </div>
@@ -271,7 +275,7 @@ export function UserAttributeForm({
                     render={({ field }) => (
                       <FormItem className="max-w-lg">
                         <FormLabel>
-                          Purpose Attribute Name{" "}
+                          Data attributes Name{" "}
                           <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
@@ -321,7 +325,7 @@ export function UserAttributeForm({
               <div className="rounded-lg border p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold">
-                    Purpose Attribute in 22 Indian Languages
+                    Data attributes in 22 Indian Languages
                   </h3>
 
                   {/* Auto-Translate Button - Available in both Create and Edit modes */}

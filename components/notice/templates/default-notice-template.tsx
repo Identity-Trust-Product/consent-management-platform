@@ -25,6 +25,7 @@ import {
 import { AccordionSelect } from "../accordion-select";
 import { NoticeConsentPurpose } from "../notice-consent-purpose";
 import { NoticeDescription } from "../notice-description";
+import { NoticeDpdpaRights } from "../notice-dpdpa-rights";
 import { NoticeFooter } from "../notice-footer";
 import { NoticeHeader } from "../notice-header";
 import { NoticeProcessingPurpose } from "../notice-processing-purpose";
@@ -46,6 +47,7 @@ export function DefaultNoticeTemplate({
   className,
   onAccept,
   onReject,
+  container,
   speechReadoutButton,
 }: DefaultNoticeTemplateProps) {
   const { isHighContrast } = useHighContrast();
@@ -94,7 +96,7 @@ export function DefaultNoticeTemplate({
       <CardContent
         className={cn(
           "pt-6",
-          isMobile ? "px-2" : "px-14",
+          isMobile ? "px-2" : "px-12 lg:px-16",
           "hc-bg-notice-body",
           className,
         )}
@@ -107,6 +109,12 @@ export function DefaultNoticeTemplate({
 
         {/* Business Process Description */}
         <NoticeDescription description={translatedBP.grantDescription} />
+
+        <NoticeDpdpaRights
+          fiduciaryName={notice.businessProcess.businessUnit.name}
+          legalDocuments={notice.businessProcess.legalDocuments}
+          container={container}
+        />
 
         <Separator
           className={cn("mb-6", isHighContrast && "hc-bg-light-gray")}

@@ -97,7 +97,7 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
   });
 
   const watchedCode = form.watch("code");
-  const { isValid, errors } = form.formState;
+  const { isValid } = form.formState;
 
   // Generate a new random code if the current code is empty
   useEffect(() => {
@@ -172,17 +172,11 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                       </p>
                     )}
                   </div>
-                  <p className="text-sm text-blue-700 mt-1">
-                    Code:{" "}
-                    <span className="font-mono">
-                      {data.businessProcess.code}
+                  {data.businessProcess.status === "published" && (
+                    <span className="mt-2 inline-flex rounded bg-blue-200 px-2 py-0.5 text-xs text-blue-800">
+                      Published
                     </span>
-                    {data.businessProcess.status === "published" && (
-                      <span className="ml-2 text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded">
-                        Published
-                      </span>
-                    )}
-                  </p>
+                  )}
                 </div>
               )}
 
@@ -223,7 +217,7 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>
-                              Department{" "}
+                              Organization{" "}
                               <span className="text-destructive">*</span>
                             </FormLabel>
                             <Popover
@@ -241,13 +235,8 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                                     {field.value
                                       ? data.businessUnits?.find(
                                         (unit) => unit.id === field.value
-                                      )?.name +
-                                      " (" +
-                                      data.businessUnits?.find(
-                                        (unit) => unit.id === field.value
-                                      )?.code +
-                                      ")"
-                                      : "Select a Department..."}
+                                      )?.name
+                                      : "Select an Organization..."}
                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                   </Button>
                                 </FormControl>
@@ -281,7 +270,7 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                                                 : "opacity-0"
                                             )}
                                           />
-                                          {unit.name} ({unit.code})
+                                          {unit.name}
                                         </CommandItem>
                                       ))}
                                     </CommandGroup>
@@ -294,38 +283,6 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                         )}
                       />
 
-                      {/* Business Process Code */}
-                      <FormField
-                        control={form.control}
-                        name="code"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Process Code{" "}
-                              <span className="text-neutral-200">
-                                (Optional)
-                              </span>
-                              <span className="text-destructive">*</span>
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="9HUttbeIL7"
-                                {...field}
-                                disabled={isEdit}
-                                className={cn(
-                                  isEdit && "bg-muted cursor-not-allowed"
-                                )}
-                              />
-                            </FormControl>
-                            {isEdit && (
-                              <p className="text-sm text-muted-foreground">
-                                Code cannot be changed after creation
-                              </p>
-                            )}
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
                     </div>
                   </div>
                 </div>
@@ -370,9 +327,6 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                           <FormItem>
                             <FormLabel>
                               Revoke Description
-                              <span className="text-neutral-200">
-                                (Optional)
-                              </span>
                             </FormLabel>
                             <FormControl>
                               <Textarea
@@ -394,9 +348,6 @@ export function Step1Form({ data, isEdit, businessProcessId }: Step1FormProps) {
                           <FormItem>
                             <FormLabel>
                               Reconsent Description
-                              <span className="text-neutral-200">
-                                (Optional)
-                              </span>
                             </FormLabel>
                             <FormControl>
                               <Textarea

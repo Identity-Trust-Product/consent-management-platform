@@ -13,6 +13,7 @@ import { redirect } from "next/navigation";
 import { verifyPermission } from "@/lib/safe-action";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { BusinessProcessForm } from "../_components/business-process-form";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 interface PageProps {
   searchParams: Promise<{ step?: string; id?: string }>;
@@ -21,12 +22,13 @@ interface PageProps {
 export default async function NewBusinessProcessPage({ searchParams }: PageProps) {
   try {
     await verifyPermission(Resources.BUSINESS_PROCESS, Actions.CREATE);
-  } catch (error) {
+  } catch {
     redirect("/cms/forbidden");
   }
 
   return (
     <div className="h-full flex flex-col pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={5} />
       <BusinessProcessForm searchParams={searchParams} mode="new" />
     </div>
   );

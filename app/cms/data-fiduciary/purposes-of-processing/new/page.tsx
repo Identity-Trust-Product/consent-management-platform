@@ -13,16 +13,18 @@ import { redirect } from "next/navigation";
 import { verifyPermission } from "@/lib/safe-action";
 import { Resources, Actions } from "@/lib/constants/rbac";
 import { PurposeOfProcessingForm } from "@/app/cms/data-fiduciary/purposes-of-processing/_components/purpose-of-processing-form";
+import { NoticeTemplateFlowProgress } from "@/components/notice-template-flow-progress";
 
 export default async function NewPurposeOfProcessingPage() {
   try {
     await verifyPermission(Resources.PURPOSE_OF_PROCESSING, Actions.CREATE);
-  } catch (error) {
+  } catch {
     redirect("/cms/forbidden");
   }
 
   return (
     <div className="pt-4 px-6">
+      <NoticeTemplateFlowProgress currentStep={3} />
       <PurposeOfProcessingForm mode="new" />
     </div>
   );

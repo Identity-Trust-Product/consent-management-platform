@@ -63,13 +63,6 @@ export function BusinessUnitsTable({
       ),
     },
     {
-      accessorKey: "code",
-      header: "Code",
-      cell: ({ row }) => (
-        <div className="font-mono text-sm">{row.getValue("code")}</div>
-      ),
-    },
-    {
       accessorKey: "active",
       header: "Active",
       cell: ({ row }) => {
@@ -160,7 +153,7 @@ export function BusinessUnitsTable({
       onRowClick={(businessUnit: BusinessUnit) => onView(businessUnit.id)}
       filterValue={filterValue}
       filterKey="name"
-      deleteDialogTitle="Delete Department"
+      deleteDialogTitle="Delete Organization"
       deleteDialogDescription={(businessUnit: BusinessUnit) =>
         `Are you sure you want to delete the department "${businessUnit.name}"? This action cannot be undone.`
       }

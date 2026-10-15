@@ -228,7 +228,7 @@ IDfy Lokey 2.0 Light Theme
 
   /* Tailwind Semantic Variable Mapping */
   --radius: 0.625rem;
-  --background: var(--shades-white);
+  --background: rgba(246, 248, 252, 1.0);
   --foreground: var(--shades-black);
   --card: var(--shades-white);
   --card-foreground: var(--shades-black);
@@ -236,15 +236,15 @@ IDfy Lokey 2.0 Light Theme
   --popover-foreground: var(--shades-black);
   --primary: var(--primary-500);
   --primary-foreground: var(--shades-white);
-  --secondary: var(--neutral-20);
+  --secondary: rgba(240, 244, 249, 1.0);
   --secondary-foreground: var(--neutral-500);
-  --muted: var(--neutral-20);
+  --muted: rgba(239, 243, 248, 1.0);
   --muted-foreground: var(--neutral-200);
   --accent: var(--primary-50);
   --accent-foreground: var(--primary-600);
   --destructive: var(--destructive-500);
-  --border: var(--neutral-50);
-  --input: var(--neutral-50);
+  --border: rgba(221, 228, 238, 1.0);
+  --input: rgba(214, 223, 235, 1.0);
   --ring: var(--primary-200);
 
   --chart-1: var(--primary-400);
@@ -253,9 +253,9 @@ IDfy Lokey 2.0 Light Theme
   --chart-4: var(--success-400);
   --chart-5: var(--warning-500);
 
-  --sidebar: rgba(8, 20, 53, 1.0);
-  --sidebar-foreground: rgba(255, 255, 255, 0.70);
-  --sidebar-primary: rgba(255, 255, 255, 0.10);
+  --sidebar: rgba(7, 24, 58, 1.0);
+  --sidebar-foreground: rgba(229, 238, 250, 0.78);
+  --sidebar-primary: rgba(255, 255, 255, 0.12);
   --sidebar-primary-foreground: var(--shades-white);
   --sidebar-accent: rgba(255, 255, 255, 0.10);
   --sidebar-accent-foreground: var(--shades-white);
@@ -366,6 +366,10 @@ IDfy Lokey 2.0 Dark Theme
   body {
     @apply bg-background text-foreground;
     @apply font-sans;
+  }
+
+  main {
+    @apply bg-background;
   }
 }
 

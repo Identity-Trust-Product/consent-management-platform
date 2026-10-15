@@ -95,10 +95,14 @@ export function PurposeOfProcessingForm({
       if (result.success) {
         toast.success(
           mode === "new"
-            ? "Purpose sub master created successfully"
+            ? "Purpose sub master created successfully. Continue with Purpose Master."
             : "Purpose sub master updated successfully"
         );
-        router.push("/cms/data-fiduciary/purposes-of-processing");
+        router.push(
+          mode === "new"
+            ? "/cms/data-fiduciary/consent-purposes"
+            : "/cms/data-fiduciary/purposes-of-processing"
+        );
       } else {
         toast.error(result.error || "An error occurred");
       }
@@ -160,33 +164,6 @@ export function PurposeOfProcessingForm({
                           />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Code */}
-                  <FormField
-                    control={form.control}
-                    name="code"
-                    render={({ field }) => (
-                      <FormItem className="max-w-lg">
-                        <FormLabel>
-                          Code <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Auto-generated code"
-                            {...field}
-                            disabled={mode === "edit"}
-                            className={mode === "edit" ? "bg-muted" : ""}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                        {mode === "edit" && (
-                          <p className="text-xs text-muted-foreground">
-                            Code cannot be changed once set
-                          </p>
-                        )}
                       </FormItem>
                     )}
                   />

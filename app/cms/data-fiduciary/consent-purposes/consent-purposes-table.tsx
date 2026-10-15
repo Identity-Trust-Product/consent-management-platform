@@ -10,12 +10,12 @@
  * is strictly prohibited without prior written permission from IDfy.
  */
 
-import { EditButton, DeleteButton } from "@/components/ui/action-buttons";
+import { EditButton } from "@/components/ui/action-buttons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Eye } from "lucide-react";
 import { Prisma } from "@prisma/client";
 
 export type ConsentPurpose = {
@@ -35,21 +35,17 @@ export type ConsentPurpose = {
 interface ConsentPurposesTableProps {
   data: ConsentPurpose[];
   onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
   onView: (id: number) => void;
   filterValue?: string;
   canUpdate: boolean;
-  canDelete: boolean;
 }
 
 export function ConsentPurposesTable({
   data,
   onEdit,
-  onDelete,
   onView,
   filterValue = "",
   canUpdate,
-  canDelete,
 }: ConsentPurposesTableProps) {
   const columns: ColumnDef<ConsentPurpose>[] = [
     {
@@ -67,13 +63,6 @@ export function ConsentPurposesTable({
       },
       cell: ({ row }) => (
         <div>{row.getValue("name")}</div>
-      ),
-    },
-    {
-      accessorKey: "code",
-      header: "Code",
-      cell: ({ row }) => (
-        <div className="font-mono text-sm">{row.getValue("code")}</div>
       ),
     },
     {
@@ -163,13 +152,8 @@ export function ConsentPurposesTable({
       id: "actions",
       header: "Actions",
       enableHiding: false,
-      cell: ({ row, table }) => {
+      cell: ({ row }) => {
         const consentPurpose = row.original;
-        const isPublished = consentPurpose.status === "published";
-        const meta = table.options.meta as {
-          onEdit?: (item: ConsentPurpose) => void;
-          onDelete?: (item: ConsentPurpose) => void;
-        };
 
         return (
           <div className="flex items-center gap-2">
@@ -181,37 +165,31 @@ export function ConsentPurposesTable({
                 }}
               />
             )}
-            {canDelete && (
-              <DeleteButton
-                onClick={(e) => {
-                  e?.stopPropagation();
-                  !isPublished && meta?.onDelete?.(consentPurpose);
-                }}
-                disabled={isPublished}
-              />
-            )}
+            <Button
+              variant="ghost"
+              size="sm"
+              aria-label="View purpose master"
+              className="hover:bg-primary/10"
+              onClick={(e) => {
+                e.stopPropagation();
+                onView(consentPurpose.id);
+              }}
+            >
+              <Eye className="h-4 w-4 text-primary" />
+            </Button>
           </div>
         );
       },
     },
   ];
 
-  const handleDelete = (consentPurpose: ConsentPurpose) => {
-    onDelete(consentPurpose.id);
-  };
-
   return (
     <DataTable
       data={data}
       columns={columns}
-      onDelete={handleDelete}
       onRowClick={(consentPurpose: ConsentPurpose) => onView(consentPurpose.id)}
       filterValue={filterValue}
       filterKey="name"
-      deleteDialogTitle="Delete Consent Purpose"
-      deleteDialogDescription={(consentPurpose: ConsentPurpose) =>
-        `Are you sure you want to delete the consent purpose "${consentPurpose.name}"? This action cannot be undone.`
-      }
       getItemName={(consentPurpose: ConsentPurpose) => consentPurpose.name}
     />
   );
