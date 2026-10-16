@@ -1,0 +1,102 @@
+pipeline {
+    agent any
+
+    options {
+        skipDefaultCheckout(true)
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        REGISTRY   = "10.210.0.123:80"
+        IMAGE      = "Identity-CMS"          // e.g. acl-apd-ui
+        TAG        = "latest"
+        BUILD_TAG_ = "${env.BUILD_NUMBER}"          // immutable tag for rollback
+        GIT_URL    = "https://cdacmumbai-gitlab.cdacmumbai.in/cms/consent-management-platform.git"
+        GIT_BRANCH = "main"
+
+        K8S_HOST       = "root@10.210.0.75"
+        K8S_NAMESPACE  = "Identity-Management"
+        K8S_DEPLOYMENT = "Identity-CMS"
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: "${GIT_BRANCH}",
+                    credentialsId: 'central-git-newtoken',
+                    url: "${GIT_URL}"
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                // Dockerfile: node:22-alpine + pnpm + prisma generate + next build
+                sh """
+                    docker build \
+                        -t ${REGISTRY}/${IMAGE}:${TAG} \
+                        -t ${REGISTRY}/${IMAGE}:${BUILD_TAG_} \
+                        -f Dockerfile .
+                """
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'docker-registry-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ]) {
+                    sh """
+                        echo "\$DOCKER_PASS" | docker login \
+                            ${REGISTRY} \
+                            -u "\$DOCKER_USER" \
+                            --password-stdin
+
+                        docker push ${REGISTRY}/${IMAGE}:${TAG}
+                        docker push ${REGISTRY}/${IMAGE}:${BUILD_TAG_}
+
+                        docker logout ${REGISTRY}
+                    """
+                }
+            }
+        }
+
+    /*    stage('Restart Deployment') {
+            steps {
+                sshagent(['IUDX-SSH']) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no \
+                            -o UserKnownHostsFile=/dev/null \
+                            ${K8S_HOST} '
+                                kubectl rollout restart deployment/${K8S_DEPLOYMENT} \
+                                    -n ${K8S_NAMESPACE} &&
+                                kubectl rollout status deployment/${K8S_DEPLOYMENT} \
+                                    -n ${K8S_NAMESPACE} --timeout=300s
+                            '
+                    """
+                }
+            }
+        } */
+    }
+
+    post {
+        success {
+            echo "Deployed ${REGISTRY}/${IMAGE}:${TAG} (build ${BUILD_TAG_})"
+        }
+        failure {
+            echo "Pipeline failed - check the stage logs above."
+        }
+        always {
+            sh """
+                docker rmi ${REGISTRY}/${IMAGE}:${TAG} || true
+                docker rmi ${REGISTRY}/${IMAGE}:${BUILD_TAG_} || true
+                docker image prune -f || true
+            """
+        }
+    }
+}
