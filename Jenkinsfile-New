@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         REGISTRY   = "10.210.0.123:80"
-        IMAGE      = "Identity-CMS"          // e.g. acl-apd-ui
+        IMAGE      = "identity-cms"          // e.g. acl-apd-ui
         TAG        = "latest"
         BUILD_TAG_ = "${env.BUILD_NUMBER}"          // immutable tag for rollback
         GIT_URL    = "https://cdacmumbai-gitlab.cdacmumbai.in/cms/consent-management-platform.git"
