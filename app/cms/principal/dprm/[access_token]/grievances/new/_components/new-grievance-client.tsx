@@ -201,7 +201,7 @@ export default function NewGrievanceClient({
                   <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                     {t("User ID")}
                   </label>
-                  <p className="text-sm font-mono mt-1 font-semibold">
+                  <p className="text-sm mt-1 font-semibold">
                     {dataPrincipalId}
                   </p>
                 </div>{" "}

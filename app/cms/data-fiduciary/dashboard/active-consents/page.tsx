@@ -85,7 +85,7 @@ export default async function ActiveConsentsPage({
         <TableBody>
           {records.map((record) => (
             <TableRow key={record.publicId}>
-              <TableCell className="font-mono text-xs">
+              <TableCell>
                 {record.referenceId}
               </TableCell>
               <TableCell>{record.dataPrincipalId}</TableCell>

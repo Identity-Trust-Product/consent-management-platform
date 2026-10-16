@@ -378,6 +378,13 @@ export const routeMetadata: Record<string, RouteMetadata> = {
       { type: "page", label: "Current Page" },
     ],
   },
+  // "/cms/data-fiduciary/dxp-documents": {
+  //   title: "DXP Documents",
+  //   breadcrumb_items: [
+  //     { type: "link", label: "CMS", href: "/cms" },
+  //     { type: "page", label: "DXP Documents" },
+  //   ],
+  // },
   "/cms/data-fiduciary/consent-timeline/:id": {
     title: "Consent Timeline",
     breadcrumb_items: [

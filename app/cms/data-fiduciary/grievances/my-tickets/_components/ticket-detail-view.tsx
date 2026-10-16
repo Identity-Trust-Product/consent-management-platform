@@ -560,7 +560,7 @@ export default function TicketDetailView({
                         <p className="text-muted-foreground mb-1">
                           User ID
                         </p>
-                        <p className="font-mono text-xs break-all">
+                        <p className="text-xs break-all">
                           {detailedTicket.dataPrincipalId}
                         </p>
                       </div>

@@ -57,12 +57,12 @@ function CopyCell({ value, label }: { value: string | null; label: string }) {
   };
 
   if (!value) {
-    return <div className="font-mono text-xs max-w-40 text-wrap pb-4">-</div>;
+    return <div className="text-sm max-w-40 text-wrap pb-4">-</div>;
   }
 
   return (
     <div className="flex items-start gap-1 pb-4">
-      <div className="font-mono text-xs max-w-36 text-wrap break-all">
+      <div className="text-sm max-w-36 text-wrap break-all">
         {value}
       </div>
       <Button

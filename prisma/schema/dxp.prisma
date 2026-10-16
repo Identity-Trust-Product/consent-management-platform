@@ -1,0 +1,15 @@
+// Immutable documents received from DXP, independent of the CMS consent lifecycle.
+model DxpDocument {
+  id         String   @id @default(uuid())
+  event      String
+  eventId    String   @unique @map("event_id")
+  requestRef String   @map("request_ref")
+  consentId  String?  @unique @map("consent_id")
+  // Keep the original UTF-8 bytes; JSON/JSONB would normalize the document.
+  rawBody    Bytes    @map("raw_body")
+  receivedAt DateTime @default(now()) @map("received_at")
+
+  @@unique([event, requestRef])
+  @@index([requestRef])
+  @@map("dxp_documents")
+}

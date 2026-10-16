@@ -10,6 +10,7 @@
  */
 
 import authConfig from "@/auth.config";
+import { isDxpEndpoint } from "@/lib/dxp-ingestion";
 import { validateApiKey } from "@/lib/api-auth-middleware";
 import { API_ERROR_CODES, createErrorResponse } from "@/lib/api-errors";
 import {
@@ -31,6 +32,11 @@ async function middleware(
 ): Promise<NextResponse | Response | undefined> {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
+
+  // DXP handlers authenticate X-API-Key independently of CMS sessions/API keys.
+  if (isDxpEndpoint(nextUrl.pathname)) {
+    return NextResponse.next();
+  }
 
   // Private health route
   if (nextUrl.pathname.endsWith(HEALTH_CHECK_ENDPOINT)) {

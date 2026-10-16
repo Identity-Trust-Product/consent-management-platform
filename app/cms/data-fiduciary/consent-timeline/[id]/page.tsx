@@ -189,7 +189,7 @@ const FilterDropdown = ({
                       {opt.label}
                     </span>
                     {opt.description && (
-                      <span className="text-xs text-gray-400 font-mono mt-0.5 group-hover:text-gray-500 truncate block">
+                      <span className="text-xs text-gray-400 mt-0.5 group-hover:text-gray-500 truncate block">
                         {opt.description}
                       </span>
                     )}
@@ -783,7 +783,7 @@ export default function ConsentDetailPage({ params }) {
                     ? "Reference ID:"
                     : "User ID:"}
                 </span>
-                <span className="text-lg font-mono text-gray-600">
+                <span className="text-lg text-gray-600">
                   {referenceId}
                 </span>
               </div>

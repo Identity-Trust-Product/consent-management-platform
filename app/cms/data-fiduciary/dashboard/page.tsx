@@ -252,7 +252,7 @@ export default async function DashboardPage() {
                 <tbody>
                   {recentNotices.map((notice) => (
                     <tr key={notice.publicId} className="border-t">
-                      <td className="max-w-48 truncate px-4 py-3 font-mono text-xs">
+                      <td className="max-w-48 truncate px-4 py-3">
                         <Link
                           href={`/cms/data-fiduciary/notices/${notice.publicId}`}
                           className="text-primary hover:underline"
@@ -260,7 +260,7 @@ export default async function DashboardPage() {
                           {notice.referenceId || notice.publicId}
                         </Link>
                       </td>
-                      <td className="max-w-48 truncate px-4 py-3 font-mono text-xs">
+                      <td className="max-w-48 truncate px-4 py-3">
                         {notice.dataPrincipalId}
                       </td>
                       <td className="px-4 py-3">

@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { logout } from "@/actions/auth";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import {
@@ -50,6 +51,10 @@ const getDataFiduciaryItems = (): SidebarSection[] => {
       title: "Consent History",
       href: "/cms/data-fiduciary/consent-history",
     },
+    // {
+    //   title: "DXP Documents",
+    //   href: "/cms/data-fiduciary/dxp-documents",
+    // },
   ];
 
   // Only add Grievances admin if user has GRIEVANCE_ADMIN:READ permission
@@ -198,9 +203,16 @@ export function Sidebar({ userName, organizationName }: SidebarProps) {
         )}
         onKeyDown={(event) => { if (event.key === "Escape") setMobileOpen(false); }}
       >
-        <Link href="/cms/data-fiduciary/dashboard" className="flex items-center gap-3 px-6 pb-8 pt-20 lg:pt-8">
-          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary text-sm font-bold text-white">CM</span>
-          <span className="text-lg font-bold leading-6 text-white">Consent Management<br />Platform</span>
+        <Link href="/cms/data-fiduciary/dashboard" className="flex shrink-0 flex-col items-center gap-4 px-4 pb-6 pt-20 lg:pt-6">
+          <Image
+            src="/cms/images/cdac-wordmark.jpg"
+            alt="C-DAC — Centre for Development of Advanced Computing"
+            width={192}
+            height={135}
+            sizes="96px"
+            className="h-auto w-24 rounded-md bg-white p-1 object-contain"
+          />
+          <span className="whitespace-nowrap text-center text-sm font-bold leading-6 text-white sm:text-[15px]">Consent Management Platform</span>
         </Link>
         <nav className="min-h-0 flex-1 overflow-y-auto px-3 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <Accordion

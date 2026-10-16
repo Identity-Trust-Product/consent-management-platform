@@ -119,7 +119,7 @@ export function ReceiptDropdown({
                         User ID:
                       </span>
                       <span
-                        className="text-sm font-medium text-gray-500 font-mono truncate"
+                        className="text-sm font-medium text-gray-500 truncate"
                         title={opt.dataPrincipalId}
                       >
                         {opt.dataPrincipalId}
@@ -130,7 +130,7 @@ export function ReceiptDropdown({
                         Reference ID:
                       </span>
                       <span
-                        className="text-sm font-medium text-gray-500 font-mono truncate"
+                        className="text-sm font-medium text-gray-500 truncate"
                         title={opt.referenceId}
                       >
                         {opt.referenceId}
