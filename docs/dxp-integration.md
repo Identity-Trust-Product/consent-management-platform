@@ -16,6 +16,29 @@ forward both paths to this Next.js application.
    the client with `npx prisma generate` before building/restarting CMS.
 3. Configure the two delivery URLs in DXP using the public CMS origin.
 
+### Kubernetes deployment
+
+CMS `.env` is ignored by Git. Pushing application code does not send that file
+to the deployed container or set Kubernetes environment variables.
+
+From a PowerShell terminal with kubectl access to the correct cluster, run:
+
+```powershell
+./scripts/configure-dxp-kubernetes.ps1 -Deployment <cms-deployment-name> -Namespace <cms-namespace>
+```
+
+The script reads `DXP_INTEGRATION_KEY` from the process environment or the local
+CMS `.env`, creates/updates the `dxp-integration` Secret in the target namespace,
+attaches its environment variable to the existing deployment, and restarts CMS.
+It does not upload the rest of `.env` or print the key. The script can be committed;
+the key remains in local configuration and the Kubernetes Secret.
+
+Run the script once after deployment, and again when rotating the key. A normal
+image update/restart retains this deployment setting, unless your deployment
+pipeline replaces it. If a separate Helm chart or deployment manifest manages
+the environment, add a `DXP_INTEGRATION_KEY` `secretKeyRef` pointing to
+`dxp-integration` / `DXP_INTEGRATION_KEY` there as well.
+
 Requests require `Content-Type: application/json` and `X-API-Key`. The body must
 be UTF-8 JSON matching the supplied DXP envelope. Extra fields are accepted at
 every level. If `X-DXP-Event` or `X-DXP-Event-Id` is supplied, it must agree with
