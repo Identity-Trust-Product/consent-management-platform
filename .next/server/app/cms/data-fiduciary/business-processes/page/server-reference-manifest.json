@@ -1,0 +1,155 @@
+{
+  "node": {
+    "008a1212120f9a3422af095421d549786cc5068805": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "000cb08da8052bb49445e9ccf3a7a6afa7012ae690": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getBusinessProcesses",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "getBusinessProcesses",
+      "filename": "actions/business-processes.ts"
+    },
+    "00527b79d070b3e249754aac836957a881a0ea542d": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getPublishedConsentPurposes",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "getPublishedConsentPurposes",
+      "filename": "actions/business-processes.ts"
+    },
+    "00a8fa2c61d6db63408996831e0baebca4accc3b20": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getBusinessProcessData",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "getBusinessProcessData",
+      "filename": "actions/business-processes.ts"
+    },
+    "40308647a4a0231feaac0d47db435803ca1fa1d9f4": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getNextVersionsForBPCodes",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "getNextVersionsForBPCodes",
+      "filename": "actions/business-processes.ts"
+    },
+    "4032cf77b2e0c0c69aa82cf71f9fd516359d144e7b": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getHighestVersionForCode",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "getHighestVersionForCode",
+      "filename": "actions/business-processes.ts"
+    },
+    "406023a44404ef8f60ebcece866c54332ed69fd81c": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "saveOrPublishBusinessProcessWithVersioning",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "saveOrPublishBusinessProcessWithVersioning",
+      "filename": "actions/business-processes.ts"
+    },
+    "407c6081e7d831319c77096781627f0ad6576e77a0": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getBusinessProcessWithFullData",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "getBusinessProcessWithFullData",
+      "filename": "actions/business-processes.ts"
+    },
+    "40b82c46450dea4af40e5bd6ec74d062663f60578c": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getBusinessProcessById",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "getBusinessProcessById",
+      "filename": "actions/business-processes.ts"
+    },
+    "7f97a3eeebb07485d02e4dd36a94509afd502ef72c": {
+      "workers": {
+        "app/cms/data-fiduciary/business-processes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/business-processes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/business-processes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteBusinessProcess",
+          "filename": "actions/business-processes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/business-processes/page": "rsc"
+      },
+      "exportedName": "deleteBusinessProcess",
+      "filename": "actions/business-processes.ts"
+    }
+  },
+  "edge": {}
+}

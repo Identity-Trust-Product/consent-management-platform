@@ -1,0 +1,65 @@
+{
+  "node": {
+    "008a1212120f9a3422af095421d549786cc5068805": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "005a963a3ed5cae8034bcab0fd7b9d9ad03d30711f": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getConsentPurposes",
+          "filename": "actions/consent-purposes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/page": "rsc"
+      },
+      "exportedName": "getConsentPurposes",
+      "filename": "actions/consent-purposes.ts"
+    },
+    "405ef56fed095a73a4f19c2d02e0c23adce2286ccb": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getHighestVersionForConsentPurposeCode",
+          "filename": "actions/consent-purposes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/page": "rsc"
+      },
+      "exportedName": "getHighestVersionForConsentPurposeCode",
+      "filename": "actions/consent-purposes.ts"
+    },
+    "7f3853f666e2e339497376092980ae675cc85b01b6": {
+      "workers": {
+        "app/cms/data-fiduciary/consent-purposes/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/consent-purposes/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/consent-purposes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteConsentPurpose",
+          "filename": "actions/consent-purposes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/consent-purposes/page": "rsc"
+      },
+      "exportedName": "deleteConsentPurpose",
+      "filename": "actions/consent-purposes.ts"
+    }
+  },
+  "edge": {}
+}

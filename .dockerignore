@@ -5,6 +5,13 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Build output (rebuilt inside the image)
+.next
+out
+dist
+build
+tsconfig.tsbuildinfo
+
 # Git / editor / OS
 .git
 .gitignore
@@ -17,3 +24,10 @@ coverage
 .nyc_output
 tmp/
 temp/
+
+# Not needed in the image
+docs
+reports
+*.md
+Jenkinsfile*
+cloudbuild.yaml

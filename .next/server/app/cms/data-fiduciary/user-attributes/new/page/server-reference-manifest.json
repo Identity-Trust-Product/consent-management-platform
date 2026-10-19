@@ -1,0 +1,95 @@
+{
+  "node": {
+    "008a1212120f9a3422af095421d549786cc5068805": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/translations.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/new/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "70b9545bad0e89f2cb1c43b9c584ffaf1beb9f6aea": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/translations.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateUserAttributeTranslation",
+          "filename": "actions/translations.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/new/page": "action-browser"
+      },
+      "exportedName": "updateUserAttributeTranslation",
+      "filename": "actions/translations.ts"
+    },
+    "7078ca02c00a5febd8d9c8a2d854ac3edaeb12da21": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/translations.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "autoTranslateUserAttribute",
+          "filename": "actions/auto-translate.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/new/page": "action-browser"
+      },
+      "exportedName": "autoTranslateUserAttribute",
+      "filename": "actions/auto-translate.ts"
+    },
+    "70be8c5ecafc7686ae2ab3ec47504a03bf70335a72": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/translations.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "translateTextToLanguages",
+          "filename": "actions/auto-translate.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/new/page": "action-browser"
+      },
+      "exportedName": "translateTextToLanguages",
+      "filename": "actions/auto-translate.ts"
+    },
+    "7f5d05edb32e9ce8e6a54867f959880d47c943ae2c": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/translations.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createUserAttribute",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/new/page": "action-browser"
+      },
+      "exportedName": "createUserAttribute",
+      "filename": "actions/user-attributes.ts"
+    },
+    "7fe6d4ad0cbdfffcfdc5405b03b801f377298a9db3": {
+      "workers": {
+        "app/cms/data-fiduciary/user-attributes/new/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/user-attributes/new/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/translations.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/auto-translate.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/actions/user-attributes.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateUserAttribute",
+          "filename": "actions/user-attributes.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/user-attributes/new/page": "action-browser"
+      },
+      "exportedName": "updateUserAttribute",
+      "filename": "actions/user-attributes.ts"
+    }
+  },
+  "edge": {}
+}

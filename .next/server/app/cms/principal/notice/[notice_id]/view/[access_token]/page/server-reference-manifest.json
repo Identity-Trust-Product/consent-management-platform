@@ -1,0 +1,65 @@
+{
+  "node": {
+    "40a5b189435618bfee3fcd67501296038521095cb3": {
+      "workers": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/principal/notice/[notice_id]/view/[access_token]/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/dprm.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/notice-consent.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/fiduciary-config.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "generateDprmLinkForNotice",
+          "filename": "actions/dprm.ts"
+        }
+      },
+      "layer": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": "action-browser"
+      },
+      "exportedName": "generateDprmLinkForNotice",
+      "filename": "actions/dprm.ts"
+    },
+    "78adcbcacde7d6d3458c3c80784f8a74c23b83c134": {
+      "workers": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/principal/notice/[notice_id]/view/[access_token]/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/dprm.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/notice-consent.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/fiduciary-config.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "handleConsentAcceptance",
+          "filename": "actions/notice-consent.ts"
+        }
+      },
+      "layer": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": "action-browser"
+      },
+      "exportedName": "handleConsentAcceptance",
+      "filename": "actions/notice-consent.ts"
+    },
+    "608f61f98d49e67eef9774f0041b5005a8581aa450": {
+      "workers": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/principal/notice/[notice_id]/view/[access_token]/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/dprm.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/notice-consent.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/fiduciary-config.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "handleConsentRejection",
+          "filename": "actions/notice-consent.ts"
+        }
+      },
+      "layer": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": "action-browser"
+      },
+      "exportedName": "handleConsentRejection",
+      "filename": "actions/notice-consent.ts"
+    },
+    "00a80171c59b84ebdcb44573d5a22d838e46d3cb40": {
+      "workers": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/principal/notice/[notice_id]/view/[access_token]/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/dprm.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/actions/notice-consent.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/actions/fiduciary-config.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getFiduciaryConfig",
+          "filename": "actions/fiduciary-config.ts"
+        }
+      },
+      "layer": {
+        "app/cms/principal/notice/[notice_id]/view/[access_token]/page": "action-browser"
+      },
+      "exportedName": "getFiduciaryConfig",
+      "filename": "actions/fiduciary-config.ts"
+    }
+  },
+  "edge": {}
+}
