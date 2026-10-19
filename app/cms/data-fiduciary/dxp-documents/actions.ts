@@ -3,6 +3,8 @@
 import prisma from "@/lib/prisma";
 import { verifyPermission } from "@/lib/safe-action";
 import { readDxpDisplay } from "@/lib/dxp-display";
+import { readDxpConsentArtifact } from "@/lib/dxp-consent-artifact";
+import { readDxpNotice } from "@/lib/dxp-notice";
 import { getDxpConsentStatus } from "@/lib/services/dxp-status-service";
 import { z } from "zod";
 
@@ -21,6 +23,8 @@ export async function viewDxpDocument(id: string) {
     event: document.event,
     requestRef: document.requestRef,
     display: readDxpDisplay(document.rawBody),
+    artifact: document.event === "consent.issued" ? readDxpConsentArtifact(document.rawBody) : null,
+    notice: document.event === "notice.accepted" ? readDxpNotice(document.rawBody) : null,
     status,
   };
 }

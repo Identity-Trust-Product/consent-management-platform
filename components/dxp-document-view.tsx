@@ -7,7 +7,14 @@ export function DxpStatusBadge({ status }: { status: DxpStatusResult | "checking
     : status.checked === true
       ? `${status.value.display_status}${status.value.reason !== null ? `: ${status.value.reason}` : ""}`
       : "Status could not be checked";
-  return <span role="status" className="inline-flex max-w-full whitespace-pre-wrap break-words rounded-full border bg-muted px-3 py-1 text-sm font-medium">{label}</span>;
+  const liveCode = status !== "checking" && status.checked === true ? status.value.status.toUpperCase() : "";
+  const color = liveCode === "ACTIVE" ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+    : ["REVOKED", "EXPIRED"].includes(liveCode) ? "border-red-200 bg-red-50 text-red-700"
+      : liveCode === "SUSPENDED" ? "border-amber-200 bg-amber-50 text-amber-800"
+        : "border-slate-200 bg-slate-100 text-slate-600";
+  return <span role="status" className={`inline-flex max-w-full items-center gap-2 whitespace-pre-wrap break-words rounded-full border px-3 py-1 text-sm font-semibold ${color}`}>
+    <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-current" />{label}
+  </span>;
 }
 
 export function DxpDocumentDisplay({ display }: { display: DxpDisplay | null }) {

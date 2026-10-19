@@ -263,10 +263,28 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/cms/data-fiduciary/dxp-consent-artifacts/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/cms/data-fiduciary/dxp-consent-artifacts">> = Specific
+  const handler = {} as typeof import("../../app/cms/data-fiduciary/dxp-consent-artifacts/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/cms/data-fiduciary/dxp-documents/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/cms/data-fiduciary/dxp-documents">> = Specific
   const handler = {} as typeof import("../../app/cms/data-fiduciary/dxp-documents/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/cms/data-fiduciary/dxp-notices/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/cms/data-fiduciary/dxp-notices">> = Specific
+  const handler = {} as typeof import("../../app/cms/data-fiduciary/dxp-notices/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

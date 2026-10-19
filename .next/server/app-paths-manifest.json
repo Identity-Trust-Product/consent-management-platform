@@ -1,22 +1,5 @@
 {
   "/cms/api/auth/[...nextauth]/route": "app/cms/api/auth/[...nextauth]/route.js",
-  "/cms/api/v1/notices/grant/route": "app/cms/api/v1/notices/grant/route.js",
-  "/cms/data-fiduciary/business-processes/new/page": "app/cms/data-fiduciary/business-processes/new/page.js",
-  "/cms/data-fiduciary/business-processes/page": "app/cms/data-fiduciary/business-processes/page.js",
-  "/cms/data-fiduciary/business-units/new/page": "app/cms/data-fiduciary/business-units/new/page.js",
-  "/cms/data-fiduciary/business-units/page": "app/cms/data-fiduciary/business-units/page.js",
-  "/cms/data-fiduciary/consent-history/page": "app/cms/data-fiduciary/consent-history/page.js",
-  "/cms/data-fiduciary/consent-purposes/new/page": "app/cms/data-fiduciary/consent-purposes/new/page.js",
-  "/cms/data-fiduciary/consent-purposes/page": "app/cms/data-fiduciary/consent-purposes/page.js",
-  "/cms/data-fiduciary/consent-timeline/[id]/page": "app/cms/data-fiduciary/consent-timeline/[id]/page.js",
-  "/cms/data-fiduciary/dashboard/page": "app/cms/data-fiduciary/dashboard/page.js",
-  "/cms/data-fiduciary/notices/[public_id]/page": "app/cms/data-fiduciary/notices/[public_id]/page.js",
-  "/cms/data-fiduciary/notices/page": "app/cms/data-fiduciary/notices/page.js",
-  "/cms/data-fiduciary/purposes-of-processing/[id]/edit/page": "app/cms/data-fiduciary/purposes-of-processing/[id]/edit/page.js",
-  "/cms/data-fiduciary/purposes-of-processing/new/page": "app/cms/data-fiduciary/purposes-of-processing/new/page.js",
-  "/cms/data-fiduciary/purposes-of-processing/page": "app/cms/data-fiduciary/purposes-of-processing/page.js",
-  "/cms/data-fiduciary/user-attributes/new/page": "app/cms/data-fiduciary/user-attributes/new/page.js",
-  "/cms/data-fiduciary/user-attributes/page": "app/cms/data-fiduciary/user-attributes/page.js",
-  "/cms/login/page": "app/cms/login/page.js",
-  "/cms/principal/notice/[notice_id]/view/[access_token]/page": "app/cms/principal/notice/[notice_id]/view/[access_token]/page.js"
+  "/cms/data-fiduciary/dxp-consent-artifacts/page": "app/cms/data-fiduciary/dxp-consent-artifacts/page.js",
+  "/cms/data-fiduciary/dxp-notices/page": "app/cms/data-fiduciary/dxp-notices/page.js"
 }

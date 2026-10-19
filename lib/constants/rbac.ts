@@ -158,6 +158,9 @@ export const ROLE_PERMISSIONS = {
     // Notices are typically not deleted for audit reasons, but we allow it for now if needed
     `${Resources.NOTICE}:${Actions.DELETE}`,
 
+    // View stored DXP notices and consent artifacts.
+    `${Resources.CONSENT_RECORD}:${Actions.READ}`,
+
     // Data Retention Policies
     `${Resources.DATA_RETENTION_POLICY}:${Actions.READ}`,
   ],

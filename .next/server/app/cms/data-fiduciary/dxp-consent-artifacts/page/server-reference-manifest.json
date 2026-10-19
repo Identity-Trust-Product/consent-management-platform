@@ -1,0 +1,35 @@
+{
+  "node": {
+    "008a1212120f9a3422af095421d549786cc5068805": {
+      "workers": {
+        "app/cms/data-fiduciary/dxp-consent-artifacts/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/dxp-consent-artifacts/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/cms/data-fiduciary/dxp-documents/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "logout",
+          "filename": "actions/auth.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/dxp-consent-artifacts/page": "action-browser"
+      },
+      "exportedName": "logout",
+      "filename": "actions/auth.ts"
+    },
+    "40522319a65ceb46e2eb4ba053ceb670714447c885": {
+      "workers": {
+        "app/cms/data-fiduciary/dxp-consent-artifacts/page": {
+          "moduleId": "[project]/.next-internal/server/app/cms/data-fiduciary/dxp-consent-artifacts/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/cms/data-fiduciary/dxp-documents/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "viewDxpDocument",
+          "filename": "app/cms/data-fiduciary/dxp-documents/actions.ts"
+        }
+      },
+      "layer": {
+        "app/cms/data-fiduciary/dxp-consent-artifacts/page": "action-browser"
+      },
+      "exportedName": "viewDxpDocument",
+      "filename": "app/cms/data-fiduciary/dxp-documents/actions.ts"
+    }
+  },
+  "edge": {}
+}

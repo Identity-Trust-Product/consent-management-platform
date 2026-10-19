@@ -71,9 +71,17 @@ cryptographic verification is not performed. No key or payload is logged.
 
 ## Viewing documents and live status
 
-Open **Admin Department → DXP Documents** at `/cms/data-fiduciary/dxp-documents`.
-The page requires the CMS `CONSENT_RECORD:READ` permission. Search by request
-reference or consent ID, then select **View notice** or **View consent**.
+The sidebar has an expanded **DXP DOCUMENTS** section with two separate options:
+
+- **DXP Notices** at `/cms/data-fiduciary/dxp-notices`, showing only `notice.accepted` documents.
+- **DXP Consent Artifacts** at `/cms/data-fiduciary/dxp-consent-artifacts`, showing only `consent.issued` documents.
+
+Both pages require `CONSENT_RECORD:READ`, which is granted to the standard CMS
+operator, administrator, DPO and auditor roles. Search by request reference or
+consent ID, then select **View notice** or **View consent** to render the stored
+DXP display. The earlier combined `/cms/data-fiduciary/dxp-documents` URL still works.
+Only documents successfully received and stored by the POST endpoints appear;
+fix delivery/configuration errors before expecting new records in these lists.
 
 The viewer reads the stored `display` block and renders the title, subtitle,
 and sections in the supplied order. It supports label/value rows, tables
@@ -94,10 +102,32 @@ On timeout, non-2xx, malformed/mismatched response, or missing configuration,
 the viewer still renders the stored consent and shows **Status could not be checked**.
 It never falls back to a previously active status. Status is not persisted.
 
+### Consent artifact detail layout
+
+**View consent** opens a full-width detail view with the live status badge beside
+the title, validity/data-item cards, consent terms, scope, consented fields
+and their treatments, recipient obligations, and signed artifact JSON. History
+is omitted. The access-usage card is not displayed. If the live status check
+fails, the stored artifact is still shown with an unknown-status badge.
+
+**View notice** opens a wide modal with a fixed request title and scrollable
+body. It renders the blue notice heading, supplied summary, party/contact cards,
+dataset and purpose, scope, data-item table, processing conditions, revocation
+and grievance information, and platform information from the received notice's
+display sections. Acceptance time (IST) and the original SHA-256 hash are shown
+at the bottom. Missing sections are not filled with invented notice terms.
+
+The download contains the original complete received JSON document, including
+its signature and public key. CMS does not claim a verified signature: the
+banner states that the signature is retained and verification is not performed.
+Obligations and treatment output names are populated from the received document;
+missing platform-specific obligations are not invented. No revoke integration
+is configured because the supplied DXP contract does not define a revoke API.
+
 Run tests with:
 
 ```sh
-npx tsx --test lib/dxp-ingestion.test.ts lib/services/dxp-document-service.test.ts lib/services/dxp-status-service.test.ts components/dxp-document-view.test.tsx
+npx tsx --test lib/dxp-ingestion.test.ts lib/services/dxp-document-service.test.ts lib/services/dxp-status-service.test.ts components/dxp-document-view.test.tsx components/dxp-consent-artifact-view.test.tsx components/dxp-notice-view.test.tsx
 ```
 
 On Windows PowerShell, use `npx.cmd` if script execution policy blocks `npx.ps1`.

@@ -1032,13 +1032,48 @@ const routeMetadata = {
             }
         ]
     },
-    // "/cms/data-fiduciary/dxp-documents": {
-    //   title: "DXP Documents",
-    //   breadcrumb_items: [
-    //     { type: "link", label: "CMS", href: "/cms" },
-    //     { type: "page", label: "DXP Documents" },
-    //   ],
-    // },
+    "/cms/data-fiduciary/dxp-documents": {
+        title: "DXP Documents",
+        breadcrumb_items: [
+            {
+                type: "link",
+                label: "CMS",
+                href: "/cms"
+            },
+            {
+                type: "page",
+                label: "DXP Documents"
+            }
+        ]
+    },
+    "/cms/data-fiduciary/dxp-notices": {
+        title: "DXP Notices",
+        breadcrumb_items: [
+            {
+                type: "link",
+                label: "CMS",
+                href: "/cms"
+            },
+            {
+                type: "page",
+                label: "DXP Notices"
+            }
+        ]
+    },
+    "/cms/data-fiduciary/dxp-consent-artifacts": {
+        title: "DXP Consent Artifacts",
+        breadcrumb_items: [
+            {
+                type: "link",
+                label: "CMS",
+                href: "/cms"
+            },
+            {
+                type: "page",
+                label: "DXP Consent Artifacts"
+            }
+        ]
+    },
     "/cms/data-fiduciary/consent-timeline/:id": {
         title: "Consent Timeline",
         breadcrumb_items: [
@@ -1596,6 +1631,21 @@ const getDataFiduciaryItems = ()=>{
     // }
     const sections = [
         {
+            title: "DXP DOCUMENTS",
+            icon: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$icons$2f$sidebar$2d$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ConsentCenterIcon"],
+            defaultOpen: true,
+            items: [
+                {
+                    title: "DXP Notices",
+                    href: "/cms/data-fiduciary/dxp-notices"
+                },
+                {
+                    title: "DXP Consent Artifacts",
+                    href: "/cms/data-fiduciary/dxp-consent-artifacts"
+                }
+            ]
+        },
+        {
             title: "DATA ELEMENT REPOSITORY",
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$icons$2f$sidebar$2d$icons$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PolicyCenterIcon"],
             defaultOpen: false,
@@ -1669,7 +1719,7 @@ function Sidebar({ userName, organizationName }) {
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["usePathname"])();
     const sidebarItems = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"](()=>getDataFiduciaryItems(), []);
     const currentSection = sidebarItems.find((section)=>section.items.some((item)=>pathname === item.href || pathname.startsWith(item.href + "/")))?.title;
-    const [openSections, setOpenSections] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"]([]);
+    const [openSections, setOpenSections] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"](()=>sidebarItems.filter((section)=>section.defaultOpen).map((section)=>section.title));
     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"](()=>{
         if (currentSection) {
             setOpenSections((sections)=>Array.from(new Set([
@@ -1695,18 +1745,18 @@ function Sidebar({ userName, organizationName }) {
                     size: 20
                 }, void 0, false, {
                     fileName: "[project]/components/cms-sidebar.tsx",
-                    lineNumber: 187,
+                    lineNumber: 194,
                     columnNumber: 23
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Menu$3e$__["Menu"], {
                     size: 20
                 }, void 0, false, {
                     fileName: "[project]/components/cms-sidebar.tsx",
-                    lineNumber: 187,
+                    lineNumber: 194,
                     columnNumber: 41
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/cms-sidebar.tsx",
-                lineNumber: 179,
+                lineNumber: 186,
                 columnNumber: 7
             }, this),
             mobileOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1716,7 +1766,7 @@ function Sidebar({ userName, organizationName }) {
                 onClick: ()=>setMobileOpen(false)
             }, void 0, false, {
                 fileName: "[project]/components/cms-sidebar.tsx",
-                lineNumber: 190,
+                lineNumber: 197,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("aside", {
@@ -1740,7 +1790,7 @@ function Sidebar({ userName, organizationName }) {
                                 className: "h-auto w-24 rounded-md bg-white p-1 object-contain"
                             }, void 0, false, {
                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                lineNumber: 207,
+                                lineNumber: 214,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1748,13 +1798,13 @@ function Sidebar({ userName, organizationName }) {
                                 children: "Consent Management Platform"
                             }, void 0, false, {
                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                lineNumber: 215,
+                                lineNumber: 222,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/cms-sidebar.tsx",
-                        lineNumber: 206,
+                        lineNumber: 213,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -1777,7 +1827,7 @@ function Sidebar({ userName, organizationName }) {
                                                         className: "size-5 shrink-0"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/cms-sidebar.tsx",
-                                                        lineNumber: 228,
+                                                        lineNumber: 235,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1785,18 +1835,18 @@ function Sidebar({ userName, organizationName }) {
                                                         children: section.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/cms-sidebar.tsx",
-                                                        lineNumber: 229,
+                                                        lineNumber: 236,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                                lineNumber: 227,
+                                                lineNumber: 234,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/cms-sidebar.tsx",
-                                            lineNumber: 226,
+                                            lineNumber: 233,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$accordion$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AccordionContent"], {
@@ -1812,34 +1862,34 @@ function Sidebar({ userName, organizationName }) {
                                                         children: item.title
                                                     }, item.href, false, {
                                                         fileName: "[project]/components/cms-sidebar.tsx",
-                                                        lineNumber: 237,
+                                                        lineNumber: 244,
                                                         columnNumber: 25
                                                     }, this);
                                                 })
                                             }, void 0, false, {
                                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                                lineNumber: 233,
+                                                lineNumber: 240,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/cms-sidebar.tsx",
-                                            lineNumber: 232,
+                                            lineNumber: 239,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, section.title, true, {
                                     fileName: "[project]/components/cms-sidebar.tsx",
-                                    lineNumber: 225,
+                                    lineNumber: 232,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/components/cms-sidebar.tsx",
-                            lineNumber: 218,
+                            lineNumber: 225,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/cms-sidebar.tsx",
-                        lineNumber: 217,
+                        lineNumber: 224,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1850,7 +1900,7 @@ function Sidebar({ userName, organizationName }) {
                                 children: userName
                             }, void 0, false, {
                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                lineNumber: 257,
+                                lineNumber: 264,
                                 columnNumber: 24
                             }, this),
                             organizationName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1858,14 +1908,14 @@ function Sidebar({ userName, organizationName }) {
                                 children: organizationName
                             }, void 0, false, {
                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                lineNumber: 258,
+                                lineNumber: 265,
                                 columnNumber: 32
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 children: "Data Fiduciary"
                             }, void 0, false, {
                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                lineNumber: 259,
+                                lineNumber: 266,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1877,24 +1927,24 @@ function Sidebar({ userName, organizationName }) {
                                     children: "Sign out"
                                 }, void 0, false, {
                                     fileName: "[project]/components/cms-sidebar.tsx",
-                                    lineNumber: 261,
+                                    lineNumber: 268,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/cms-sidebar.tsx",
-                                lineNumber: 260,
+                                lineNumber: 267,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/cms-sidebar.tsx",
-                        lineNumber: 256,
+                        lineNumber: 263,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/cms-sidebar.tsx",
-                lineNumber: 197,
+                lineNumber: 204,
                 columnNumber: 7
             }, this)
         ]

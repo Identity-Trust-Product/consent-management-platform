@@ -51,10 +51,6 @@ const getDataFiduciaryItems = (): SidebarSection[] => {
       title: "Consent History",
       href: "/cms/data-fiduciary/consent-history",
     },
-    // {
-    //   title: "DXP Documents",
-    //   href: "/cms/data-fiduciary/dxp-documents",
-    // },
   ];
 
   // Only add Grievances admin if user has GRIEVANCE_ADMIN:READ permission
@@ -74,6 +70,15 @@ const getDataFiduciaryItems = (): SidebarSection[] => {
   // }
 
   const sections: SidebarSection[] = [
+    {
+      title: "DXP DOCUMENTS",
+      icon: ConsentCenterIcon,
+      defaultOpen: true,
+      items: [
+        { title: "DXP Notices", href: "/cms/data-fiduciary/dxp-notices" },
+        { title: "DXP Consent Artifacts", href: "/cms/data-fiduciary/dxp-consent-artifacts" },
+      ],
+    },
     {
       title: "DATA ELEMENT REPOSITORY",
       icon: PolicyCenterIcon,
@@ -165,7 +170,9 @@ export function Sidebar({ userName, organizationName }: SidebarProps) {
   const currentSection = sidebarItems.find((section) =>
     section.items.some((item) => pathname === item.href || pathname.startsWith(item.href + "/")),
   )?.title;
-  const [openSections, setOpenSections] = React.useState<string[]>([]);
+  const [openSections, setOpenSections] = React.useState<string[]>(() =>
+    sidebarItems.filter((section) => section.defaultOpen).map((section) => section.title),
+  );
 
   React.useEffect(() => {
     if (currentSection) {
